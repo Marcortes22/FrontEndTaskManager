@@ -1,0 +1,63 @@
+.TaskDetailContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  padding-top: 20px;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+.TaskDetailPrincipalContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.TaskMainInformation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: gray; */
+
+  border-radius: 3px;
+}
+
+.TaskTitleContainer {
+  display: flex;
+  word-wrap: break-word;
+  overflow: scroll;
+  gap: 5px;
+  max-height: 100px;
+}
+
+.TaskTitle {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+.CheckBoxStyle {
+  color: white;
+  padding: 0px 0px 0px 0px;
+  height: 24px;
+  width: 24px;
+}
+
+.StarCheckBoxContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.TaskDetailSecondaryContentContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  justify-content: space-between;
+  padding: 15px 10px 15px 0px;
+  border-top: 1px solid gray;
+}

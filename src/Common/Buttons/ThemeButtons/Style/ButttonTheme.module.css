@@ -1,0 +1,21 @@
+.sunStyles {
+  font-size: 60;
+  color: #ffff00;
+  transition: transform;
+}
+
+.sunStyles:hover {
+  color: #ffff52;
+  transform: scale(1.5);
+}
+
+.moonStyles {
+  border-radius: 50%;
+  color: #808b96;
+  transition: transform;
+  background-color: #f8f9f9;
+}
+
+.moonStyles:hover {
+  transform: scale(1.5);
+}

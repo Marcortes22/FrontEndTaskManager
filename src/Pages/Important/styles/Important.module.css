@@ -1,0 +1,16 @@
+.importantContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 90%;
+  gap: 15px;
+  justify-content: center;
+}
+
+.importantMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  gap: 10px;
+}

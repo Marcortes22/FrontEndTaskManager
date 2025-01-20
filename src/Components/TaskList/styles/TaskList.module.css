@@ -1,0 +1,69 @@
+.TaskListContainer {
+  overflow-y: scroll;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.Task {
+  width: 100%;
+  background-color: rgba(43, 43, 46, 0.9);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  font-size: medium;
+}
+.TaskActions {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  color: white;
+  justify-content: space-between;
+}
+.taskTitleContariner {
+  display: flex;
+  align-items: center;
+  word-wrap: break-word;
+  overflow: scroll;
+  gap: 5px;
+  flex: 1;
+}
+.titleTask {
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.CheckBoxStyle {
+  color: white;
+  padding: 0px 0px 0px 0px;
+  height: 24px;
+  width: 24px;
+}
+
+.taskTags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-left: 42px;
+  font-size: x-small;
+}
+
+.TaskListContainer::-webkit-scrollbar {
+  width: 5px;
+}
+.TaskListContainer::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5px;
+}
+
+.TaskListContainer::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
