@@ -13,6 +13,7 @@ import useSideBar from './Hooks/useSidebar';
 import { Moon, Sun } from '@/Common';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 export default function SideBar({
   open,
@@ -29,11 +30,12 @@ export default function SideBar({
     changeTheme,
     mode,
   } = useSideBar();
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { user } = useAuth0();
 
+  console.log(import.meta.env.VITE_AUTH0_CLIENT_ID);
   const fetchApiData = async () => {
     try {
-      const token = await getAccessTokenSilently();
+      const token = Cookies.get('auth_token');
 
       console.log(token);
       const response = await fetch(
@@ -49,8 +51,7 @@ export default function SideBar({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
-      console.log(data);
+      await response.json();
     } catch (error) {
       console.error('Error fetching API data:', error);
     }
@@ -58,7 +59,7 @@ export default function SideBar({
 
   useEffect(() => {
     fetchApiData();
-  }, [getAccessTokenSilently]); // Incluye getAccessTokenSilently como dependencia
+  }, []); // Incluye getAccessTokenSilently como dependencia
 
   console.log({ user });
   return (
