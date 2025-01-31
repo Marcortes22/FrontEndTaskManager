@@ -1,7 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 // import WallpaperRoundedIcon from '@mui/icons-material/WallpaperRounded';
 // import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import DehazeIcon from '@mui/icons-material/Dehaze';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BackGroundList from '../BackGroundList/BackGroundList';
 import { useState } from 'react';
 import Menu from '@mui/material/Menu';
@@ -40,8 +40,9 @@ export default function Header({
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        size="large"
       >
-        <DehazeIcon />
+        <MoreHorizIcon />
       </IconButton>
 
       <Menu

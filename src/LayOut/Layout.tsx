@@ -15,11 +15,8 @@ export function Layout() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div>
-          <header>
-            <SideNavBar children={<Outlet></Outlet>} />
-          </header>
-        </div>
+
+        <SideNavBar children={<Outlet></Outlet>} />
       </ThemeProvider>
     </>
   );

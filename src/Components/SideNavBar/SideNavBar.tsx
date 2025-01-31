@@ -26,7 +26,7 @@ export default function SideNavBar({
   const { backgroundImage } = useContext(ThemeContext);
 
   return (
-    <Box sx={{ height: '100vh', display: 'flex' }}>
+    <Box sx={{ height: '100dvh', display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -68,6 +68,8 @@ export default function SideNavBar({
           color: 'white',
           transition: 'ease-in-out',
           transitionDuration: '0.3s',
+
+          maxHeight: '100dvh',
         }}
       >
         {children}

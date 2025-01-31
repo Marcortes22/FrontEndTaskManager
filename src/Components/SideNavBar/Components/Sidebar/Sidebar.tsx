@@ -12,8 +12,6 @@ import LogoutButton from '@/Common/Buttons/LogoutButton/Logout.button';
 import useSideBar from './Hooks/useSidebar';
 import { Moon, Sun } from '@/Common';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
 
 export default function SideBar({
   open,
@@ -32,36 +30,6 @@ export default function SideBar({
   } = useSideBar();
   const { user } = useAuth0();
 
-  console.log(import.meta.env.VITE_AUTH0_CLIENT_ID);
-  const fetchApiData = async () => {
-    try {
-      const token = Cookies.get('auth_token');
-
-      console.log(token);
-      const response = await fetch(
-        'http://localhost:8000/api/User/verifyAccound',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      await response.json();
-    } catch (error) {
-      console.error('Error fetching API data:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchApiData();
-  }, []); // Incluye getAccessTokenSilently como dependencia
-
-  console.log({ user });
   return (
     <>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>

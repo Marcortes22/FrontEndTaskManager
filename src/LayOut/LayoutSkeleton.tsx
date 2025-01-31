@@ -53,10 +53,11 @@ export default function LayoutSkeleton() {
             gap: '5px',
           }}
         >
-          {[...Array(7)].map(() => (
+          {[...Array(7)].map((_, index) => (
             <Skeleton
               variant="rectangular"
               animation="wave"
+              key={index}
               sx={{
                 width: '100%',
                 height: '35px',

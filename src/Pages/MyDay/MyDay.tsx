@@ -20,7 +20,7 @@ export default function MyDay() {
 
   const todayTasks = getTodayTasks(tasksTest);
 
-  console.log(todayTasks);
+  //console.log(todayTasks);
 
   return (
     isAuthenticated && (

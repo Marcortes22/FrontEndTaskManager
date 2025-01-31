@@ -35,7 +35,7 @@ export const tasksTest: Task[] = [
   },
   {
     title:
-      'Estudiar para elaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+      'Estudiar para elahhasdfasfasfasdfasfasdfafasdfasfasdfasdfasdfasdfasdfsdfasfasdfafasdfasfasdfasdfasdfasdfasdfsdf asfasdfafasdfasfasdf',
     isCompleted: false,
     isImportant: true,
     createdDate: new Date(),

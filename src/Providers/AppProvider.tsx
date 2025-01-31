@@ -1,6 +1,7 @@
 import ThemeContextProvider from '@/Contexts/ThemeContextProvider';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 export default function AppProvider({
   children,
 }: {
@@ -21,6 +22,7 @@ export default function AppProvider({
       <ThemeContextProvider>
         <QueryClientProvider client={queryClient}>
           {children}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeContextProvider>
     </Auth0Provider>

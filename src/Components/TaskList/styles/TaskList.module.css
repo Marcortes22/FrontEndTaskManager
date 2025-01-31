@@ -25,18 +25,19 @@
 .taskTitleContariner {
   display: flex;
   align-items: center;
-  word-wrap: break-word;
-  overflow: scroll;
+  overflow: hidden;
   gap: 5px;
   flex: 1;
+  max-width: 100%;
 }
 .titleTask {
-  flex: 1;
-  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
+  -webkit-line-clamp: 2; /* Limita el texto a 2 líneas */
+  line-clamp: 2;
+  overflow: hidden;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .CheckBoxStyle {

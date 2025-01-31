@@ -1,70 +1,77 @@
 import List from '@mui/material/List';
-import { menuItems } from './MenuConfig';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { useNavigate, useLocation } from 'react-router';
+import { useSideBarItems } from './Hook/useSideBarItems';
+import { IconName } from '@/Constants/IconsDictionary';
+import styles from './styles/SideBarItems.module.css';
 export default function SideBarItems({ open }: { open: boolean }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { query, iconsDictionary } = useSideBarItems();
+  console.log('query', query.data);
   return (
     <>
       <Divider />
       <List>
-        {menuItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              selected={location.pathname === item.url}
-              onClick={() => navigate(`${item.url}`)}
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                },
-                open
-                  ? {
-                      justifyContent: 'initial',
-                    }
-                  : {
-                      justifyContent: 'center',
-                    },
-              ]}
-            >
-              <ListItemIcon
+        {query.data &&
+          query.data.data?.map((item, index) => (
+            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                selected={location.pathname === item.url}
+                onClick={() => navigate(`${item.url}`)}
+                className={styles.listItemButton}
                 sx={[
-                  {
-                    minWidth: 0,
-                    justifyContent: 'center',
-                  },
                   open
                     ? {
-                        mr: 3,
+                        justifyContent: 'initial',
                       }
                     : {
-                        mr: 'auto',
+                        justifyContent: 'center',
                       },
                 ]}
               >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
-                      },
-                ]}
-              />
-            </ListItemButton>
-            {index === 5 && <Divider />}
-          </ListItem>
-        ))}
+                <ListItemIcon
+                  className={styles.ListItemIconStyles}
+                  sx={[
+                    open
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: 'auto',
+                        },
+                  ]}
+                >
+                  {iconsDictionary[item.name as IconName] ??
+                    iconsDictionary['Default']}
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.name}
+                  secondary={
+                    open && item.amoundOfTasks > 0 && item.amoundOfTasks
+                  }
+                  sx={[
+                    open
+                      ? {
+                          opacity: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                          justifyContent: 'space-between',
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}
+                />
+              </ListItemButton>
+              {index === 5 && <Divider />}
+            </ListItem>
+          ))}
       </List>
     </>
   );
