@@ -4,7 +4,7 @@ import Completed from '@/Pages/Completed/Completed';
 import Important from '@/Pages/Important/Important';
 import MyDay from '@/Pages/MyDay/MyDay';
 import Planned from '@/Pages/Planned/Planned';
-import TaskList from '@/Pages/TaskList/TaskList';
+import TaskLists from '@/Pages/TaskLists/TaskLists';
 
 export const routes = [
   {
@@ -16,7 +16,7 @@ export const routes = [
       { path: '/planned', element: <Planned /> },
       { path: '/completed', element: <Completed /> },
       { path: '/all', element: <All /> },
-      { path: '/taskList/:id', element: <TaskList /> },
+      { path: '/taskList/:id', element: <TaskLists /> },
     ],
   },
 ];

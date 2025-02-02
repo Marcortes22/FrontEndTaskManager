@@ -1,4 +1,4 @@
-export type Task = {
+export type TaskItem = {
   title: string;
   isCompleted: boolean;
   isImportant: boolean;
@@ -6,10 +6,5 @@ export type Task = {
   reminderDate?: Date | null;
   dueDate?: Date | null;
   completedDate?: Date | null;
-  tags?: Tag[];
-};
-
-export type Tag = {
-  name: string;
-  color: string;
+  note?: string;
 };

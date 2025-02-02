@@ -1,42 +1,76 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { tasksTest } from '@/Constants/tasks';
-import styles from './styles/Planned.module.css';
 import Header from '@/Components/Header/Header';
-import TaskList from '@/Components/TaskList/TaskList';
+
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import plannedPhoto from '@/assets/time-and-calendar.png';
+import { usePlanned } from './Hook/usePlanned';
+import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
+import { Box } from '@mui/material';
+import globalStyles from '@/Styles/globals.module.css';
+import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 
 export default function Planned() {
-  const { isAuthenticated } = useAuth0();
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
-  const importantTasks = tasksTest?.filter((item) => item.dueDate !== null);
+  const {
+    handleSubmit,
+    query,
+    earlierTasksCount,
+    todayTasksCount,
+    tomorrowTasksCount,
+    thisWeekTasksCount,
+    laterTasksCount,
+    tasksCount,
+  } = usePlanned();
 
   return (
     <>
-      {isAuthenticated && (
-        <div className={styles.plannedContainer}>
-          <Header title="Planned"></Header>
+      <LinearProgres isLoading={query.isFetching} />
+      <div className={globalStyles.pageContainer}>
+        <Header title="Planned"></Header>
 
-          <main className={styles.plannedtMain}>
-            <TaskList tasks={importantTasks} />
+        <main className={globalStyles.pageMain}>
+          <Box className={globalStyles.TaskListContainer}>
+            <DespegableTaskList
+              tasks={query.data?.data?.earlierTasks}
+              title="Ealier"
+              count={earlierTasksCount}
+            ></DespegableTaskList>
 
-            {importantTasks?.length > 0 ? null : (
-              <TodoEmptyHelper
-                title=""
-                description="Tasks with due dates will show up here."
-                photo={plannedPhoto}
-              ></TodoEmptyHelper>
-            )}
+            <DespegableTaskList
+              tasks={query.data?.data?.todayTasks}
+              title="Today"
+              count={todayTasksCount}
+            ></DespegableTaskList>
 
-            <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
-          </main>
-        </div>
-      )}
+            <DespegableTaskList
+              tasks={query.data?.data?.tomorrowTaks}
+              title="Tomorrow"
+              count={tomorrowTasksCount}
+            ></DespegableTaskList>
+
+            <DespegableTaskList
+              tasks={query.data?.data?.thisWeekTasks}
+              title="This Week"
+              count={thisWeekTasksCount}
+            ></DespegableTaskList>
+
+            <DespegableTaskList
+              tasks={query.data?.data?.laterTasks}
+              title="Later"
+              count={laterTasksCount}
+            ></DespegableTaskList>
+          </Box>
+
+          {tasksCount > 0 ? null : (
+            <TodoEmptyHelper
+              title=""
+              description="Tasks with due dates will show up here."
+              photo={plannedPhoto}
+            ></TodoEmptyHelper>
+          )}
+
+          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
+        </main>
+      </div>
     </>
   );
 }

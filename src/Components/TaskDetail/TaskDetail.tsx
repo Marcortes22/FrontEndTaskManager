@@ -1,9 +1,7 @@
 import { Box, Button, Checkbox, IconButton, TextField } from '@mui/material';
-
-import { Task } from '@/Types/Task.type';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { Anchor } from '@/Types/Types';
-
+import { format } from '@formkit/tempo';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
@@ -13,7 +11,8 @@ import styles from './styles/TaskDetail.module.css';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { validateTodayTask } from '@/Utils/Funtions';
-export default function TaskDetail({ task }: { task: Task | null }) {
+import { TaskItem } from '@/Types/Task.type';
+export default function TaskDetail({ task }: { task: TaskItem | null }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -72,7 +71,7 @@ export default function TaskDetail({ task }: { task: Task | null }) {
                     <CalendarMonthOutlinedIcon></CalendarMonthOutlinedIcon>
                   }
                 >
-                  Due {task?.dueDate.toDateString()}
+                  Due {format(task?.dueDate, 'medium')}
                 </Button>
               ) : (
                 <Button
@@ -97,7 +96,7 @@ export default function TaskDetail({ task }: { task: Task | null }) {
 
           <Box className={styles.TaskDetailSecondaryContentContainer}>
             <p style={{ flexGrow: '1' }}>
-              Created on {task?.createdDate.toDateString()}
+              Created on {format(task?.createdDate, 'medium')}
             </p>
             <IconButton sx={{ padding: '0px' }}>
               <DeleteOutlineOutlinedIcon></DeleteOutlineOutlinedIcon>

@@ -1,5 +1,5 @@
 .TaskListContainer {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
   width: 24px;
 }
 
-.taskTags {
+/* .taskTags {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -67,4 +67,4 @@
 .TaskListContainer::-webkit-scrollbar-thumb:hover {
   background: #b3b3b3;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
+} */

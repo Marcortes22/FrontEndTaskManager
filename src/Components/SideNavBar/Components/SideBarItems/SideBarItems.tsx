@@ -8,14 +8,14 @@ import { useNavigate, useLocation } from 'react-router';
 import { useSideBarItems } from './Hook/useSideBarItems';
 import { IconName } from '@/Constants/IconsDictionary';
 import styles from './styles/SideBarItems.module.css';
+import { Badge } from '@mui/material';
 export default function SideBarItems({ open }: { open: boolean }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { query, iconsDictionary } = useSideBarItems();
-  console.log('query', query.data);
+  //console.log('query', query.data);
   return (
     <>
-      <Divider />
       <List>
         {query.data &&
           query.data.data?.map((item, index) => (
@@ -46,14 +46,17 @@ export default function SideBarItems({ open }: { open: boolean }) {
                         },
                   ]}
                 >
-                  {iconsDictionary[item.name as IconName] ??
-                    iconsDictionary['Default']}
+                  <Badge
+                    badgeContent={item.amoundOfTasks}
+                    color="primary"
+                    invisible={item.amoundOfTasks > 0 ? false : true}
+                  >
+                    {iconsDictionary[item.name as IconName] ??
+                      iconsDictionary['Default']}
+                  </Badge>
                 </ListItemIcon>
                 <ListItemText
                   primary={item.name}
-                  secondary={
-                    open && item.amoundOfTasks > 0 && item.amoundOfTasks
-                  }
                   sx={[
                     open
                       ? {

@@ -1,7 +1,6 @@
 import IconButton from '@mui/material/IconButton';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { Tooltip } from '@mui/material';
-import AccessAlarmOutlinedIcon from '@mui/icons-material/AccessAlarmOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './styles/TaskInputForm.module.css';
 import { useRef, useState } from 'react';
@@ -19,24 +18,18 @@ export default function TaskInputForm({
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
         {isFocused ? (
           <IconButton type="submit" className={styles.buttonFormAddNewTask}>
-            <CircleOutlinedIcon />
+            <CircleOutlinedIcon sx={{ color: 'white' }} />
           </IconButton>
         ) : (
           <IconButton type="submit" className={styles.buttonFormAddNewTask}>
-            <AddIcon />
+            <AddIcon sx={{ color: 'white' }} />
           </IconButton>
         )}
 
         <div className={styles.buttonsAtTheEnd}>
           <Tooltip title="Add due date">
             <IconButton className={styles.buttonFormAddNewTask}>
-              <CalendarMonthOutlinedIcon />
-            </IconButton>
-          </Tooltip>
-
-          <Tooltip title="Remind me">
-            <IconButton className={styles.buttonFormAddNewTask}>
-              <AccessAlarmOutlinedIcon />
+              <CalendarMonthOutlinedIcon sx={{ color: 'white' }} />
             </IconButton>
           </Tooltip>
         </div>

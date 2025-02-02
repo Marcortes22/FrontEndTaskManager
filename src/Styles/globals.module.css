@@ -1,0 +1,36 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 90%;
+  gap: 15px;
+  justify-content: center;
+}
+
+.pageMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  gap: 10px;
+}
+
+.TaskListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: scroll;
+}
+
+.TaskListContainer::-webkit-scrollbar {
+  width: 5px;
+}
+.TaskListContainer::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5px;
+}
+
+.TaskListContainer::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}

@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
@@ -43,6 +43,8 @@ import ThemeContext from '@/Contexts/ThemeContext';
 
 export default function BackGroundList() {
   const { setBackgroundImage } = useContext(ThemeContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <Box
       sx={{
@@ -57,7 +59,7 @@ export default function BackGroundList() {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        cols={4}
+        cols={isMobile ? 3 : 4}
         gap={10}
       >
         {itemData.map((item) => (

@@ -1,11 +1,11 @@
 import { BaseResponse } from '@/Interfaces/BaseResponse';
-import { TaskListInformation } from '@/Interfaces/TaskLists/ITaskLists';
+import { IGetPlannedTaskItems } from '@/Interfaces/TaskItems/ItaskItems';
 
-export async function getTaskListsInformation(
+export async function getPlannedTasks(
   token: string,
-): Promise<BaseResponse<TaskListInformation[]>> {
+): Promise<BaseResponse<IGetPlannedTaskItems>> {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}TaskList/getTaskListInformation`,
+    `${import.meta.env.VITE_BACKEND_URL}TaskItem/GetPlannedTasks`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -13,7 +13,7 @@ export async function getTaskListsInformation(
     },
   );
 
-  const jsonResponse: BaseResponse<TaskListInformation[]> =
+  const jsonResponse: BaseResponse<IGetPlannedTaskItems> =
     await response.json();
 
   if (!response.ok) {

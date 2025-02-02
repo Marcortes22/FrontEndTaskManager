@@ -1,14 +1,10 @@
 import IconButton from '@mui/material/IconButton';
-// import WallpaperRoundedIcon from '@mui/icons-material/WallpaperRounded';
-// import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BackGroundList from '../BackGroundList/BackGroundList';
 import { useState } from 'react';
 import Menu from '@mui/material/Menu';
-import SwapVertIcon from '@mui/icons-material/SwapVert';
-import { Box, Button, useTheme } from '@mui/material';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Box } from '@mui/material';
 import styles from './styles/Header.module.css';
+import WallpaperIcon from '@mui/icons-material/Wallpaper';
 
 export default function Header({
   title,
@@ -26,8 +22,6 @@ export default function Header({
     setAnchorEl(null);
   };
 
-  const theme = useTheme();
-
   return (
     <header className={styles.HeaderStyles}>
       <div>
@@ -42,7 +36,7 @@ export default function Header({
         onClick={handleClick}
         size="large"
       >
-        <MoreHorizIcon />
+        <WallpaperIcon />
       </IconButton>
 
       <Menu
@@ -54,17 +48,8 @@ export default function Header({
           'aria-labelledby': 'basic-button',
         }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-            padding: '20px',
-            height: '275px',
-            overflowY: 'scroll',
-          }}
-        >
-          <Button
+        <Box className={styles.MenuContainer}>
+          {/* <Button
             sx={{
               color: theme.palette.text.primary,
               display: 'flex',
@@ -78,7 +63,7 @@ export default function Header({
               <SwapVertIcon />
               Sord by
             </Box>
-          </Button>
+          </Button> */}
           <BackGroundList></BackGroundList>
         </Box>
       </Menu>

@@ -11,16 +11,17 @@ export default function Auth({ children }: { children: React.ReactNode }) {
     loginWithRedirect,
     getAccessTokenSilently,
   } = useAuth0();
-  const { isPending, error } = useQuery({
+  const { error } = useQuery({
     queryKey: ['verifyAccount'],
     queryFn: async () => {
       const token = await getAccessTokenSilently();
+      console.log(token);
       return await verifyAccound(token);
     },
     enabled: isAuthenticated,
   });
 
-  if (isPending || isLoading) {
+  if (isLoading) {
     return (
       <>
         <LayoutSkeleton></LayoutSkeleton>

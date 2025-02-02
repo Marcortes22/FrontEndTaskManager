@@ -1,0 +1,19 @@
+.RotateRightIcon {
+  transform: rotate(90deg);
+}
+
+.RotateInitialPositionIcon {
+  transform: rotate(0deg);
+}
+
+.DespegableTaskListContainer {
+  display: flex;
+  gap: 5px;
+  background-color: rgba(43, 43, 46, 0.9);
+  align-items: center;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 8px;
+  margin-bottom: 5px;
+  font-size: small;
+}

@@ -2,7 +2,7 @@ import { ThemeContextProviderProps } from '@/Models/Theme.models';
 
 import { useState } from 'react';
 import ThemeContext from './ThemeContext';
-import background from '@/assets/backgroundImages//rock-background.webp';
+import background from '@/assets/backgroundImages//stars-background.webp';
 
 export default function ThemeContextProvider({
   children,

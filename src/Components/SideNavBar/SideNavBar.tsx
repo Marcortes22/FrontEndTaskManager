@@ -31,10 +31,11 @@ export default function SideNavBar({
       <AppBar
         position="fixed"
         open={open}
-        // sx={{ bgcolor: theme.palette.background.default }}
+        sx={{ minHeight: '64px', maxHeight: '64px' }}
       >
         <SideBar open={open} handleDrawerOpen={handleDrawerOpen} />
       </AppBar>
+
       <Drawer
         variant="permanent"
         open={open}
@@ -64,11 +65,10 @@ export default function SideNavBar({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '5px',
+          paddingX: '5px',
           color: 'white',
           transition: 'ease-in-out',
           transitionDuration: '0.3s',
-
           maxHeight: '100dvh',
         }}
       >

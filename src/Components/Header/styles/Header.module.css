@@ -3,3 +3,27 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.MenuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  height: fit-content;
+  overflow-y: scroll;
+}
+
+.MenuContainer::-webkit-scrollbar {
+  width: 5px;
+}
+.MenuContainer::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5px;
+}
+
+.MenuContainer::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}

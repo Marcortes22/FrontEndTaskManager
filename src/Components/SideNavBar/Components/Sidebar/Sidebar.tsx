@@ -32,7 +32,15 @@ export default function SideBar({
 
   return (
     <>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+          minHeight: '64px',
+        }}
+      >
         <Box sx={{ display: 'flex' }}>
           <IconButton
             aria-label="open drawer"
@@ -45,7 +53,7 @@ export default function SideBar({
               open && { display: 'none' },
             ]}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: 'white' }} />
           </IconButton>
           <Tooltip title={mode === 'dark' ? 'Light mode' : 'Dark mode'}>
             <IconButton aria-label="Mode" onClick={changeTheme}>
