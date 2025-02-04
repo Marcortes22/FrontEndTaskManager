@@ -7,9 +7,14 @@ import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import globalStyles from '@/Styles/globals.module.css';
 import calendarPhoto from '@/assets/icons8-completed-64.png';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
+import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 export default function All() {
   const { handleSubmit, query, allTasksCount } = useAll();
 
+  console.log(query.data?.data);
+  if (query.isLoading) {
+    return <MainSkeleton />;
+  }
   return (
     <>
       <LinearProgres isLoading={query.isFetching} />

@@ -2,7 +2,7 @@ import IconButton from '@mui/material/IconButton';
 import BackGroundList from '../BackGroundList/BackGroundList';
 import { useState } from 'react';
 import Menu from '@mui/material/Menu';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import styles from './styles/Header.module.css';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 
@@ -22,6 +22,8 @@ export default function Header({
     setAnchorEl(null);
   };
 
+  const theme = useTheme();
+
   return (
     <header className={styles.HeaderStyles}>
       <div>
@@ -36,7 +38,7 @@ export default function Header({
         onClick={handleClick}
         size="large"
       >
-        <WallpaperIcon />
+        <WallpaperIcon sx={{ color: theme.palette.primary.main }} />
       </IconButton>
 
       <Menu

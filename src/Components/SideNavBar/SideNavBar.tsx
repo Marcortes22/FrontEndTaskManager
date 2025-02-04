@@ -26,13 +26,14 @@ export default function SideNavBar({
   const { backgroundImage } = useContext(ThemeContext);
 
   return (
-    <Box sx={{ height: '100dvh', display: 'flex' }}>
+    <Box
+      sx={{
+        height: '100dvh',
+        display: 'flex',
+      }}
+    >
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        open={open}
-        sx={{ minHeight: '64px', maxHeight: '64px' }}
-      >
+      <AppBar position="fixed" open={open} sx={{ height: '64px' }}>
         <SideBar open={open} handleDrawerOpen={handleDrawerOpen} />
       </AppBar>
 
@@ -41,7 +42,7 @@ export default function SideNavBar({
         open={open}
         sx={{ bgcolor: theme.palette.background.default }}
       >
-        <DrawerHeader>
+        <DrawerHeader sx={{ height: '64px', minHeight: '64px' }}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
@@ -70,6 +71,7 @@ export default function SideNavBar({
           transition: 'ease-in-out',
           transitionDuration: '0.3s',
           maxHeight: '100dvh',
+          overflow: 'hidden',
         }}
       >
         {children}

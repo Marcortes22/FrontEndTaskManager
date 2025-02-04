@@ -8,9 +8,13 @@ import { Box } from '@mui/material';
 import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
 import globalStyles from '@/styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
+import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 export default function Completed() {
   const { handleSubmit, query, completedTasksCount } = useCompleted();
 
+  if (query.isLoading) {
+    return <MainSkeleton />;
+  }
   return (
     <>
       <LinearProgres isLoading={query.isFetching} />

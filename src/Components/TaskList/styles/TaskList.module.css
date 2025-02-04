@@ -47,24 +47,11 @@
   width: 24px;
 }
 
-/* .taskTags {
+.taskTags {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
-  margin-left: 42px;
-  font-size: x-small;
+  gap: 10px;
+  margin-left: 29px;
+  height: fit-content;
 }
-
-.TaskListContainer::-webkit-scrollbar {
-  width: 5px;
-}
-.TaskListContainer::-webkit-scrollbar-thumb {
-  background: #fff;
-  border-radius: 5px;
-}
-
-.TaskListContainer::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-} */

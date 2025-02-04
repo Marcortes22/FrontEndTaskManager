@@ -13,31 +13,33 @@
   gap: 10px;
   padding-left: 5px;
   padding-right: 5px;
+  flex: 1;
 }
 
 .TaskMainInformation {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
-  /* background-color: gray; */
-
   border-radius: 3px;
+
+  padding: 10px 5px 10px 5px;
 }
 
 .TaskTitleContainer {
   display: flex;
-  word-wrap: break-word;
-  overflow: scroll;
+
+  overflow: hidden;
   gap: 5px;
-  max-height: 100px;
 }
 
 .TaskTitle {
-  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 3; /* Limita el texto a 2 líneas */
   line-clamp: 3;
+  overflow: hidden;
+  word-wrap: break-word;
+  max-width: 90%;
 }
 .CheckBoxStyle {
   color: white;

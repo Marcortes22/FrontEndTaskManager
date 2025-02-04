@@ -1,15 +1,20 @@
-import { Task } from '@/Types/Task.type';
-import { format, isEqual } from '@formkit/tempo';
+import { TaskItem } from '@/Types/TaskItem.type';
+import { format, isBefore, isEqual } from '@formkit/tempo';
 
-export function validateTodayTask(task: Task) {
+export function validateTodayTask(TaskDate: Date): boolean {
   const date = new Date();
   return (
-    task?.dueDate &&
-    isEqual(format(task?.dueDate, 'YYYY-MM-DD'), format(date, 'YYYY-MM-DD'))
+    TaskDate &&
+    isEqual(format(TaskDate, 'YYYY-MM-DD'), format(date, 'YYYY-MM-DD'))
   );
 }
 
-export function getTodayTasks(tasks: Task[]) {
+export function isOlder(taskDate: Date): boolean {
+  const date = new Date();
+  return isBefore(format(taskDate, 'YYYY-MM-DD'), format(date, 'YYYY-MM-DD'));
+}
+
+export function getTodayTasks(tasks: TaskItem[]) {
   const date = new Date();
 
   return tasks.filter(

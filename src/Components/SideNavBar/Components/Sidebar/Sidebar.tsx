@@ -37,8 +37,7 @@ export default function SideBar({
           display: 'flex',
           justifyContent: 'space-between',
           width: '100%',
-          height: '100%',
-          minHeight: '64px',
+          height: '64px',
         }}
       >
         <Box sx={{ display: 'flex' }}>

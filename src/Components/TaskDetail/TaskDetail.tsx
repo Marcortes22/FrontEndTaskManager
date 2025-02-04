@@ -1,4 +1,12 @@
-import { Box, Button, Checkbox, IconButton, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  IconButton,
+  TextField,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { Anchor } from '@/Types/Types';
 import { format } from '@formkit/tempo';
@@ -11,10 +19,37 @@ import styles from './styles/TaskDetail.module.css';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { validateTodayTask } from '@/Utils/Funtions';
-import { TaskItem } from '@/Types/Task.type';
+import { TaskItem } from '@/Types/TaskItem.type';
+import { useState } from 'react';
+import { Toll } from '@mui/icons-material';
 export default function TaskDetail({ task }: { task: TaskItem | null }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [noteIsEditing, setNoteIsEditing] = useState(false);
+  const [noteText, setNoteText] = useState(task?.note);
+
+  const [titleIsEditing, setTitleIsEditing] = useState(false);
+  const [titleText, setTitleText] = useState(task?.title);
+
+  function handleNoteChange(open: boolean) {
+    setNoteIsEditing(open);
+  }
+
+  function handleTitleChange(open: boolean) {
+    setTitleIsEditing(open);
+  }
+
+  function handleTextNoteChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    setNoteText(e.target.value);
+  }
+
+  function handleTextTitleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    setTitleText(e.target.value);
+  }
 
   const anchor: Anchor = isMobile ? 'bottom' : 'right';
 
@@ -33,7 +68,10 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
             className={styles.TaskDetailPrincipalContentContainer}
             role="presentation"
           >
-            <Box className={styles.TaskMainInformation}>
+            <Box
+              sx={{ bgcolor: theme.palette.secondary.main }}
+              className={styles.TaskMainInformation}
+            >
               <Box className={styles.TaskTitleContainer}>
                 <Checkbox
                   className={styles.CheckBoxStyle}
@@ -41,9 +79,33 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                   checkedIcon={<CheckCircleOutlineIcon />}
                   checked={task?.isCompleted ?? false}
                 />
-                <p className={styles.TaskTitle}>{task?.title}</p>
-              </Box>
-              <Box className={styles.StarCheckBoxContainer}>
+
+                {titleIsEditing ? (
+                  <Tooltip title="Click to edit" arrow>
+                    <TextField
+                      variant="standard"
+                      fullWidth
+                      onBlur={() => handleTitleChange(false)}
+                      onChange={(e) => handleTextTitleChange(e)}
+                      autoFocus
+                      value={titleText}
+                      error={(titleText?.trim()?.length ?? 0) === 0}
+                      helperText={
+                        (titleText?.trim()?.length ?? 0) === 0
+                          ? 'Title must be between 1 and 25 characters'
+                          : ''
+                      }
+                    ></TextField>
+                  </Tooltip>
+                ) : (
+                  <Typography
+                    className={styles.TaskTitle}
+                    onClick={() => setTitleIsEditing(true)}
+                  >
+                    {task?.title}
+                  </Typography>
+                )}
+
                 <Checkbox
                   className={styles.CheckBoxStyle}
                   icon={<StarOutlineOutlinedIcon />}
@@ -51,46 +113,86 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                   checked={task?.isImportant ?? false}
                 />
               </Box>
+
+              <Box className={styles.StarCheckBoxContainer}></Box>
             </Box>
-            <Box>
-              {validateTodayTask(task) ? (
-                <Button disabled={true} startIcon={<WbSunnyIcon></WbSunnyIcon>}>
-                  Added to my day
-                </Button>
-              ) : (
-                <Button startIcon={<WbSunnyIcon></WbSunnyIcon>}>
-                  Add to my day
-                </Button>
-              )}
+
+            <Box sx={{ bgcolor: theme.palette.secondary.main }}>
+              <Box>
+                {task?.addedToMyDay &&
+                  (validateTodayTask(task.addedToMyDay) ? (
+                    <Button
+                      disabled={validateTodayTask(task.addedToMyDay)}
+                      startIcon={<WbSunnyIcon></WbSunnyIcon>}
+                    >
+                      Added to my day
+                    </Button>
+                  ) : (
+                    <Button startIcon={<WbSunnyIcon></WbSunnyIcon>}>
+                      Add to my day
+                    </Button>
+                  ))}
+              </Box>
+              <Box>
+                {task?.dueDate ? (
+                  <Button
+                    startIcon={
+                      <CalendarMonthOutlinedIcon></CalendarMonthOutlinedIcon>
+                    }
+                  >
+                    Due {format(task?.dueDate, 'medium')}
+                  </Button>
+                ) : (
+                  <Button
+                    startIcon={
+                      <CalendarMonthOutlinedIcon></CalendarMonthOutlinedIcon>
+                    }
+                  >
+                    Add due date
+                  </Button>
+                )}
+              </Box>
             </Box>
-            <Box>
-              {task?.dueDate ? (
-                <Button
-                  disabled={true}
-                  startIcon={
-                    <CalendarMonthOutlinedIcon></CalendarMonthOutlinedIcon>
+            <Box
+              sx={{ bgcolor: theme.palette.secondary.main }}
+              onClick={() => setNoteIsEditing(true)}
+            >
+              {noteIsEditing ? (
+                <TextField
+                  multiline
+                  maxRows={4}
+                  label="Note"
+                  variant="outlined"
+                  fullWidth
+                  onBlur={() => setNoteIsEditing(false)}
+                  onChange={(e) => setNoteText(e.target.value)}
+                  autoFocus
+                  value={noteText}
+                  error={
+                    (noteText?.trim()?.length ?? 0) === 0 ||
+                    (noteText?.trim()?.length ?? 0) >= 100
                   }
-                >
-                  Due {format(task?.dueDate, 'medium')}
-                </Button>
-              ) : (
-                <Button
-                  startIcon={
-                    <CalendarMonthOutlinedIcon></CalendarMonthOutlinedIcon>
+                  helperText={
+                    (noteText?.trim()?.length ?? 0) === 0 ||
+                    (noteText?.trim()?.length ?? 0) >= 100
+                      ? 'Note must be between 1 and 100 characters'
+                      : ''
                   }
-                >
-                  Add due date
-                </Button>
+                ></TextField>
+              ) : (
+                <Tooltip title="Click to edit" arrow>
+                  <Typography
+                    sx={{
+                      width: '100%',
+                      paddingX: '16.5px',
+                      paddingY: ' 14px',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    Note: {task?.note}
+                  </Typography>
+                </Tooltip>
               )}
-            </Box>
-            <Box>
-              <TextField
-                multiline
-                maxRows={4}
-                label="Add note"
-                variant="standard"
-                fullWidth
-              ></TextField>
             </Box>
           </Box>
 

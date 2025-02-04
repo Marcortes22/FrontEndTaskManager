@@ -8,10 +8,15 @@ import plannedPhoto from '@/assets/time-and-calendar.png';
 import TaskList from '@/Components/TaskList/TaskList';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
+import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 
 export default function TaskLists() {
   const { handleSubmit, query, completedTaskCount, allTaskCount } =
     useTaskLists();
+
+  if (query.isLoading) {
+    return <MainSkeleton />;
+  }
 
   return (
     <>

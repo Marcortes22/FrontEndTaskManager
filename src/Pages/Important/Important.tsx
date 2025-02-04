@@ -8,10 +8,14 @@ import { useImportant } from './Hook/useImportant';
 import globalStyles from '@/Styles/globals.module.css';
 import { Box } from '@mui/material';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
+import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 
 export default function Important() {
   const { handleSubmit, query, tasksCount } = useImportant();
 
+  if (query.isLoading) {
+    return <MainSkeleton />;
+  }
   return (
     <>
       <LinearProgres isLoading={query.isFetching} />

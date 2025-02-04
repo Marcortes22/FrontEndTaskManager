@@ -2,6 +2,8 @@ import ThemeContextProvider from '@/Contexts/ThemeContextProvider';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 export default function AppProvider({
   children,
 }: {
@@ -21,7 +23,9 @@ export default function AppProvider({
     >
       <ThemeContextProvider>
         <QueryClientProvider client={queryClient}>
-          {children}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {children}
+          </LocalizationProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeContextProvider>

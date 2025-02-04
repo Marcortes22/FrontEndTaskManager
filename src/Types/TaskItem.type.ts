@@ -7,4 +7,5 @@ export type TaskItem = {
   dueDate?: Date | null;
   completedDate?: Date | null;
   note?: string;
+  addedToMyDay: Date | null;
 };

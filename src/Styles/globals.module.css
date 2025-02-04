@@ -3,8 +3,10 @@
   flex-direction: column;
   height: 90%;
   width: 90%;
+  max-width: 90%;
   gap: 15px;
   justify-content: center;
+  overflow: hidden;
 }
 
 .pageMain {

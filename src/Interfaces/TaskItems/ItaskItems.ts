@@ -1,4 +1,4 @@
-import { TaskItem } from '@/Types/Task.type';
+import { TaskItem } from '@/Types/TaskItem.type';
 
 export interface IGetTodayTaskItems {
   uncompletedTasks: TaskItem[];

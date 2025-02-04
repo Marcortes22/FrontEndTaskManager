@@ -24,6 +24,7 @@ export function usePlanned() {
   const thisWeekTasksCount = query.data?.data?.thisWeekTasksCount ?? 0;
   const laterTasksCount = query.data?.data?.laterTasksCount ?? 0;
   const tasksCount = query.data?.data?.tasksCount ?? 0;
+
   return {
     isAuthenticated,
     handleSubmit,

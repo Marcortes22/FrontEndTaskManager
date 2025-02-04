@@ -8,3 +8,8 @@
   min-width: 0px;
   justify-content: center;
 }
+
+.linkStyles {
+  text-decoration: none;
+  color: inherit;
+}

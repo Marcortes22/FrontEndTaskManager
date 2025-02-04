@@ -1,18 +1,28 @@
 import IconButton from '@mui/material/IconButton';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import { Tooltip } from '@mui/material';
+
 import AddIcon from '@mui/icons-material/Add';
 import styles from './styles/TaskInputForm.module.css';
-import { useRef, useState } from 'react';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+
+import { useTaskInputForm } from './Hook/useTaskImputForm';
+import DateSelecter from '../DateSelecter/DateSelecter';
+import TaskListSelecterMenu from '../TaskListSelecterMenu/TaskListSelecterMenu';
+import { TextField } from '@mui/material';
 
 export default function TaskInputForm({
   handleSubmit,
 }: {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
+  const {
+    inputRef,
+    isFocused,
+    setIsFocused,
+    currentList,
+    setCurrentList,
+    dateValue,
+    setDateValue,
+  } = useTaskInputForm();
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
@@ -25,27 +35,51 @@ export default function TaskInputForm({
             <AddIcon sx={{ color: 'white' }} />
           </IconButton>
         )}
-
+        {/* {inputRef.current?.value.trim().length > 0 ? ( */}
         <div className={styles.buttonsAtTheEnd}>
-          <Tooltip title="Add due date">
-            <IconButton className={styles.buttonFormAddNewTask}>
-              <CalendarMonthOutlinedIcon sx={{ color: 'white' }} />
-            </IconButton>
-          </Tooltip>
-        </div>
+          <TaskListSelecterMenu
+            currentList={currentList}
+            setCurrentList={setCurrentList}
+          />
 
-        <input
+          <DateSelecter value={dateValue} setValue={setDateValue} />
+        </div>
+        {/* // ) : null} */}
+        <TextField
           ref={inputRef}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           className={styles.newTaskInput}
+          sx={{
+            paddingRight: dateValue
+              ? { xs: '123px', md: '167px' }
+              : { xs: '74px', md: '103px' },
+            position: 'absolute',
+            paddingLeft: '30px',
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'transparent',
+              },
+
+              '&:hover fieldset': {
+                borderColor: 'transparent',
+              },
+
+              '&.Mui-focused fieldset': {
+                borderColor: 'transparent',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white', // ✅ Forzar color blanco
+              },
+            },
+          }}
           type="text"
           placeholder={
             isFocused
               ? `Try typing: 'Pay utilities bill by friday 6pm'`
               : 'Add a task'
           }
-        ></input>
+        ></TextField>
       </form>
     </>
   );

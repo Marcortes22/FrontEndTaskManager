@@ -8,6 +8,7 @@ import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
 import { Box } from '@mui/material';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
+import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 
 export default function Planned() {
   const {
@@ -20,6 +21,10 @@ export default function Planned() {
     laterTasksCount,
     tasksCount,
   } = usePlanned();
+
+  if (query.isLoading) {
+    return <MainSkeleton />;
+  }
 
   return (
     <>
