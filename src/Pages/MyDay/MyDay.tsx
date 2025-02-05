@@ -1,5 +1,4 @@
 import { format } from '@formkit/tempo';
-import styles from './styles/MyDay.module.css';
 import calendarPhoto from '@/assets/calendar.png';
 import Header from '@/Components/Header/Header';
 import TaskList from '@/Components/TaskList/TaskList';
@@ -11,9 +10,10 @@ import useMyDay from './Hook/useMyDay';
 import globalStyles from '@/styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { myDayDefaultData } from '@/Constants/newTaskItemDefaultData';
 
 export default function MyDay() {
-  const { handleSubmit, todayDate, query, tasksCount } = useMyDay();
+  const { todayDate, query, tasksCount } = useMyDay();
 
   if (query.isLoading) {
     return <MainSkeleton />;
@@ -29,7 +29,7 @@ export default function MyDay() {
         ></Header>
 
         <main className={globalStyles.pageMain}>
-          <Box className={styles.taskListContainer}>
+          <Box className={globalStyles.TaskListContainer}>
             <TaskList tasks={query.data?.data?.uncompletedTasks} />
 
             <DespegableTaskList
@@ -46,9 +46,11 @@ export default function MyDay() {
               photo={calendarPhoto}
             ></TodoEmptyHelper>
           )}
-
-          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
         </main>
+        <TaskInputForm
+          defaultValuePerPage={myDayDefaultData}
+          pageQueryKey="MyDayTasks"
+        ></TaskInputForm>
       </div>
     </>
   );

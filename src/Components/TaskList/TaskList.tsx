@@ -9,12 +9,13 @@ import SunIcon from '@mui/icons-material/LightMode';
 import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer';
 import useTaskList from './Hook/useTaskList';
 import TaskDetail from '../TaskDetail/TaskDetail';
-import { TaskItem } from '@/Types/TaskItem.type';
+
 import { Box, Typography, useTheme } from '@mui/material';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { isOlder, validateTodayTask } from '@/Utils/Funtions';
 import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
-export default function TaskList({ tasks }: { tasks?: TaskItem[] }) {
+import { TaskItemType } from '@/Types/TaskItem.type';
+export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
   const {
     DrawerState,
     CurrentTask,
@@ -58,7 +59,7 @@ export default function TaskList({ tasks }: { tasks?: TaskItem[] }) {
               />
             </div>
             <div className={styles.taskTags}>
-              {task?.addedToMyDay && validateTodayTask(task.addedToMyDay) && (
+              {validateTodayTask(task.addedToMyDay) && (
                 <>
                   <Box
                     sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}

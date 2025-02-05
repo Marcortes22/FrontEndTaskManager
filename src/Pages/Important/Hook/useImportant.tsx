@@ -13,9 +13,6 @@ export function useImportant() {
     enabled: isAuthenticated,
   });
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
   const tasksCount = query.data?.data?.tasksCount ?? 0;
-  return { isAuthenticated, handleSubmit, query, tasksCount };
+  return { isAuthenticated, query, tasksCount };
 }

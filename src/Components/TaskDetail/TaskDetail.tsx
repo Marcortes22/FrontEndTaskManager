@@ -3,12 +3,12 @@ import {
   Button,
   Checkbox,
   IconButton,
+  Paper,
   TextField,
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useMediaQuery, useTheme } from '@mui/material';
-import { Anchor } from '@/Types/Types';
+
 import { format } from '@formkit/tempo';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -19,59 +19,39 @@ import styles from './styles/TaskDetail.module.css';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { validateTodayTask } from '@/Utils/Funtions';
-import { TaskItem } from '@/Types/TaskItem.type';
-import { useState } from 'react';
-import { Toll } from '@mui/icons-material';
-export default function TaskDetail({ task }: { task: TaskItem | null }) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [noteIsEditing, setNoteIsEditing] = useState(false);
-  const [noteText, setNoteText] = useState(task?.note);
+import { TaskItemType } from '@/Types/TaskItem.type';
+import { useTaskDetail } from './Hook/useTaskDetail';
 
-  const [titleIsEditing, setTitleIsEditing] = useState(false);
-  const [titleText, setTitleText] = useState(task?.title);
-
-  function handleNoteChange(open: boolean) {
-    setNoteIsEditing(open);
-  }
-
-  function handleTitleChange(open: boolean) {
-    setTitleIsEditing(open);
-  }
-
-  function handleTextNoteChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    setNoteText(e.target.value);
-  }
-
-  function handleTextTitleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    setTitleText(e.target.value);
-  }
-
-  const anchor: Anchor = isMobile ? 'bottom' : 'right';
+export default function TaskDetail({ task }: { task: TaskItemType | null }) {
+  const {
+    noteIsEditing,
+    noteText,
+    titleIsEditing,
+    titleText,
+    handleTitleChange,
+    handleTitleTextChange,
+    handleNoteChange,
+    handleTextNoteChange,
+  } = useTaskDetail(task);
 
   return (
     <>
       {task && (
-        <Box
+        <Paper
+          elevation={1}
           className={styles.TaskDetailContainer}
           sx={{
-            width: anchor === 'bottom' ? 'auto' : 250,
-            height: anchor === 'bottom' ? '75vh' : '100vh',
-            marginTop: anchor === 'right' ? '64px' : '0px',
+            width: { sm: 'auto', md: 250 },
+            height: { xs: '75dvh', md: '100vh' },
+            marginTop: { xs: '0px', md: '64px' },
           }}
         >
-          <Box
+          <Paper
+            elevation={2}
             className={styles.TaskDetailPrincipalContentContainer}
             role="presentation"
           >
-            <Box
-              sx={{ bgcolor: theme.palette.secondary.main }}
-              className={styles.TaskMainInformation}
-            >
+            <Paper elevation={3} className={styles.TaskMainInformation}>
               <Box className={styles.TaskTitleContainer}>
                 <Checkbox
                   className={styles.CheckBoxStyle}
@@ -86,13 +66,13 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                       variant="standard"
                       fullWidth
                       onBlur={() => handleTitleChange(false)}
-                      onChange={(e) => handleTextTitleChange(e)}
+                      onChange={(e) => handleTitleTextChange(e)}
                       autoFocus
-                      value={titleText}
+                      value={titleText ?? ''}
                       error={(titleText?.trim()?.length ?? 0) === 0}
                       helperText={
                         (titleText?.trim()?.length ?? 0) === 0
-                          ? 'Title must be between 1 and 25 characters'
+                          ? 'Title must be at least one character'
                           : ''
                       }
                     ></TextField>
@@ -100,7 +80,7 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                 ) : (
                   <Typography
                     className={styles.TaskTitle}
-                    onClick={() => setTitleIsEditing(true)}
+                    onClick={() => handleTitleChange(true)}
                   >
                     {task?.title}
                   </Typography>
@@ -115,23 +95,22 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
               </Box>
 
               <Box className={styles.StarCheckBoxContainer}></Box>
-            </Box>
+            </Paper>
 
-            <Box sx={{ bgcolor: theme.palette.secondary.main }}>
+            <Paper elevation={3}>
               <Box>
-                {task?.addedToMyDay &&
-                  (validateTodayTask(task.addedToMyDay) ? (
-                    <Button
-                      disabled={validateTodayTask(task.addedToMyDay)}
-                      startIcon={<WbSunnyIcon></WbSunnyIcon>}
-                    >
-                      Added to my day
-                    </Button>
-                  ) : (
-                    <Button startIcon={<WbSunnyIcon></WbSunnyIcon>}>
-                      Add to my day
-                    </Button>
-                  ))}
+                {validateTodayTask(task?.addedToMyDay) ? (
+                  <Button
+                    disabled={validateTodayTask(task.addedToMyDay)}
+                    startIcon={<WbSunnyIcon></WbSunnyIcon>}
+                  >
+                    Added to my day
+                  </Button>
+                ) : (
+                  <Button startIcon={<WbSunnyIcon></WbSunnyIcon>}>
+                    Add to my day
+                  </Button>
+                )}
               </Box>
               <Box>
                 {task?.dueDate ? (
@@ -152,11 +131,8 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                   </Button>
                 )}
               </Box>
-            </Box>
-            <Box
-              sx={{ bgcolor: theme.palette.secondary.main }}
-              onClick={() => setNoteIsEditing(true)}
-            >
+            </Paper>
+            <Paper elevation={3} onClick={() => handleNoteChange(true)}>
               {noteIsEditing ? (
                 <TextField
                   multiline
@@ -164,18 +140,14 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                   label="Note"
                   variant="outlined"
                   fullWidth
-                  onBlur={() => setNoteIsEditing(false)}
-                  onChange={(e) => setNoteText(e.target.value)}
+                  onBlur={() => handleNoteChange(false)}
+                  onChange={(e) => handleTextNoteChange(e)}
                   autoFocus
-                  value={noteText}
-                  error={
-                    (noteText?.trim()?.length ?? 0) === 0 ||
-                    (noteText?.trim()?.length ?? 0) >= 100
-                  }
+                  value={noteText ?? ''}
+                  error={(noteText?.trim()?.length ?? 0) === 0}
                   helperText={
-                    (noteText?.trim()?.length ?? 0) === 0 ||
-                    (noteText?.trim()?.length ?? 0) >= 100
-                      ? 'Note must be between 1 and 100 characters'
+                    (noteText?.trim()?.length ?? 0) === 0
+                      ? 'Note must be at least one character'
                       : ''
                   }
                 ></TextField>
@@ -193,18 +165,21 @@ export default function TaskDetail({ task }: { task: TaskItem | null }) {
                   </Typography>
                 </Tooltip>
               )}
-            </Box>
-          </Box>
+            </Paper>
+          </Paper>
 
-          <Box className={styles.TaskDetailSecondaryContentContainer}>
+          <Paper
+            elevation={3}
+            className={styles.TaskDetailSecondaryContentContainer}
+          >
             <p style={{ flexGrow: '1' }}>
               Created on {format(task?.createdDate, 'medium')}
             </p>
             <IconButton sx={{ padding: '0px' }}>
               <DeleteOutlineOutlinedIcon></DeleteOutlineOutlinedIcon>
             </IconButton>
-          </Box>
-        </Box>
+          </Paper>
+        </Paper>
       )}
     </>
   );

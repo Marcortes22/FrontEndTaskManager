@@ -13,16 +13,11 @@ export function useCompleted() {
     enabled: isAuthenticated,
   });
 
-  console.log(query.data?.data);
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
   let completedTasksCount = 0;
 
   query.data?.data?.forEach((item) => {
     completedTasksCount += item.taskItems.length;
   });
 
-  return { isAuthenticated, handleSubmit, query, completedTasksCount };
+  return { isAuthenticated, query, completedTasksCount };
 }

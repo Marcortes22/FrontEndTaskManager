@@ -9,10 +9,10 @@ import { Box } from '@mui/material';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { plannedDefaultData } from '@/Constants/newTaskItemDefaultData';
 
 export default function Planned() {
   const {
-    handleSubmit,
     query,
     earlierTasksCount,
     todayTasksCount,
@@ -72,9 +72,11 @@ export default function Planned() {
               photo={plannedPhoto}
             ></TodoEmptyHelper>
           )}
-
-          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
         </main>
+        <TaskInputForm
+          defaultValuePerPage={plannedDefaultData}
+          pageQueryKey="PlannedTasks"
+        ></TaskInputForm>
       </div>
     </>
   );

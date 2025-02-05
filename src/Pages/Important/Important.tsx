@@ -9,9 +9,10 @@ import globalStyles from '@/Styles/globals.module.css';
 import { Box } from '@mui/material';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { importantDefaultData } from '@/Constants/newTaskItemDefaultData';
 
 export default function Important() {
-  const { handleSubmit, query, tasksCount } = useImportant();
+  const { query, tasksCount } = useImportant();
 
   if (query.isLoading) {
     return <MainSkeleton />;
@@ -34,9 +35,11 @@ export default function Important() {
               photo={importantPhoto}
             ></TodoEmptyHelper>
           )}
-
-          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
         </main>
+        <TaskInputForm
+          defaultValuePerPage={importantDefaultData}
+          pageQueryKey="ImportantTasks"
+        ></TaskInputForm>
       </div>
     </>
   );

@@ -8,14 +8,16 @@ import DefaultIcon from '@mui/icons-material/Dehaze';
 import { Icon, Skeleton, Tooltip, Typography } from '@mui/material';
 import styles from './styles/TaskListSelecterMenu.module.css';
 
-import { TaskList } from '@/Types/TaskList.type';
 import { useTaskListSelecterMenu } from './Hook/useTaskListSelecterMenu';
+import { TaskListType } from '@/Types/TaskList.type';
 export default function TaskListSelecterMenu({
   currentList,
   setCurrentList,
+  defaultTaskListId,
 }: {
-  currentList?: TaskList;
-  setCurrentList: (list: TaskList) => void;
+  currentList?: TaskListType;
+  setCurrentList: (list: TaskListType) => void;
+  defaultTaskListId?: number;
 }) {
   const {
     open,
@@ -24,7 +26,7 @@ export default function TaskListSelecterMenu({
     handleClose,
     anchorEl,
     query,
-  } = useTaskListSelecterMenu({ setCurrentList });
+  } = useTaskListSelecterMenu({ setCurrentList, defaultTaskListId });
 
   if (query.isLoading) {
     return (

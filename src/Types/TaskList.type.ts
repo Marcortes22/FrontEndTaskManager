@@ -1,7 +1,7 @@
-import { TaskItem } from './TaskItem.type';
+import { TaskItemType } from './TaskItem.type';
 
-export type TaskList = {
+export type TaskListType = {
   id: number;
   name: string;
-  taskItems?: TaskItem[];
+  taskItems?: TaskItemType[];
 };

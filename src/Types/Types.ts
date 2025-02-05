@@ -1,1 +1,1 @@
-export type Anchor = 'bottom' | 'right';
+// export type Anchor = 'bottom' | 'right';

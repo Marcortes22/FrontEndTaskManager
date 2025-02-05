@@ -14,13 +14,9 @@ export default function useMyDay() {
     enabled: isAuthenticated,
   });
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
   const todayDate = new Date();
 
   const tasksCount = query.data?.data?.totalCount ?? 0;
 
-  return { isAuthenticated, handleSubmit, todayDate, query, tasksCount };
+  return { isAuthenticated, todayDate, query, tasksCount };
 }

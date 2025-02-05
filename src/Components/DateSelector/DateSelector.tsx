@@ -1,18 +1,19 @@
 import { Box, IconButton, Menu, Tooltip, Typography } from '@mui/material';
 
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import styles from './styles/DateSelecter.module.css';
-import { useDateSelecter } from './Hook/useDateSelecter';
+import styles from './styles/DateSelector.module.css';
+
 import { DateCalendar } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
-export default function DateSelecter({
+import { useDateSelector } from './Hook/useDateSelector';
+export default function DateSelector({
   value,
   setValue,
 }: {
   value: Dayjs | null;
   setValue: (value: Dayjs | null) => void;
 }) {
-  const { anchorEl, open, handleClick, handleClose } = useDateSelecter();
+  const { anchorEl, open, handleClick, handleClose } = useDateSelector();
   return (
     <>
       <Tooltip title="Add due date" arrow>

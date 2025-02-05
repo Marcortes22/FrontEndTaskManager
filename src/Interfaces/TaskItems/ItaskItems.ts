@@ -1,32 +1,42 @@
-import { TaskItem } from '@/Types/TaskItem.type';
+import { TaskItemType } from '@/Types/TaskItem.type';
 
 export interface IGetTodayTaskItems {
-  uncompletedTasks: TaskItem[];
+  uncompletedTasks: TaskItemType[];
   totalCount: number;
-  completedTasks: TaskItem[];
+  completedTasks: TaskItemType[];
   completedCount: number;
 }
 
 export interface IGetImportantTaskItems {
-  tasks: TaskItem[];
+  tasks: TaskItemType[];
   tasksCount: number;
 }
 
 export interface IGetCompletedTaskItems {
-  completedTasks: TaskItem[];
+  completedTasks: TaskItemType[];
   tasksCount: number;
 }
 
 export interface IGetPlannedTaskItems {
-  earlierTasks: TaskItem[];
+  earlierTasks: TaskItemType[];
   earlierTasksCount: number;
-  todayTasks: TaskItem[];
+  todayTasks: TaskItemType[];
   todayTasksCount: number;
-  tomorrowTaks: TaskItem[];
+  tomorrowTaks: TaskItemType[];
   tomorrowTasksCount: number;
-  thisWeekTasks: TaskItem[];
+  thisWeekTasks: TaskItemType[];
   thisWeekTasksCount: number;
-  laterTasks: TaskItem[];
+  laterTasks: TaskItemType[];
   laterTasksCount: number;
   tasksCount: number;
+}
+
+export interface ICreateTaskItem {
+  title?: string;
+  isCompleted?: boolean;
+  isImportant?: boolean;
+  dueDate?: null | string;
+  note?: string;
+  addedToMyDay?: string | null;
+  taskListId?: number;
 }

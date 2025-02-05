@@ -1,4 +1,3 @@
-import styles from './styles/Completed.module.css';
 import Header from '@/Components/Header/Header';
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
@@ -9,8 +8,9 @@ import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
 import globalStyles from '@/styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { completedDefaultData } from '@/Constants/newTaskItemDefaultData';
 export default function Completed() {
-  const { handleSubmit, query, completedTasksCount } = useCompleted();
+  const { query, completedTasksCount } = useCompleted();
 
   if (query.isLoading) {
     return <MainSkeleton />;
@@ -22,7 +22,7 @@ export default function Completed() {
         <Header title="Completed"></Header>
 
         <main className={globalStyles.pageMain}>
-          <Box className={styles.TaskListContainer}>
+          <Box className={globalStyles.TaskListContainer}>
             {query.data?.data?.map((task) => (
               <DespegableTaskList
                 key={task.id}
@@ -40,9 +40,11 @@ export default function Completed() {
               photo={completedPhoto}
             ></TodoEmptyHelper>
           )}
-
-          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
         </main>
+        <TaskInputForm
+          defaultValuePerPage={completedDefaultData}
+          pageQueryKey="CompletedTasks"
+        ></TaskInputForm>
       </div>
     </>
   );

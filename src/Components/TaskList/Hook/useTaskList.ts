@@ -1,15 +1,15 @@
-import { TaskItem } from '@/Types/TaskItem.type';
+import { TaskItemType } from '@/Types/TaskItem.type';
 import { useState } from 'react';
 
 export default function useTaskList() {
   const [DrawerState, SetDrawerStateState] = useState(false);
-  const [CurrentTask, SetCurrentTask] = useState<TaskItem | null>(null);
+  const [CurrentTask, SetCurrentTask] = useState<TaskItemType | null>(null);
 
   function handleSwipeableDrawerState(open: boolean) {
     SetDrawerStateState(open);
   }
 
-  function handleTaskClick(newCurrentTask: TaskItem) {
+  function handleTaskClick(newCurrentTask: TaskItemType) {
     SetCurrentTask(newCurrentTask);
   }
 

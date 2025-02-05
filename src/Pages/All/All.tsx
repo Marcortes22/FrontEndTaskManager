@@ -8,19 +8,19 @@ import globalStyles from '@/Styles/globals.module.css';
 import calendarPhoto from '@/assets/icons8-completed-64.png';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { allDefaultData } from '@/Constants/newTaskItemDefaultData';
 export default function All() {
-  const { handleSubmit, query, allTasksCount } = useAll();
-
-  console.log(query.data?.data);
+  const { query, allTasksCount } = useAll();
+  console.log(allTasksCount);
   if (query.isLoading) {
     return <MainSkeleton />;
   }
   return (
     <>
       <LinearProgres isLoading={query.isFetching} />
+
       <div className={globalStyles.pageContainer}>
         <Header title="All"></Header>
-
         <main className={globalStyles.pageMain}>
           <Box className={globalStyles.TaskListContainer}>
             {query.data?.data?.map((task) => (
@@ -35,14 +35,16 @@ export default function All() {
 
           {allTasksCount > 0 ? null : (
             <TodoEmptyHelper
-              title=""
+              title="aa"
               description="All tasks will show up here."
               photo={calendarPhoto}
             ></TodoEmptyHelper>
           )}
-
-          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
         </main>
+        <TaskInputForm
+          defaultValuePerPage={allDefaultData}
+          pageQueryKey="AllTasks"
+        ></TaskInputForm>
       </div>
     </>
   );

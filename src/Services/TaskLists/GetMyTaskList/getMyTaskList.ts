@@ -1,9 +1,9 @@
 import { BaseResponse } from '@/Interfaces/BaseResponse';
-import { TaskList } from '@/Types/TaskList.type';
+import { TaskListType } from '@/Types/TaskList.type';
 
 export async function getMyTaskList(
   token: string,
-): Promise<BaseResponse<TaskList[]>> {
+): Promise<BaseResponse<TaskListType[]>> {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}TaskList/getMyTaskLists`,
     {
@@ -13,7 +13,7 @@ export async function getMyTaskList(
     },
   );
 
-  const jsonResponse: BaseResponse<TaskList[]> = await response.json();
+  const jsonResponse: BaseResponse<TaskListType[]> = await response.json();
 
   if (!response.ok) {
     console.log(response.status);

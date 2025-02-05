@@ -9,10 +9,14 @@ import TaskList from '@/Components/TaskList/TaskList';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { useParams } from 'react-router-dom';
+import { getTaskListDefaultData } from '@/Constants/newTaskItemDefaultData';
 
 export default function TaskLists() {
-  const { handleSubmit, query, completedTaskCount, allTaskCount } =
-    useTaskLists();
+  const { query, completedTaskCount, allTaskCount } = useTaskLists();
+
+  const params = useParams();
+  const { id } = params;
 
   if (query.isLoading) {
     return <MainSkeleton />;
@@ -42,7 +46,11 @@ export default function TaskLists() {
             ></TodoEmptyHelper>
           )}
 
-          <TaskInputForm handleSubmit={handleSubmit}></TaskInputForm>
+          <TaskInputForm
+            defaultTaskListId={Number(id)}
+            defaultValuePerPage={getTaskListDefaultData(Number(id))}
+            pageQueryKey="TaskList"
+          ></TaskInputForm>
         </main>
       </div>
     </>

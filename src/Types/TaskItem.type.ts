@@ -1,4 +1,6 @@
-export type TaskItem = {
+import { TaskListType } from './TaskList.type';
+
+export type TaskItemType = {
   title: string;
   isCompleted: boolean;
   isImportant: boolean;
@@ -8,4 +10,6 @@ export type TaskItem = {
   completedDate?: Date | null;
   note?: string;
   addedToMyDay: Date | null;
+  taskListId?: number;
+  taskList?: TaskListType;
 };

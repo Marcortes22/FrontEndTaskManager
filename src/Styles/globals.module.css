@@ -1,20 +1,23 @@
 .pageContainer {
   display: flex;
   flex-direction: column;
-  height: 90%;
-  width: 90%;
-  max-width: 90%;
+  height: 100dvh;
+  max-height: 100%;
+  width: 95%;
+  max-width: 100%;
   gap: 15px;
-  justify-content: center;
+  justify-content: space-between;
   overflow: hidden;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .pageMain {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90%;
   gap: 10px;
+  overflow: hidden;
 }
 
 .TaskListContainer {

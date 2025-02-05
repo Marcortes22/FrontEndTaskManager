@@ -14,10 +14,6 @@ export function usePlanned() {
     enabled: isAuthenticated,
   });
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
   const earlierTasksCount = query.data?.data?.earlierTasksCount ?? 0;
   const todayTasksCount = query.data?.data?.todayTasksCount ?? 0;
   const tomorrowTasksCount = query.data?.data?.tomorrowTasksCount ?? 0;
@@ -27,7 +23,7 @@ export function usePlanned() {
 
   return {
     isAuthenticated,
-    handleSubmit,
+
     query,
     earlierTasksCount,
     todayTasksCount,

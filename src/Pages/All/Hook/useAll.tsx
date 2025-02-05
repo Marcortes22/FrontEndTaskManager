@@ -12,10 +12,10 @@ export function useAll() {
     },
     enabled: isAuthenticated,
   });
-  const allTasksCount = query.data?.data?.length ?? 0;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-  return { isAuthenticated, handleSubmit, query, allTasksCount };
+  const allTasksCount =
+    query.data?.data?.reduce((sum, item) => sum + item.taskItems.length, 0) ??
+    0;
+
+  return { isAuthenticated, query, allTasksCount };
 }

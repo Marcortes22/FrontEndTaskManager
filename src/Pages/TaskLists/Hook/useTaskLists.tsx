@@ -16,17 +16,12 @@ export function useTaskLists() {
     enabled: isAuthenticated,
   });
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
   const completedTaskCount = query.data?.data?.completedTaskCount ?? 0;
   const allTaskCount = query.data?.data?.totalCount ?? 0;
-  console.log(completedTaskCount, allTaskCount);
 
   return {
     isAuthenticated,
-    handleSubmit,
+
     query,
     completedTaskCount,
     allTaskCount,

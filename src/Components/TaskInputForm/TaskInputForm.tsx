@@ -5,24 +5,32 @@ import styles from './styles/TaskInputForm.module.css';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 
 import { useTaskInputForm } from './Hook/useTaskImputForm';
-import DateSelecter from '../DateSelecter/DateSelecter';
+import DateSelector from '../DateSelector/DateSelector';
 import TaskListSelecterMenu from '../TaskListSelecterMenu/TaskListSelecterMenu';
 import { TextField } from '@mui/material';
+import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
 
 export default function TaskInputForm({
-  handleSubmit,
+  defaultTaskListId,
+  defaultValuePerPage,
+  pageQueryKey,
 }: {
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  defaultTaskListId?: number;
+  defaultValuePerPage: ICreateTaskItem;
+  pageQueryKey: string;
 }) {
   const {
-    inputRef,
     isFocused,
     setIsFocused,
     currentList,
     setCurrentList,
     dateValue,
     setDateValue,
-  } = useTaskInputForm();
+    newTitleText,
+    handleTextTitleChange,
+    handleSubmit,
+  } = useTaskInputForm(defaultValuePerPage, pageQueryKey);
+
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
@@ -40,15 +48,17 @@ export default function TaskInputForm({
           <TaskListSelecterMenu
             currentList={currentList}
             setCurrentList={setCurrentList}
+            defaultTaskListId={defaultTaskListId}
           />
 
-          <DateSelecter value={dateValue} setValue={setDateValue} />
+          <DateSelector value={dateValue} setValue={setDateValue} />
         </div>
         {/* // ) : null} */}
         <TextField
-          ref={inputRef}
+          onChange={(e) => handleTextTitleChange(e)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          value={newTitleText}
           className={styles.newTaskInput}
           sx={{
             paddingRight: dateValue

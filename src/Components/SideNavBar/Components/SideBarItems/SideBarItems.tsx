@@ -22,7 +22,6 @@ export default function SideBarItems({ open }: { open: boolean }) {
   return (
     <>
       <List sx={{ paddingTop: '0px' }}>
-        <Divider />
         {query.data &&
           query.data.data?.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: 'block' }}>
