@@ -8,15 +8,12 @@ import { useTaskInputForm } from './Hook/useTaskImputForm';
 import DateSelector from '../DateSelector/DateSelector';
 import TaskListSelecterMenu from '../TaskListSelecterMenu/TaskListSelecterMenu';
 import { TextField } from '@mui/material';
-import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
 
 export default function TaskInputForm({
   defaultTaskListId,
-  defaultValuePerPage,
   pageQueryKey,
 }: {
   defaultTaskListId?: number;
-  defaultValuePerPage: ICreateTaskItem;
   pageQueryKey: string;
 }) {
   const {
@@ -29,21 +26,12 @@ export default function TaskInputForm({
     newTitleText,
     handleTextTitleChange,
     handleSubmit,
-  } = useTaskInputForm(defaultValuePerPage, pageQueryKey);
+    mutation,
+  } = useTaskInputForm(pageQueryKey, defaultTaskListId);
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
-        {isFocused ? (
-          <IconButton type="submit" className={styles.buttonFormAddNewTask}>
-            <CircleOutlinedIcon sx={{ color: 'white' }} />
-          </IconButton>
-        ) : (
-          <IconButton type="submit" className={styles.buttonFormAddNewTask}>
-            <AddIcon sx={{ color: 'white' }} />
-          </IconButton>
-        )}
-        {/* {inputRef.current?.value.trim().length > 0 ? ( */}
         <div className={styles.buttonsAtTheEnd}>
           <TaskListSelecterMenu
             currentList={currentList}
@@ -53,11 +41,23 @@ export default function TaskInputForm({
 
           <DateSelector value={dateValue} setValue={setDateValue} />
         </div>
+
+        <IconButton type="submit" className={styles.buttonFormAddNewTask}>
+          {isFocused ? (
+            <CircleOutlinedIcon sx={{ color: 'white' }} />
+          ) : (
+            <AddIcon sx={{ color: 'white' }} />
+          )}
+        </IconButton>
+        {/* <IconButton type="submit" className={styles.buttonFormAddNewTask}>
+          </IconButton> */}
+        {/* {inputRef.current?.value.trim().length > 0 ? ( */}
         {/* // ) : null} */}
         <TextField
+          disabled={mutation.isPending}
           onChange={(e) => handleTextTitleChange(e)}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          // onBlur={() => setIsFocused(false)}
           value={newTitleText}
           className={styles.newTaskInput}
           sx={{

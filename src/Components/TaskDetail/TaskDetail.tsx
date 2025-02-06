@@ -32,6 +32,7 @@ export default function TaskDetail({ task }: { task: TaskItemType | null }) {
     handleTitleTextChange,
     handleNoteChange,
     handleTextNoteChange,
+    theme,
   } = useTaskDetail(task);
 
   return (
@@ -64,7 +65,8 @@ export default function TaskDetail({ task }: { task: TaskItemType | null }) {
                   <Tooltip title="Click to edit" arrow>
                     <TextField
                       variant="standard"
-                      fullWidth
+                      fullWidth={true}
+                      multiline
                       onBlur={() => handleTitleChange(false)}
                       onChange={(e) => handleTitleTextChange(e)}
                       autoFocus
@@ -176,7 +178,12 @@ export default function TaskDetail({ task }: { task: TaskItemType | null }) {
               Created on {format(task?.createdDate, 'medium')}
             </p>
             <IconButton sx={{ padding: '0px' }}>
-              <DeleteOutlineOutlinedIcon></DeleteOutlineOutlinedIcon>
+              <DeleteOutlineOutlinedIcon
+                sx={{
+                  color: theme.palette.error.dark,
+                  fontSize: theme.typography.h5.fontSize,
+                }}
+              />
             </IconButton>
           </Paper>
         </Paper>

@@ -9,7 +9,6 @@ import globalStyles from '@/Styles/globals.module.css';
 import { Box } from '@mui/material';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
-import { importantDefaultData } from '@/Constants/newTaskItemDefaultData';
 
 export default function Important() {
   const { query, tasksCount } = useImportant();
@@ -23,7 +22,12 @@ export default function Important() {
       <div className={globalStyles.pageContainer}>
         <Header title="Important"></Header>
 
-        <main className={globalStyles.pageMain}>
+        <Box
+          className={globalStyles.pageMain}
+          sx={{
+            justifyContent: tasksCount === 0 ? 'center' : 'start',
+          }}
+        >
           <Box className={globalStyles.TaskListContainer}>
             <TaskList tasks={query.data?.data?.tasks} />
           </Box>
@@ -35,11 +39,8 @@ export default function Important() {
               photo={importantPhoto}
             ></TodoEmptyHelper>
           )}
-        </main>
-        <TaskInputForm
-          defaultValuePerPage={importantDefaultData}
-          pageQueryKey="ImportantTasks"
-        ></TaskInputForm>
+        </Box>
+        <TaskInputForm pageQueryKey="ImportantTasks"></TaskInputForm>
       </div>
     </>
   );

@@ -15,6 +15,12 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import { isOlder, validateTodayTask } from '@/Utils/Funtions';
 import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
 import { TaskItemType } from '@/Types/TaskItem.type';
+import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
+import { useAuth0 } from '@auth0/auth0-react';
+
+import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
+import { useLocation } from 'react-router-dom';
+
 export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
   const {
     DrawerState,
@@ -23,6 +29,25 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
     handleTaskClick,
   } = useTaskList();
   const theme = useTheme();
+  const location = useLocation();
+  const { updateOnSubmit } = useTaskItemMutation(location.pathname);
+  const { getAccessTokenSilently } = useAuth0();
+
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const handle = async (task: TaskItemType) => {
+    const token = await getAccessTokenSilently();
+    const newTask: ICreateTaskItem = {
+      ...task,
+      isCompleted: !task.isCompleted,
+    };
+
+    updateOnSubmit({
+      taskItemId: task.id,
+      token,
+      taskItem: newTask,
+    });
+  };
 
   return (
     <>
@@ -44,7 +69,10 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
                   checkedIcon={<CheckCircleOutlineIcon />}
                   size="medium"
                   checked={task.isCompleted}
-                  onClick={(event) => event.stopPropagation()}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handle(task);
+                  }}
                 />
                 <p className={styles.titleTask}>{task.title}</p>
               </div>
@@ -55,7 +83,10 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
                 checkedIcon={<StarIcon />}
                 size="medium"
                 checked={task.isImportant}
-                onClick={(event) => event.stopPropagation()}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handle(task);
+                }}
               />
             </div>
             <div className={styles.taskTags}>
@@ -109,7 +140,11 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
                           : 'inherit',
                       }}
                       variant="caption"
-                    >{`${format(task.dueDate, 'medium')}`}</Typography>
+                    >{`${format({
+                      date: task.dueDate,
+                      format: 'medium',
+                      tz: timeZone,
+                    })}`}</Typography>
                   </Box>
                 </>
               )}

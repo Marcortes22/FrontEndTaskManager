@@ -8,10 +8,10 @@ import globalStyles from '@/Styles/globals.module.css';
 import calendarPhoto from '@/assets/icons8-completed-64.png';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
-import { allDefaultData } from '@/Constants/newTaskItemDefaultData';
+
 export default function All() {
   const { query, allTasksCount } = useAll();
-  console.log(allTasksCount);
+
   if (query.isLoading) {
     return <MainSkeleton />;
   }
@@ -21,7 +21,12 @@ export default function All() {
 
       <div className={globalStyles.pageContainer}>
         <Header title="All"></Header>
-        <main className={globalStyles.pageMain}>
+        <Box
+          className={globalStyles.pageMain}
+          sx={{
+            justifyContent: allTasksCount === 0 ? 'center' : 'start',
+          }}
+        >
           <Box className={globalStyles.TaskListContainer}>
             {query.data?.data?.map((task) => (
               <DespegableTaskList
@@ -29,6 +34,7 @@ export default function All() {
                 tasks={task.taskItems}
                 title={task.name}
                 count={task.taskItems.length}
+                defaulOpenValue={true}
               ></DespegableTaskList>
             ))}
           </Box>
@@ -40,11 +46,8 @@ export default function All() {
               photo={calendarPhoto}
             ></TodoEmptyHelper>
           )}
-        </main>
-        <TaskInputForm
-          defaultValuePerPage={allDefaultData}
-          pageQueryKey="AllTasks"
-        ></TaskInputForm>
+        </Box>
+        <TaskInputForm pageQueryKey="allTasks"></TaskInputForm>
       </div>
     </>
   );

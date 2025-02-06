@@ -1,6 +1,7 @@
 import { TaskListType } from './TaskList.type';
 
 export type TaskItemType = {
+  id: number;
   title: string;
   isCompleted: boolean;
   isImportant: boolean;

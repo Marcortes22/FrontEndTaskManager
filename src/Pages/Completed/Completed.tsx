@@ -8,7 +8,6 @@ import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
 import globalStyles from '@/styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
-import { completedDefaultData } from '@/Constants/newTaskItemDefaultData';
 export default function Completed() {
   const { query, completedTasksCount } = useCompleted();
 
@@ -21,7 +20,12 @@ export default function Completed() {
       <div className={globalStyles.pageContainer}>
         <Header title="Completed"></Header>
 
-        <main className={globalStyles.pageMain}>
+        <Box
+          className={globalStyles.pageMain}
+          sx={{
+            justifyContent: completedTasksCount === 0 ? 'center' : 'start',
+          }}
+        >
           <Box className={globalStyles.TaskListContainer}>
             {query.data?.data?.map((task) => (
               <DespegableTaskList
@@ -29,6 +33,7 @@ export default function Completed() {
                 tasks={task.taskItems}
                 title={task.name}
                 count={task.taskItems.length}
+                defaulOpenValue={true}
               ></DespegableTaskList>
             ))}
           </Box>
@@ -40,11 +45,8 @@ export default function Completed() {
               photo={completedPhoto}
             ></TodoEmptyHelper>
           )}
-        </main>
-        <TaskInputForm
-          defaultValuePerPage={completedDefaultData}
-          pageQueryKey="CompletedTasks"
-        ></TaskInputForm>
+        </Box>
+        <TaskInputForm pageQueryKey="CompletedTasks"></TaskInputForm>
       </div>
     </>
   );

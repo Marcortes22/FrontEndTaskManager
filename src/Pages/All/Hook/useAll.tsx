@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 export function useAll() {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const query = useQuery({
-    queryKey: ['AllTasks'],
+    queryKey: ['allTasks'],
     queryFn: async () => {
       const token = await getAccessTokenSilently();
       return GetTaskListWithTasks(token);

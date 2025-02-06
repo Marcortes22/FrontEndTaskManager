@@ -10,9 +10,11 @@ import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 import { useParams } from 'react-router-dom';
-import { getTaskListDefaultData } from '@/Constants/newTaskItemDefaultData';
+import { GetCurrentPageQueryKey } from '@/Utils/GetCurrentPageQueryKey';
 
 export default function TaskLists() {
+  const { queryKeyToInvalidate } = GetCurrentPageQueryKey();
+  console.log(queryKeyToInvalidate);
   const { query, completedTaskCount, allTaskCount } = useTaskLists();
 
   const params = useParams();
@@ -28,7 +30,12 @@ export default function TaskLists() {
       <div className={globalStyles.pageContainer}>
         <Header title={query.data?.data?.name || 'Default Title'}></Header>
 
-        <main className={globalStyles.pageMain}>
+        <Box
+          className={globalStyles.pageMain}
+          sx={{
+            justifyContent: allTaskCount === 0 ? 'center' : 'start',
+          }}
+        >
           <Box className={globalStyles.TaskListContainer}>
             <TaskList tasks={query.data?.data?.uncompletedTasks}></TaskList>
             <DespegableTaskList
@@ -45,13 +52,11 @@ export default function TaskLists() {
               photo={plannedPhoto}
             ></TodoEmptyHelper>
           )}
-
-          <TaskInputForm
-            defaultTaskListId={Number(id)}
-            defaultValuePerPage={getTaskListDefaultData(Number(id))}
-            pageQueryKey="TaskList"
-          ></TaskInputForm>
-        </main>
+        </Box>
+        <TaskInputForm
+          defaultTaskListId={Number(id)}
+          pageQueryKey="TaskList"
+        ></TaskInputForm>
       </div>
     </>
   );

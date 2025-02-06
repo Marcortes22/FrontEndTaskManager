@@ -9,7 +9,6 @@ import { Box } from '@mui/material';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
-import { plannedDefaultData } from '@/Constants/newTaskItemDefaultData';
 
 export default function Planned() {
   const {
@@ -32,12 +31,18 @@ export default function Planned() {
       <div className={globalStyles.pageContainer}>
         <Header title="Planned"></Header>
 
-        <main className={globalStyles.pageMain}>
+        <Box
+          className={globalStyles.pageMain}
+          sx={{
+            justifyContent: tasksCount === 0 ? 'center' : 'start',
+          }}
+        >
           <Box className={globalStyles.TaskListContainer}>
             <DespegableTaskList
               tasks={query.data?.data?.earlierTasks}
               title="Ealier"
               count={earlierTasksCount}
+              defaulOpenValue={true}
             ></DespegableTaskList>
 
             <DespegableTaskList
@@ -72,11 +77,8 @@ export default function Planned() {
               photo={plannedPhoto}
             ></TodoEmptyHelper>
           )}
-        </main>
-        <TaskInputForm
-          defaultValuePerPage={plannedDefaultData}
-          pageQueryKey="PlannedTasks"
-        ></TaskInputForm>
+        </Box>
+        <TaskInputForm pageQueryKey="PlannedTasks"></TaskInputForm>
       </div>
     </>
   );

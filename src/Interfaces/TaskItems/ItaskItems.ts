@@ -35,8 +35,8 @@ export interface ICreateTaskItem {
   title?: string;
   isCompleted?: boolean;
   isImportant?: boolean;
-  dueDate?: null | string;
+  dueDate?: Date | null | string;
   note?: string;
-  addedToMyDay?: string | null;
+  addedToMyDay?: string | null | Date;
   taskListId?: number;
 }

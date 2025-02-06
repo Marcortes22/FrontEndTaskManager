@@ -1,4 +1,5 @@
 import { TaskItemType } from '@/Types/TaskItem.type';
+import { useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 export function useTaskDetail(task: TaskItemType | null) {
@@ -7,6 +8,8 @@ export function useTaskDetail(task: TaskItemType | null) {
 
   const [titleIsEditing, setTitleIsEditing] = useState(true);
   const [titleText, setTitleText] = useState(task?.title ?? '');
+
+  const theme = useTheme();
 
   function handleTitleChange(open: boolean) {
     setTitleIsEditing(open);
@@ -48,5 +51,6 @@ export function useTaskDetail(task: TaskItemType | null) {
     handleTitleTextChange,
     handleNoteChange,
     handleTextNoteChange,
+    theme,
   };
 }

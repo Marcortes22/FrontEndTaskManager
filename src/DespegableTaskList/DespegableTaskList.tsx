@@ -3,18 +3,20 @@ import { Box, IconButton } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import styles from './styles/DespegableTaskList.module.css';
 import TaskList from '@/Components/TaskList/TaskList';
-import { TaskItem } from '@/Types/TaskItem.type';
+import { TaskItemType } from '@/Types/TaskItem.type';
 
 export default function DespegableTaskList({
   tasks,
   title,
   count,
+  defaulOpenValue,
 }: {
-  tasks?: TaskItem[];
+  tasks?: TaskItemType[];
   title?: string;
   count?: number;
+  defaulOpenValue?: boolean;
 }) {
-  const { open, handleOpen } = useDespegableTaskList();
+  const { open, handleOpen } = useDespegableTaskList(defaulOpenValue);
 
   return (
     <>
