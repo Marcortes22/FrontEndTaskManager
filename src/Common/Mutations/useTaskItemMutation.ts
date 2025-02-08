@@ -5,7 +5,10 @@ import { GetCurrentPageQueryKey } from '@/Utils/GetCurrentPageQueryKey';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-export function useTaskItemMutation(pathName: string) {
+export function useTaskItemMutation(
+  pathName: string,
+  queriesToInvalidate?: string[],
+) {
   const { queryKey, queryKeyId } = GetCurrentPageQueryKey(pathName);
 
   const queryClient = useQueryClient();
@@ -22,9 +25,12 @@ export function useTaskItemMutation(pathName: string) {
       if (queryKey) {
         queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
 
+        queriesToInvalidate?.forEach((query) => {
+          queryClient.invalidateQueries({ queryKey: [query] });
+        });
+
         if (queryKeyId) {
           queryClient.invalidateQueries({ queryKey: [queryKey, queryKeyId] });
-          console.log('entre');
           return;
         }
         queryClient.invalidateQueries({ queryKey: [queryKey] });
@@ -43,5 +49,5 @@ export function useTaskItemMutation(pathName: string) {
     updateTaskItemMutation.mutate(data);
   };
 
-  return { updateTaskItemMutation, updateOnSubmit };
+  return { updateOnSubmit };
 }

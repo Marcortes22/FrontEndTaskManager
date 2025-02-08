@@ -4,7 +4,7 @@ import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import completedPhoto from '@/assets/icons8-completed-64.png';
 import { useCompleted } from './Hook/useCompleted';
 import { Box } from '@mui/material';
-import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
+import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
 import globalStyles from '@/styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';

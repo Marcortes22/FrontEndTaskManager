@@ -4,50 +4,29 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import styles from './styles/TaskList.module.css';
-import { format } from '@formkit/tempo';
 import SunIcon from '@mui/icons-material/LightMode';
-import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer';
+import TaskDetailWrapper from '../TaskDetailWrapper/TaskDetailWrapper';
 import useTaskList from './Hook/useTaskList';
 import TaskDetail from '../TaskDetail/TaskDetail';
-
 import { Box, Typography, useTheme } from '@mui/material';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import { isOlder, validateTodayTask } from '@/Utils/Funtions';
+import {
+  getDateToLocaleZoneDate,
+  isOlder,
+  validateTodayTask,
+} from '@/Utils/TaskItemsDateFunctions';
 import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
 import { TaskItemType } from '@/Types/TaskItem.type';
-import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
-import { useAuth0 } from '@auth0/auth0-react';
 
-import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
-import { useLocation } from 'react-router-dom';
-
-export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
+export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
+  const theme = useTheme();
   const {
     DrawerState,
-    CurrentTask,
+    CurrentTaskId,
     handleSwipeableDrawerState,
     handleTaskClick,
+    handleUpdateTaskItem,
   } = useTaskList();
-  const theme = useTheme();
-  const location = useLocation();
-  const { updateOnSubmit } = useTaskItemMutation(location.pathname);
-  const { getAccessTokenSilently } = useAuth0();
-
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  const handle = async (task: TaskItemType) => {
-    const token = await getAccessTokenSilently();
-    const newTask: ICreateTaskItem = {
-      ...task,
-      isCompleted: !task.isCompleted,
-    };
-
-    updateOnSubmit({
-      taskItemId: task.id,
-      token,
-      taskItem: newTask,
-    });
-  };
 
   return (
     <>
@@ -71,10 +50,14 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
                   checked={task.isCompleted}
                   onClick={(event) => {
                     event.stopPropagation();
-                    handle(task);
+                    handleUpdateTaskItem(task, {
+                      isCompleted: !task.isCompleted,
+                    });
                   }}
                 />
-                <p className={styles.titleTask}>{task.title}</p>
+                <Typography className={styles.titleTask}>
+                  {task.title}
+                </Typography>
               </div>
 
               <Checkbox
@@ -85,29 +68,32 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
                 checked={task.isImportant}
                 onClick={(event) => {
                   event.stopPropagation();
-                  handle(task);
+                  handleUpdateTaskItem(task, {
+                    isImportant: !task.isImportant,
+                  });
                 }}
               />
             </div>
             <div className={styles.taskTags}>
-              {validateTodayTask(task.addedToMyDay) && (
-                <>
-                  <Box
-                    sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}
-                  >
-                    <SunIcon sx={{ fontSize: '16px' }} />
-                    <Typography sx={{ userSelect: 'none' }} variant="caption">
-                      My Day
-                    </Typography>
-                  </Box>
+              {task.addedToMyDay &&
+                validateTodayTask(new Date(task.addedToMyDay)) && (
+                  <>
+                    <Box
+                      sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                    >
+                      <SunIcon sx={{ fontSize: '16px' }} />
+                      <Typography sx={{ userSelect: 'none' }} variant="caption">
+                        My Day
+                      </Typography>
+                    </Box>
 
-                  <Typography
-                    sx={{ userSelect: 'none' }}
-                    fontWeight="bold"
-                    variant="caption"
-                  >{`·`}</Typography>
-                </>
-              )}
+                    <Typography
+                      sx={{ userSelect: 'none' }}
+                      fontWeight="bold"
+                      variant="caption"
+                    >{`·`}</Typography>
+                  </>
+                )}
 
               <Typography
                 sx={{ userSelect: 'none' }}
@@ -140,11 +126,9 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
                           : 'inherit',
                       }}
                       variant="caption"
-                    >{`${format({
-                      date: task.dueDate,
-                      format: 'medium',
-                      tz: timeZone,
-                    })}`}</Typography>
+                    >
+                      {getDateToLocaleZoneDate(task.dueDate, 'medium')}
+                    </Typography>
                   </Box>
                 </>
               )}
@@ -167,11 +151,16 @@ export default function TaskList({ tasks }: { tasks?: TaskItemType[] }) {
           </div>
         ))}
 
-        <SwipeableTemporaryDrawer
+        <TaskDetailWrapper
           DrawerState={DrawerState}
           handleSwipeableDrawerState={handleSwipeableDrawerState}
-          children={<TaskDetail task={CurrentTask}></TaskDetail>}
-        ></SwipeableTemporaryDrawer>
+          children={
+            <TaskDetail
+              DrawerState={DrawerState}
+              taskId={CurrentTaskId}
+            ></TaskDetail>
+          }
+        ></TaskDetailWrapper>
       </div>
     </>
   );

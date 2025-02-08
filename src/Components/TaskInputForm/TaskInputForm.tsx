@@ -1,12 +1,10 @@
 import IconButton from '@mui/material/IconButton';
-
 import AddIcon from '@mui/icons-material/Add';
 import styles from './styles/TaskInputForm.module.css';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-
 import { useTaskInputForm } from './Hook/useTaskImputForm';
 import DateSelector from '../DateSelector/DateSelector';
-import TaskListSelecterMenu from '../TaskListSelecterMenu/TaskListSelecterMenu';
+import TaskListSelector from '../TaskListSelector/TaskListSelectorMenu';
 import { TextField } from '@mui/material';
 
 export default function TaskInputForm({
@@ -26,14 +24,13 @@ export default function TaskInputForm({
     newTitleText,
     handleTextTitleChange,
     handleSubmit,
-    mutation,
   } = useTaskInputForm(pageQueryKey, defaultTaskListId);
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
         <div className={styles.buttonsAtTheEnd}>
-          <TaskListSelecterMenu
+          <TaskListSelector
             currentList={currentList}
             setCurrentList={setCurrentList}
             defaultTaskListId={defaultTaskListId}
@@ -49,15 +46,11 @@ export default function TaskInputForm({
             <AddIcon sx={{ color: 'white' }} />
           )}
         </IconButton>
-        {/* <IconButton type="submit" className={styles.buttonFormAddNewTask}>
-          </IconButton> */}
-        {/* {inputRef.current?.value.trim().length > 0 ? ( */}
-        {/* // ) : null} */}
+
         <TextField
-          disabled={mutation.isPending}
+          // disabled={mutation.isPending}
           onChange={(e) => handleTextTitleChange(e)}
           onFocus={() => setIsFocused(true)}
-          // onBlur={() => setIsFocused(false)}
           value={newTitleText}
           className={styles.newTaskInput}
           sx={{
@@ -79,7 +72,7 @@ export default function TaskInputForm({
                 borderColor: 'transparent',
               },
               '& .MuiInputBase-input': {
-                color: 'white', // ✅ Forzar color blanco
+                color: 'white',
               },
             },
           }}

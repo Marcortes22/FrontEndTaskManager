@@ -4,7 +4,7 @@ import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import plannedPhoto from '@/assets/time-and-calendar.png';
 import { usePlanned } from './Hook/usePlanned';
-import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
+import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
 import { Box } from '@mui/material';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
@@ -38,36 +38,46 @@ export default function Planned() {
           }}
         >
           <Box className={globalStyles.TaskListContainer}>
-            <DespegableTaskList
-              tasks={query.data?.data?.earlierTasks}
-              title="Ealier"
-              count={earlierTasksCount}
-              defaulOpenValue={true}
-            ></DespegableTaskList>
+            {query.data?.data?.earlierTasks && (
+              <DespegableTaskList
+                tasks={query.data?.data?.earlierTasks}
+                title="Ealier"
+                count={earlierTasksCount}
+                defaulOpenValue={true}
+              ></DespegableTaskList>
+            )}
 
-            <DespegableTaskList
-              tasks={query.data?.data?.todayTasks}
-              title="Today"
-              count={todayTasksCount}
-            ></DespegableTaskList>
+            {query.data?.data?.todayTasks && (
+              <DespegableTaskList
+                tasks={query.data?.data?.todayTasks}
+                title="Today"
+                count={todayTasksCount}
+              ></DespegableTaskList>
+            )}
 
-            <DespegableTaskList
-              tasks={query.data?.data?.tomorrowTaks}
-              title="Tomorrow"
-              count={tomorrowTasksCount}
-            ></DespegableTaskList>
+            {query.data?.data?.tomorrowTaks && (
+              <DespegableTaskList
+                tasks={query.data?.data?.tomorrowTaks}
+                title="Tomorrow"
+                count={tomorrowTasksCount}
+              ></DespegableTaskList>
+            )}
 
-            <DespegableTaskList
-              tasks={query.data?.data?.thisWeekTasks}
-              title="This Week"
-              count={thisWeekTasksCount}
-            ></DespegableTaskList>
+            {query.data?.data?.thisWeekTasks && (
+              <DespegableTaskList
+                tasks={query.data?.data?.thisWeekTasks}
+                title="This Week"
+                count={thisWeekTasksCount}
+              ></DespegableTaskList>
+            )}
 
-            <DespegableTaskList
-              tasks={query.data?.data?.laterTasks}
-              title="Later"
-              count={laterTasksCount}
-            ></DespegableTaskList>
+            {query.data?.data?.laterTasks && (
+              <DespegableTaskList
+                tasks={query.data?.data?.laterTasks}
+                title="Later"
+                count={laterTasksCount}
+              ></DespegableTaskList>
+            )}
           </Box>
 
           {tasksCount > 0 ? null : (

@@ -1,4 +1,5 @@
 import { TaskItemType } from '@/Types/TaskItem.type';
+import { TaskListType } from '@/Types/TaskList.type';
 
 export interface IGetTodayTaskItems {
   uncompletedTasks: TaskItemType[];
@@ -39,4 +40,19 @@ export interface ICreateTaskItem {
   note?: string;
   addedToMyDay?: string | null | Date;
   taskListId?: number;
+}
+
+export interface IUpdateTaskItem {
+  id?: number;
+  title?: string;
+  isCompleted?: boolean;
+  isImportant?: boolean;
+  createdDate?: Date;
+  reminderDate?: Date | null;
+  dueDate?: Date | null | string;
+  completedDate?: Date | null;
+  note?: string;
+  addedToMyDay?: Date | null;
+  taskListId?: number;
+  taskList?: TaskListType;
 }

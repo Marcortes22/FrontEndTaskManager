@@ -1,5 +1,5 @@
 import IconButton from '@mui/material/IconButton';
-import BackGroundList from '../BackGroundList/BackGroundList';
+import BackGroundImageList from '../BackGroundImageList/BackGroundImageList';
 import { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import { Box, useTheme } from '@mui/material';
@@ -66,7 +66,7 @@ export default function Header({
               Sord by
             </Box>
           </Button> */}
-          <BackGroundList></BackGroundList>
+          <BackGroundImageList />
         </Box>
       </Menu>
     </header>

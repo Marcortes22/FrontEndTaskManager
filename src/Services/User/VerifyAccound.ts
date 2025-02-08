@@ -1,18 +1,24 @@
-import { BaseResponse, IdReponse } from '@/Interfaces/BaseResponse';
+import { BaseResponse } from '@/Interfaces/BaseResponse';
+import { IVerifyAccoundResponse } from '@/Interfaces/Users/IUser';
 
 export async function verifyAccound(
   token: string,
-): Promise<BaseResponse<IdReponse>> {
+  timeZone: string,
+): Promise<BaseResponse<IVerifyAccoundResponse>> {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}User/verifyAccound`,
     {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ timeZone }),
     },
   );
 
-  const jsonResponse: BaseResponse<IdReponse> = await response.json();
+  const jsonResponse: BaseResponse<IVerifyAccoundResponse> =
+    await response.json();
 
   if (!response.ok) {
     console.log(response.status);

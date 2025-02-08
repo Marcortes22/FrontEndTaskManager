@@ -9,7 +9,6 @@ export async function createTaskItem({
   token: string;
   taskItem: ICreateTaskItem;
 }): Promise<BaseResponse<TaskItemType>> {
-  console.log(taskItem);
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}TaskItem`, {
     method: 'POST',
     headers: {

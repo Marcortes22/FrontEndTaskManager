@@ -1,6 +1,6 @@
 import Header from '@/Components/Header/Header';
 import { Box } from '@mui/material';
-import DespegableTaskList from '@/DespegableTaskList/DespegableTaskList';
+import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import { useTaskLists } from './Hook/useTaskLists';
@@ -10,11 +10,8 @@ import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 import { useParams } from 'react-router-dom';
-import { GetCurrentPageQueryKey } from '@/Utils/GetCurrentPageQueryKey';
 
 export default function TaskLists() {
-  const { queryKeyToInvalidate } = GetCurrentPageQueryKey();
-  console.log(queryKeyToInvalidate);
   const { query, completedTaskCount, allTaskCount } = useTaskLists();
 
   const params = useParams();
@@ -37,12 +34,17 @@ export default function TaskLists() {
           }}
         >
           <Box className={globalStyles.TaskListContainer}>
-            <TaskList tasks={query.data?.data?.uncompletedTasks}></TaskList>
-            <DespegableTaskList
-              tasks={query.data?.data?.completedTasks}
-              title="Completed"
-              count={completedTaskCount}
-            ></DespegableTaskList>
+            {query.data?.data?.uncompletedTasks && (
+              <TaskList tasks={query.data?.data?.uncompletedTasks}></TaskList>
+            )}
+
+            {query.data?.data?.completedTasks && (
+              <DespegableTaskList
+                tasks={query.data?.data?.completedTasks}
+                title="Completed"
+                count={completedTaskCount}
+              ></DespegableTaskList>
+            )}
           </Box>
 
           {allTaskCount > 0 ? null : (

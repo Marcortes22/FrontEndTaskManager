@@ -31,7 +31,7 @@
       "@Styles/*": ["src/styles/*"],
       "@Utils/*": ["src/Utils/*"],
       "@Common/*": ["src/Common/*"],
-      "@Routes/*": ["src/Routes/*"]
+      "@Routes/*": ["src/Router/*"]
     }
   },
   "include": ["src"]

@@ -29,7 +29,9 @@ export default function Important() {
           }}
         >
           <Box className={globalStyles.TaskListContainer}>
-            <TaskList tasks={query.data?.data?.tasks} />
+            {query.data?.data?.tasks && (
+              <TaskList tasks={query.data?.data?.tasks} />
+            )}
           </Box>
 
           {tasksCount > 0 ? null : (

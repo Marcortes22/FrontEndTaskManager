@@ -66,4 +66,3 @@ export default function DateSelector({
     </>
   );
 }
-// sx={{ color: 'white' }}

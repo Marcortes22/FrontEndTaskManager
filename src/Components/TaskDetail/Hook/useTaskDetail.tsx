@@ -1,18 +1,60 @@
+import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
+import {
+  ICreateTaskItem,
+  IUpdateTaskItem,
+} from '@/Interfaces/TaskItems/ItaskItems';
+import { getTaskItemById } from '@/Services/TaskItems/GetTaskItemById/getTaskItemById';
 import { TaskItemType } from '@/Types/TaskItem.type';
-import { useTheme } from '@mui/material';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export function useTaskDetail(task: TaskItemType | null) {
+export function useTaskDetail(taskId: number, DrawerState: boolean) {
+  //Auth0 functions
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const location = useLocation();
+  //QueryClient to invalidate the query
+  const queryClient = useQueryClient();
+
+  //Query
+  const query = useQuery({
+    queryKey: ['taskById'],
+    queryFn: async () => {
+      const token = await getAccessTokenSilently();
+      return getTaskItemById(token, taskId);
+    },
+
+    enabled: isAuthenticated && DrawerState && taskId !== undefined,
+  });
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  //States to manage if the title or note is being edited
   const [noteIsEditing, setNoteIsEditing] = useState(false);
-  const [noteText, setNoteText] = useState(task?.note ?? '');
-
   const [titleIsEditing, setTitleIsEditing] = useState(true);
-  const [titleText, setTitleText] = useState(task?.title ?? '');
 
-  const theme = useTheme();
+  //States to manage the text of the title and note
+  const [noteText, setNoteText] = useState(query.data?.data?.note ?? '');
+  const [titleText, setTitleText] = useState(query.data?.data?.title ?? '');
+
+  //State to manage current task
+  const [task, setTask] = useState(query.data?.data);
+
+  //Functions
+
+  //Mutations to update taskItem
+  const { updateOnSubmit } = useTaskItemMutation(location.pathname, [
+    'taskById',
+  ]);
 
   function handleTitleChange(open: boolean) {
     setTitleIsEditing(open);
+    if (!open && titleText !== task?.title && task && titleText.trim() !== '') {
+      handleUpdateTaskItemDetail(task, { title: titleText });
+    }
   }
 
   function handleTitleTextChange(
@@ -27,6 +69,9 @@ export function useTaskDetail(task: TaskItemType | null) {
 
   function handleNoteChange(open: boolean) {
     setNoteIsEditing(open);
+    if (!open && noteText !== task?.note && task) {
+      handleUpdateTaskItemDetail(task, { note: noteText });
+    }
   }
 
   function handleTextNoteChange(
@@ -37,10 +82,56 @@ export function useTaskDetail(task: TaskItemType | null) {
     }
     setNoteText(e.target.value);
   }
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  function handleDateChange(date: Dayjs | null, task: TaskItemType) {
+    if (
+      date &&
+      date?.isValid() &&
+      date.format('YYYY-MM-DD') !== task.dueDate?.toString()
+    ) {
+      handleUpdateTaskItemDetail(task, {
+        dueDate: date.format('YYYY-MM-DD'),
+      });
+    }
+  }
+
   useEffect(() => {
-    setTitleText(task?.title ?? '');
-    handleTitleChange(true);
-  }, [task]);
+    queryClient.invalidateQueries({ queryKey: ['taskById'] });
+  }, [queryClient, taskId]);
+
+  useEffect(() => {
+    if (query.data?.data && DrawerState) {
+      setTask(query.data.data);
+      setTitleText(query.data.data.title);
+      setNoteText(query.data.data.note ?? '');
+    }
+  }, [DrawerState, query.data?.data]);
+
+  async function handleUpdateTaskItemDetail(
+    task: TaskItemType,
+    newData: IUpdateTaskItem,
+  ) {
+    const token = await getAccessTokenSilently();
+
+    const newTask: ICreateTaskItem = {
+      ...task,
+      ...newData,
+    };
+
+    updateOnSubmit({
+      taskItemId: task.id,
+      token,
+      taskItem: newTask,
+    });
+  }
 
   return {
     noteIsEditing,
@@ -51,6 +142,13 @@ export function useTaskDetail(task: TaskItemType | null) {
     handleTitleTextChange,
     handleNoteChange,
     handleTextNoteChange,
-    theme,
+    task,
+    query,
+    anchorEl,
+    open,
+    handleClose,
+    handleClick,
+    handleUpdateTaskItemDetail,
+    handleDateChange,
   };
 }

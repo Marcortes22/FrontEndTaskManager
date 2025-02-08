@@ -1,15 +1,17 @@
-import ThemeContextProvider from '@/Contexts/ThemeContextProvider';
+import ThemeContextProvider from '@/Contexts/ThemeContext/ThemeContextProvider';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 export default function AppProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const queryClient = new QueryClient();
+
   return (
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH0_DOMAIN}
@@ -26,7 +28,7 @@ export default function AppProvider({
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             {children}
           </LocalizationProvider>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeContextProvider>
     </Auth0Provider>
