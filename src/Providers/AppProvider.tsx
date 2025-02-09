@@ -1,7 +1,6 @@
 import ThemeContextProvider from '@/Contexts/ThemeContext/ThemeContextProvider';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
