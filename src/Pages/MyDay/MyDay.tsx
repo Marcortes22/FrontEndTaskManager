@@ -6,7 +6,7 @@ import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
 import { Box } from '@mui/material';
 import useMyDay from './Hook/useMyDay';
-import globalStyles from '@/styles/globals.module.css';
+import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 import { getDateToLocaleZoneDate } from '@/Utils/TaskItemsDateFunctions';
