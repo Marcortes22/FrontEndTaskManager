@@ -5,7 +5,7 @@ import completedPhoto from '@/assets/pageImagesInformation/icons8-completed-64.p
 import { useCompleted } from './Hook/useCompleted';
 import { Box } from '@mui/material';
 import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
-import globalStyles from '@/styles/globals.module.css';
+import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 export default function Completed() {
