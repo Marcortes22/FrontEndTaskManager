@@ -1,9 +1,9 @@
-import { TaskItem } from '@/Types/TaskItem.type';
+import { TaskItemType } from '@/Types/TaskItem.type';
 
 export interface ITaskListWithTasks {
   id: number;
   name: string;
-  taskItems: TaskItem[];
+  taskItems: TaskItemType[];
 }
 
 export interface ITaskListWithCountTasks {
@@ -27,8 +27,8 @@ export interface ITaskListInformation {
 export interface ITaskListById {
   id: number;
   name: string;
-  uncompletedTasks: TaskItem[];
-  completedTasks: TaskItem[];
+  uncompletedTasks: TaskItemType[];
+  completedTasks: TaskItemType[];
   completedTaskCount: number;
   totalCount: number;
 }
