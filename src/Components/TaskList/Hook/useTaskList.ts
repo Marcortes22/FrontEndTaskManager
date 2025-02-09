@@ -5,6 +5,7 @@ import {
 } from '@/Interfaces/TaskItems/ItaskItems';
 import { TaskItemType } from '@/Types/TaskItem.type';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useTheme } from '@mui/material';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ export default function useTaskList() {
   //Constansts
   const location = useLocation();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const theme = useTheme();
 
   //Auth0
   const { getAccessTokenSilently } = useAuth0();
@@ -21,7 +23,10 @@ export default function useTaskList() {
   const [CurrentTaskId, SetCurrentTaskId] = useState<number>();
 
   //Mutations to update taskItem
-  const { updateOnSubmit } = useTaskItemMutation(location.pathname);
+  const { updateTaskItemMutation } = useTaskItemMutation(
+    location.pathname,
+    theme,
+  );
 
   //Functions
   function handleSwipeableDrawerState(open: boolean) {
@@ -44,7 +49,7 @@ export default function useTaskList() {
       ...newData,
     };
 
-    updateOnSubmit({
+    updateTaskItemMutation.mutate({
       taskItemId: task.id,
       token,
       taskItem: newTask,

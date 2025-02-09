@@ -24,13 +24,16 @@ import { useTaskDetail } from './Hook/useTaskDetail';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { DateCalendar } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import DeleteTaskItemModal from '../DeleteTaskItemModal/DeleteTaskItemModal';
 
 export default function TaskDetail({
   taskId,
   DrawerState,
+  handleSwipeableDrawerState,
 }: {
   taskId?: number;
   DrawerState: boolean;
+  handleSwipeableDrawerState: (open: boolean) => void;
 }) {
   const theme = useTheme();
   const {
@@ -46,11 +49,14 @@ export default function TaskDetail({
     query,
     anchorEl,
     open,
-    handleClose,
+    handleCloseDateSelector,
     handleClick,
     handleUpdateTaskItemDetail,
     handleDateChange,
-  } = useTaskDetail(taskId ?? 0, DrawerState);
+    handleDeleteTaskItem,
+    openDeleteModal,
+    setOpenDeleteModal,
+  } = useTaskDetail(taskId ?? 0, DrawerState, handleSwipeableDrawerState);
 
   if (query.isFetching) {
     return (
@@ -185,7 +191,7 @@ export default function TaskDetail({
                   id="dateSelector"
                   anchorEl={anchorEl}
                   open={open}
-                  onClose={handleClose}
+                  onClose={handleCloseDateSelector}
                   MenuListProps={{
                     'aria-labelledby': 'basic-button',
                   }}
@@ -193,7 +199,7 @@ export default function TaskDetail({
                   <DateCalendar
                     value={task?.dueDate ? dayjs(task.dueDate) : null}
                     onChange={(newValue) => {
-                      handleClose();
+                      handleCloseDateSelector();
                       handleDateChange(newValue, task);
                     }}
                   />
@@ -245,7 +251,10 @@ export default function TaskDetail({
             <p style={{ flexGrow: '1' }}>
               Created on {format(task?.createdDate, 'medium')}
             </p>
-            <IconButton sx={{ padding: '0px' }}>
+            <IconButton
+              sx={{ padding: '0px' }}
+              onClick={() => setOpenDeleteModal(true)}
+            >
               <DeleteOutlineOutlinedIcon
                 sx={{
                   color: theme.palette.error.dark,
@@ -254,6 +263,12 @@ export default function TaskDetail({
               />
             </IconButton>
           </Paper>
+          <DeleteTaskItemModal
+            task={task}
+            open={openDeleteModal}
+            setOpen={setOpenDeleteModal}
+            handleDeleteTaskItem={handleDeleteTaskItem}
+          ></DeleteTaskItemModal>
         </Paper>
       )}
     </>

@@ -24,7 +24,7 @@ export default function TaskInputForm({
     newTitleText,
     handleTextTitleChange,
     handleSubmit,
-  } = useTaskInputForm(pageQueryKey, defaultTaskListId);
+  } = useTaskInputForm(pageQueryKey);
 
   return (
     <>

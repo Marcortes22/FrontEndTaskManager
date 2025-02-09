@@ -1,23 +1,17 @@
+import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
 import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
-import { createTaskItem } from '@/Services/TaskItems/CreateTaskItem/createTaskItem';
 import { TaskListType } from '@/Types/TaskList.type';
 import { getTaskItemDefaultData } from '@/Utils/GetTaskItemDefaultData';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@mui/material';
-
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 
-export function useTaskInputForm(
-  pageQueryKey: string,
-  defaultTaskListId?: number,
-) {
+export function useTaskInputForm(pageQueryKey: string) {
   //Auth0
   const { getAccessTokenSilently } = useAuth0();
-
+  const theme = useTheme();
   //Location
   const location = useLocation();
 
@@ -31,43 +25,12 @@ export function useTaskInputForm(
   const [isFocused, setIsFocused] = useState(false);
   const [currentList, setCurrentList] = useState<TaskListType>();
   const [dateValue, setDateValue] = useState<Dayjs | null>(firstDateValue);
-  const theme = useTheme();
-  //REACT QUERY
-  const queryClient = useQueryClient();
 
-  //MUTATION
-  const mutation = useMutation({
-    mutationFn: (data: { token: string; taskItem: ICreateTaskItem }) => {
-      return createTaskItem(data);
-    },
-    onSuccess: () => {
-      invalidateQueries();
-      toast.success('Successfully created!', {
-        style: {
-          background: theme.palette.background.default,
-          color: theme.palette.text.primary,
-        },
-      });
-    },
-    onError: () => {
-      toast.error('Task creation failed');
-    },
-  });
-
-  //Invalidate Queries function
-  function invalidateQueries() {
-    queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
-
-    if (location.pathname.includes('taskList') && defaultTaskListId) {
-      queryClient.invalidateQueries({
-        queryKey: [`${pageQueryKey}`, `${defaultTaskListId}`],
-      });
-
-      return;
-    }
-
-    queryClient.invalidateQueries({ queryKey: [`${pageQueryKey}`] });
-  }
+  const { createTaskItemMutation } = useTaskItemMutation(
+    location.pathname,
+    theme,
+    [pageQueryKey],
+  );
 
   //Handlers
 
@@ -105,7 +68,7 @@ export function useTaskInputForm(
       ...defaultData,
     };
 
-    mutation.mutate({ token: token, taskItem: newTaskItem });
+    createTaskItemMutation.mutate({ token: token, taskItem: newTaskItem });
     setNewTitleText('');
     if (!firstDateValue) {
       setDateValue(null);
@@ -122,6 +85,5 @@ export function useTaskInputForm(
     newTitleText,
     handleTextTitleChange,
     handleSubmit,
-    mutation,
   };
 }

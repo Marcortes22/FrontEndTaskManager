@@ -2,7 +2,7 @@ import Header from '@/Components/Header/Header';
 
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
-import plannedPhoto from '@/assets/time-and-calendar.png';
+import plannedPhoto from '@/assets/pageImagesInformation/time-and-calendar.png';
 import { usePlanned } from './Hook/usePlanned';
 import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
 import { Box } from '@mui/material';
@@ -43,7 +43,7 @@ export default function Planned() {
                 tasks={query.data?.data?.earlierTasks}
                 title="Ealier"
                 count={earlierTasksCount}
-                defaulOpenValue={true}
+                // defaulOpenValue={true}
               ></DespegableTaskList>
             )}
 
@@ -66,7 +66,7 @@ export default function Planned() {
             {query.data?.data?.thisWeekTasks && (
               <DespegableTaskList
                 tasks={query.data?.data?.thisWeekTasks}
-                title="This Week"
+                title="Next 7 days"
                 count={thisWeekTasksCount}
               ></DespegableTaskList>
             )}

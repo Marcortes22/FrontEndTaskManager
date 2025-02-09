@@ -2,7 +2,7 @@ import Header from '@/Components/Header/Header';
 
 import TaskList from '@/Components/TaskList/TaskList';
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
-import importantPhoto from '@/assets/calendario.png';
+import importantPhoto from '@/assets/pageImagesInformation/calendario.png';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import { useImportant } from './Hook/useImportant';
 import globalStyles from '@/Styles/globals.module.css';

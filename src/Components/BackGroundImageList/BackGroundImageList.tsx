@@ -74,7 +74,7 @@ export default function BackGroundImageList() {
               srcSet={`${item.thumbnail}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
               src={`${item.thumbnail}?w=164&h=164&fit=crop&auto=format`}
               alt={item.title}
-              loading="lazy"
+              // loading="lazy"
               onClick={() => setBackgroundImage(item.img)}
             />
           </ImageListItem>

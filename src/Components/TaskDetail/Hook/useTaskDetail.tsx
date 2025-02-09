@@ -6,17 +6,23 @@ import {
 import { getTaskItemById } from '@/Services/TaskItems/GetTaskItemById/getTaskItemById';
 import { TaskItemType } from '@/Types/TaskItem.type';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export function useTaskDetail(taskId: number, DrawerState: boolean) {
+export function useTaskDetail(
+  taskId: number,
+  DrawerState: boolean,
+  handleSwipeableDrawerState: (open: boolean) => void,
+) {
   //Auth0 functions
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const location = useLocation();
   //QueryClient to invalidate the query
   const queryClient = useQueryClient();
+  const theme = useTheme();
 
   //Query
   const query = useQuery({
@@ -40,15 +46,22 @@ export function useTaskDetail(taskId: number, DrawerState: boolean) {
   const [noteText, setNoteText] = useState(query.data?.data?.note ?? '');
   const [titleText, setTitleText] = useState(query.data?.data?.title ?? '');
 
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   //State to manage current task
   const [task, setTask] = useState(query.data?.data);
 
   //Functions
 
   //Mutations to update taskItem
-  const { updateOnSubmit } = useTaskItemMutation(location.pathname, [
-    'taskById',
-  ]);
+  const { updateTaskItemMutation } = useTaskItemMutation(
+    location.pathname,
+    theme,
+    ['taskById'],
+  );
+  const { deleteTaskItemMutation } = useTaskItemMutation(
+    location.pathname,
+    theme,
+  );
 
   function handleTitleChange(open: boolean) {
     setTitleIsEditing(open);
@@ -87,7 +100,7 @@ export function useTaskDetail(taskId: number, DrawerState: boolean) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleCloseDateSelector = () => {
     setAnchorEl(null);
   };
 
@@ -126,11 +139,19 @@ export function useTaskDetail(taskId: number, DrawerState: boolean) {
       ...newData,
     };
 
-    updateOnSubmit({
+    updateTaskItemMutation.mutate({
       taskItemId: task.id,
       token,
       taskItem: newTask,
     });
+  }
+
+  async function handleDeleteTaskItem(task: TaskItemType) {
+    if (task && task.id) {
+      const token = await getAccessTokenSilently();
+      deleteTaskItemMutation.mutate({ taskItemId: task.id, token });
+      handleSwipeableDrawerState(false);
+    }
   }
 
   return {
@@ -146,9 +167,12 @@ export function useTaskDetail(taskId: number, DrawerState: boolean) {
     query,
     anchorEl,
     open,
-    handleClose,
+    handleCloseDateSelector,
     handleClick,
     handleUpdateTaskItemDetail,
     handleDateChange,
+    handleDeleteTaskItem,
+    openDeleteModal,
+    setOpenDeleteModal,
   };
 }

@@ -1,4 +1,4 @@
-import calendarPhoto from '@/assets/calendar.png';
+import calendarPhoto from '@/assets/pageImagesInformation/calendar.png';
 import Header from '@/Components/Header/Header';
 import TaskList from '@/Components/TaskList/TaskList';
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';

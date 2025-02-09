@@ -1,17 +1,40 @@
 import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
+import { createTaskItem } from '@/Services/TaskItems/CreateTaskItem/createTaskItem';
+import { deleteTaskItem } from '@/Services/TaskItems/DeleteTasItem/deleteTaskItem';
 import { updateTaskItem } from '@/Services/TaskItems/UpdateTaskItem/updateTaskItem';
-import { GetCurrentPageQueryKey } from '@/Utils/GetCurrentPageQueryKey';
+import { InvalidateQueries } from '@/Utils/InvalidateQueries';
+import { Theme } from '@mui/material';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 export function useTaskItemMutation(
   pathName: string,
+  theme: Theme,
   queriesToInvalidate?: string[],
 ) {
-  const { queryKey, queryKeyId } = GetCurrentPageQueryKey(pathName);
-
   const queryClient = useQueryClient();
+
+  //Mutation to create taskItem
+  const createTaskItemMutation = useMutation({
+    mutationFn: (data: { token: string; taskItem: ICreateTaskItem }) => {
+      return createTaskItem(data);
+    },
+    onSuccess: () => {
+      InvalidateQueries(queryClient, pathName, queriesToInvalidate);
+      toast.success('Successfully created!', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onError: () => {
+      toast.error('Task creation failed');
+    },
+  });
+
+  //Mutation to update taskItem
   const updateTaskItemMutation = useMutation({
     mutationFn: (data: {
       taskItemId: number;
@@ -21,33 +44,35 @@ export function useTaskItemMutation(
       return updateTaskItem(data);
     },
 
-    onSuccess: () => {
-      if (queryKey) {
-        queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
-
-        queriesToInvalidate?.forEach((query) => {
-          queryClient.invalidateQueries({ queryKey: [query] });
-        });
-
-        if (queryKeyId) {
-          queryClient.invalidateQueries({ queryKey: [queryKey, queryKeyId] });
-          return;
-        }
-        queryClient.invalidateQueries({ queryKey: [queryKey] });
-      }
-    },
+    onSuccess: () =>
+      InvalidateQueries(queryClient, pathName, queriesToInvalidate),
     onError: () => {
       toast.error('Task update failed');
     },
   });
 
-  const updateOnSubmit = (data: {
-    taskItemId: number;
-    token: string;
-    taskItem: ICreateTaskItem;
-  }) => {
-    updateTaskItemMutation.mutate(data);
-  };
+  //Mutation to delete taskItem
+  const deleteTaskItemMutation = useMutation({
+    mutationFn: (data: { taskItemId: number; token: string }) => {
+      return deleteTaskItem(data);
+    },
+    onSuccess: () => {
+      InvalidateQueries(queryClient, pathName, queriesToInvalidate);
+      toast.success('Successfully deleted!', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onError: () => {
+      toast.error('Task deletion failed');
+    },
+  });
 
-  return { updateOnSubmit };
+  return {
+    updateTaskItemMutation,
+    createTaskItemMutation,
+    deleteTaskItemMutation,
+  };
 }

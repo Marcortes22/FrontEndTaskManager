@@ -4,7 +4,7 @@ import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskLi
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import { useTaskLists } from './Hook/useTaskLists';
-import plannedPhoto from '@/assets/time-and-calendar.png';
+import plannedPhoto from '@/assets/pageImagesInformation/time-and-calendar.png';
 import TaskList from '@/Components/TaskList/TaskList';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';

@@ -1,5 +1,5 @@
 import useDespegableTaskList from './Hook/useDespegableTaskList';
-import { Box, IconButton } from '@mui/material';
+import { Badge, Box, IconButton } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import styles from './styles/DespegableTaskList.module.css';
 import TaskList from '@/Components/TaskList/TaskList';
@@ -21,26 +21,28 @@ export default function DespegableTaskList({
   return (
     <>
       {tasks && tasks.length > 0 && (
-        <Box>
-          <Box className={styles.DespegableTaskListContainer}>
-            <IconButton
-              sx={{ padding: 0 }}
-              aria-label="Mode"
-              onClick={handleOpen}
-            >
-              <KeyboardArrowRightIcon
-                sx={{ color: 'white' }}
-                className={
-                  open
-                    ? styles.RotateRightIcon
-                    : styles.RotateInitialPositionIcon
-                }
-              />
-            </IconButton>
+        <Box sx={{ paddingTop: '10px' }}>
+          <Badge badgeContent={count} color="secondary">
+            <Box className={styles.DespegableTaskListContainer}>
+              <IconButton
+                sx={{ padding: 0 }}
+                aria-label="Mode"
+                onClick={handleOpen}
+              >
+                <KeyboardArrowRightIcon
+                  sx={{ color: 'white' }}
+                  className={
+                    open
+                      ? styles.RotateRightIcon
+                      : styles.RotateInitialPositionIcon
+                  }
+                />
+              </IconButton>
 
-            <p> {title}</p>
-            <p> {count}</p>
-          </Box>
+              <p> {title}</p>
+              {/* <p> {count}</p> */}
+            </Box>
+          </Badge>
 
           {open && (tasks?.length ?? 0) > 0 && <TaskList tasks={tasks} />}
         </Box>

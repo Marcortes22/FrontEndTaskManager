@@ -5,7 +5,7 @@ import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskLi
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import globalStyles from '@/Styles/globals.module.css';
-import calendarPhoto from '@/assets/icons8-completed-64.png';
+import calendarPhoto from '@/assets/pageImagesInformation/icons8-completed-64.png';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 
@@ -34,7 +34,7 @@ export default function All() {
                 tasks={task.taskItems}
                 title={task.name}
                 count={task.taskItems.length}
-                defaulOpenValue={true}
+                // defaulOpenValue={true}
               ></DespegableTaskList>
             ))}
           </Box>

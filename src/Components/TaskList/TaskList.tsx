@@ -61,6 +61,7 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
               </div>
 
               <Checkbox
+                sx={{ color: 'white' }}
                 className={styles.CheckBoxStyle}
                 icon={<StarOutlineOutlinedIcon />}
                 checkedIcon={<StarIcon />}
@@ -157,6 +158,7 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
           children={
             <TaskDetail
               DrawerState={DrawerState}
+              handleSwipeableDrawerState={handleSwipeableDrawerState}
               taskId={CurrentTaskId}
             ></TaskDetail>
           }
