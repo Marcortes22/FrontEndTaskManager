@@ -26,7 +26,7 @@ export default function ProtectedRoutes({
     );
   }
 
-  if (!isAuthenticated || error) {
+  if (!isAuthenticated) {
     loginWithRedirect();
     return null;
   }
