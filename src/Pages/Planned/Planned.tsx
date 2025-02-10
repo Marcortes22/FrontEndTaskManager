@@ -2,7 +2,7 @@ import Header from '@/Components/Header/Header';
 
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
-import plannedPhoto from '@/assets/pageImagesInformation/time-and-calendar.png';
+import plannedImage from '@/assets/pageImagesInformation/plannedImage.png';
 import { usePlanned } from './Hook/usePlanned';
 import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
 import { Box } from '@mui/material';
@@ -82,9 +82,9 @@ export default function Planned() {
 
           {tasksCount > 0 ? null : (
             <TodoEmptyHelper
-              title=""
-              description="Tasks with due dates will show up here."
-              photo={plannedPhoto}
+              title="Stay on Track"
+              description="See what's ahead. Keep track of tasks planned for the future."
+              photo={plannedImage}
             ></TodoEmptyHelper>
           )}
         </Box>

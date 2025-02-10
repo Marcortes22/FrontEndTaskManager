@@ -10,8 +10,7 @@ export default function ProtectedRoutes({
 }) {
   const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const { verifyAccountMutation } = useUserMutation();
-  const { mutate } = verifyAccountMutation;
-  //const { mutate, error } = verifyAccountMutation;
+  const { mutate, error } = verifyAccountMutation;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -27,7 +26,7 @@ export default function ProtectedRoutes({
     );
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || error) {
     loginWithRedirect();
     return null;
   }

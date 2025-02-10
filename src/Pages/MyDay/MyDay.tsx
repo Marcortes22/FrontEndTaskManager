@@ -1,4 +1,4 @@
-import calendarPhoto from '@/assets/pageImagesInformation/calendar.png';
+import myDayImage from '@/assets/pageImagesInformation/myDayImage.webp';
 import Header from '@/Components/Header/Header';
 import TaskList from '@/Components/TaskList/TaskList';
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
@@ -52,7 +52,7 @@ export default function MyDay() {
             <TodoEmptyHelper
               title="Focus on your day"
               description="Get things done with My Day. A list that refreshes every day."
-              photo={calendarPhoto}
+              photo={myDayImage}
             ></TodoEmptyHelper>
           )}
         </Box>

@@ -5,7 +5,7 @@ import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskLi
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import globalStyles from '@/Styles/globals.module.css';
-import calendarPhoto from '@/assets/pageImagesInformation/icons8-completed-64.png';
+import allImage from '@/assets/pageImagesInformation/allImage.png';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 
@@ -41,9 +41,9 @@ export default function All() {
 
           {allTasksCount > 0 ? null : (
             <TodoEmptyHelper
-              title="aa"
-              description="All tasks will show up here."
-              photo={calendarPhoto}
+              title="All Tasks in One Place"
+              description="Access every task in your list, no matter its status."
+              photo={allImage}
             ></TodoEmptyHelper>
           )}
         </Box>

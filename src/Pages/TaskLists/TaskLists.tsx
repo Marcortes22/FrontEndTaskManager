@@ -4,7 +4,7 @@ import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskLi
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import { useTaskLists } from './Hook/useTaskLists';
-import plannedPhoto from '@/assets/pageImagesInformation/time-and-calendar.png';
+import taskListImage from '@/assets/pageImagesInformation/taskListImage.png';
 import TaskList from '@/Components/TaskList/TaskList';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
@@ -49,9 +49,9 @@ export default function TaskLists() {
 
           {allTaskCount > 0 ? null : (
             <TodoEmptyHelper
-              title=""
-              description="Tasks created on this llist will show up here."
-              photo={plannedPhoto}
+              title="Custom Task List"
+              description="Your personalized task list. A place to manage specific tasks and projects."
+              photo={taskListImage}
             ></TodoEmptyHelper>
           )}
         </Box>

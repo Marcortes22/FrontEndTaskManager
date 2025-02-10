@@ -1,7 +1,7 @@
 import Header from '@/Components/Header/Header';
 import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
-import completedPhoto from '@/assets/pageImagesInformation/icons8-completed-64.png';
+import completedImage from '@/assets/pageImagesInformation/completedImage.png';
 import { useCompleted } from './Hook/useCompleted';
 import { Box } from '@mui/material';
 import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
@@ -40,9 +40,9 @@ export default function Completed() {
 
           {completedTasksCount > 0 ? null : (
             <TodoEmptyHelper
-              title=""
-              description="Tasks with due dates will show up here."
-              photo={completedPhoto}
+              title="Celebrate Progress"
+              description="Track your achievements. A list of everything you've completed."
+              photo={completedImage}
             ></TodoEmptyHelper>
           )}
         </Box>

@@ -17,8 +17,6 @@
 }
 
 .Photo {
-  width: 64px;
-  height: 64px;
   object-fit: cover;
   border-radius: 5px;
 }
