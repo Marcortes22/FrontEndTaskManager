@@ -29,10 +29,10 @@ export default function BackGroundImageList({
 
     setTimeout(() => {
       setBackgroundImage(img);
-    }, 290);
+    }, 300);
     setTimeout(() => {
       setBackgroundIsChanging(false);
-    }, 500);
+    }, 320);
   }
   return (
     <Box
