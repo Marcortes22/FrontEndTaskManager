@@ -7,6 +7,7 @@ import AppBar from '@/Components/AppBar/AppBar';
 import DeskTopDrawer from '@/Components/SideBarDrawers/DeskTopDrawer/DeskTopDrawer';
 import { useLayOut } from './Hook/useLayOut';
 import MobileDrawer from '@/Components/SideBarDrawers/MobileDrawer/MobileDrawer';
+import BackDrop from '@/Components/BackDrop/BackDrop';
 
 export function Layout() {
   const {
@@ -23,6 +24,8 @@ export function Layout() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
+        <BackDrop />
 
         <Box
           sx={{

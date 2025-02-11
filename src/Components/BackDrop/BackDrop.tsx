@@ -1,9 +1,12 @@
 import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import { Backdrop, CircularProgress } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 export default function BackDrop() {
   const { isLoading } = useContext(ThemeContext);
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
 
   return (
     <>
