@@ -19,20 +19,20 @@ import background_6 from '@Assets/backgroundImages/sunset-background.webp';
 import thumbnail_7 from '@Assets/thumbnails/mountain-thumbnail.webp';
 import background_7 from '@Assets/backgroundImages/mountain-background.webp';
 
-import thumbnail_8 from '@/assets/thumbnails/rock-thumbnail.webp';
+import thumbnail_8 from '@Assets/thumbnails/rock-thumbnail.webp';
 import background_8 from '@/assets/backgroundImages/rock-background.webp';
 
-import thumbnail_9 from '@/assets/thumbnails/sea-thumbnail.webp';
-import background_9 from '@/assets/backgroundImages/sea-background.webp';
+import thumbnail_9 from '@Assets/thumbnails/sea-thumbnail.webp';
+import background_9 from '@Assets/backgroundImages/sea-background.webp';
 
-import thumbnail_10 from '@/assets/thumbnails/sea-star-thumbnail.webp';
-import background_10 from '@/assets/backgroundImages/sea-star-background.webp';
+import thumbnail_10 from '@Assets/thumbnails/sea-star-thumbnail.webp';
+import background_10 from '@Assets/backgroundImages/sea-star-background.webp';
 
-import thumbnail_11 from '@/assets/thumbnails/snow-mountain-thumbnail.webp';
-import background_11 from '@/assets/backgroundImages/snow-mountain-background.webp';
+import thumbnail_11 from '@Assets/thumbnails/snow-mountain-thumbnail.webp';
+import background_11 from '@Assets/backgroundImages/snow-mountain-background.webp';
 
-import thumbnail_12 from '@/assets/thumbnails/stars-thumbnail.webp';
-import background_12 from '@/assets/backgroundImages/stars-background.webp';
+import thumbnail_12 from '@Assets/thumbnails/stars-thumbnail.webp';
+import background_12 from '@Assets/backgroundImages/stars-background.webp';
 
 export const backgroundImagesItems = [
   {
