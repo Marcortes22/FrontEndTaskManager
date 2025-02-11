@@ -1,3 +1,5 @@
+import { backGroundImages } from './Types';
+
 export type ThemeContextType = {
   mode: string;
   setMode: (mode: string) => void;
@@ -7,4 +9,6 @@ export type ThemeContextType = {
   setBackgroundIsChanging: (backgroundIsChanging: boolean) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  backgroundImages: backGroundImages[];
+  setBackgroundImages: (backgroundImages: backGroundImages[]) => void;
 };

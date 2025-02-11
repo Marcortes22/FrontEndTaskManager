@@ -2,27 +2,18 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
-import { backgroundImagesItems } from '@/Constants/BackGroundImages';
 
 export default function BackGroundImageList({
   handleClose,
 }: {
   handleClose: () => void;
 }) {
-  const { setBackgroundImage, setBackgroundIsChanging } =
+  const { setBackgroundImage, setBackgroundIsChanging, backgroundImages } =
     useContext(ThemeContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  useEffect(() => {
-    // Precargar todas las imágenes de fondo
-    backgroundImagesItems.forEach((item) => {
-      const img = new Image();
-      img.src = item.img; // Esto inicia la carga de la imagen
-    });
-  }, []);
 
   function handleChangesBackgroundImage(img: string) {
     setBackgroundIsChanging(true);
@@ -32,7 +23,7 @@ export default function BackGroundImageList({
     }, 300);
     setTimeout(() => {
       setBackgroundIsChanging(false);
-    }, 320);
+    }, 350);
   }
   return (
     <Box
@@ -51,7 +42,7 @@ export default function BackGroundImageList({
         cols={isMobile ? 3 : 4}
         gap={10}
       >
-        {backgroundImagesItems.map((item) => (
+        {backgroundImages.map((item) => (
           <ImageListItem
             key={item.img}
             sx={{
