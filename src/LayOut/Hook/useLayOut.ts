@@ -7,7 +7,7 @@ export function useLayOut() {
   const { mode } = useContext(ThemeContext);
   const { backgroundImage } = useContext(ThemeContext);
   const theme = mode === 'dark' ? darkTheme : lightTheme;
-
+  const { backgroundIsChanging } = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -27,5 +27,6 @@ export function useLayOut() {
     isDeskTop,
     open,
     theme,
+    backgroundIsChanging,
   };
 }

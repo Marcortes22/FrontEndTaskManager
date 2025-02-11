@@ -3,4 +3,6 @@ export type ThemeContextType = {
   setMode: (mode: string) => void;
   backgroundImage: string;
   setBackgroundImage: (backgroundImage: string) => void;
+  backgroundIsChanging: boolean;
+  setBackgroundIsChanging: (backgroundIsChanging: boolean) => void;
 };

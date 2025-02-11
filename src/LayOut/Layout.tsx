@@ -16,6 +16,7 @@ export function Layout() {
     isDeskTop,
     open,
     theme,
+    backgroundIsChanging,
   } = useLayOut();
 
   return (
@@ -44,6 +45,8 @@ export function Layout() {
             sx={{
               width: '100%',
               marginTop: '64px',
+              opacity: backgroundIsChanging ? 0 : 1,
+              transition: 'opacity 350ms ease-in-out',
               backgroundImage: `url(${backgroundImage})`,
               backgroundColor: 'black',
               backgroundSize: 'cover',
@@ -54,8 +57,6 @@ export function Layout() {
               alignItems: 'center',
               paddingX: '5px',
               color: 'white',
-              transition: 'ease-in-out',
-              transitionDuration: '0.3s',
               maxHeight: '100dvh',
               overflow: 'hidden',
             }}

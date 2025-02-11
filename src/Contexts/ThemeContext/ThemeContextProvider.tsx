@@ -9,9 +9,17 @@ export default function ThemeContextProvider({
 }: ThemeContextProviderProps) {
   const [mode, setMode] = useState('dark');
   const [backgroundImage, setBackgroundImage] = useState(background);
+  const [backgroundIsChanging, setBackgroundIsChanging] = useState(false);
   return (
     <ThemeContext.Provider
-      value={{ mode, setMode, backgroundImage, setBackgroundImage }}
+      value={{
+        mode,
+        setMode,
+        backgroundImage,
+        setBackgroundImage,
+        backgroundIsChanging,
+        setBackgroundIsChanging,
+      }}
     >
       {children}
     </ThemeContext.Provider>

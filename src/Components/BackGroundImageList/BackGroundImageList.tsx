@@ -7,9 +7,19 @@ import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import { backgroundImagesItems } from '@/Constants/BackGroundImages';
 
 export default function BackGroundImageList() {
-  const { setBackgroundImage } = useContext(ThemeContext);
+  const { setBackgroundImage, setBackgroundIsChanging } =
+    useContext(ThemeContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  function handleChangesBackgroundImage(img: string) {
+    setBackgroundIsChanging(true);
+
+    setTimeout(() => {
+      setBackgroundImage(img);
+      setBackgroundIsChanging(false);
+    }, 300);
+  }
   return (
     <Box
       sx={{
@@ -40,7 +50,7 @@ export default function BackGroundImageList() {
               src={`${item.thumbnail}`}
               alt={item.title}
               // loading="lazy"
-              onClick={() => setBackgroundImage(item.img)}
+              onClick={() => handleChangesBackgroundImage(item.img)}
             />
           </ImageListItem>
         ))}

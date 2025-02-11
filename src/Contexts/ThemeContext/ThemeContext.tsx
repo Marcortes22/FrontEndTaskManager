@@ -6,6 +6,8 @@ const ThemeContext = React.createContext<ThemeContextType>({
   setMode: () => {},
   backgroundImage: '',
   setBackgroundImage: () => {},
+  backgroundIsChanging: false,
+  setBackgroundIsChanging: () => {},
 });
 
 export default ThemeContext;
