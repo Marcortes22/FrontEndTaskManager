@@ -26,7 +26,7 @@ export function useTaskItemMutation(
 
     onSuccess: () => {
       InvalidateQueries(queryClient, pathName, queriesToInvalidate);
-      setIsLoading(false);
+
       toast.success('Successfully created!', {
         style: {
           background: theme.palette.background.default,
@@ -35,8 +35,15 @@ export function useTaskItemMutation(
       });
     },
     onError: () => {
+      toast.error('Task creation failed', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onSettled: () => {
       setIsLoading(false);
-      toast.error('Task creation failed');
     },
   });
 
@@ -52,11 +59,23 @@ export function useTaskItemMutation(
 
     onSuccess: () => {
       InvalidateQueries(queryClient, pathName, queriesToInvalidate);
-      setIsLoading(false);
+      toast.success('Successfully updated!', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
     },
     onError: () => {
+      toast.error('Task update failed', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onSettled: () => {
       setIsLoading(false);
-      toast.error('Task update failed');
     },
   });
 
@@ -67,7 +86,7 @@ export function useTaskItemMutation(
     },
     onSuccess: () => {
       InvalidateQueries(queryClient, pathName, queriesToInvalidate);
-      setIsLoading(false);
+
       toast.success('Successfully deleted!', {
         style: {
           background: theme.palette.background.default,
@@ -76,8 +95,15 @@ export function useTaskItemMutation(
       });
     },
     onError: () => {
+      toast.error('Task deletion failed', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onSettled: () => {
       setIsLoading(false);
-      toast.error('Task deletion failed');
     },
   });
 
