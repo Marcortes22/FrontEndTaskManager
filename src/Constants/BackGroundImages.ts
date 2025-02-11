@@ -1,4 +1,4 @@
-import thumbnail_1 from '@Assets/thumbnails/city-thumbnail.webp';
+import thumbnail_1 from '@/Assets/thumbnails/city-thumbnail.webp';
 import background_1 from '@Assets/backgroundImages/city-background.webp';
 
 import thumbnail_2 from '@Assets/thumbnails/dark-forest-thumbnail.webp';

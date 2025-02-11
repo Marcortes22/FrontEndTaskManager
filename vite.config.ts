@@ -19,7 +19,7 @@ export default defineConfig({
       '@Utils': path.resolve(__dirname, 'src/Utils'),
       '@Common': path.resolve(__dirname, 'src/Common'),
       '@Routes': path.resolve(__dirname, 'src/Routes'),
-      '@Assets': path.resolve(__dirname, 'src/Assets'),
+      '@Assets': path.resolve(__dirname, 'src/assets'),
     },
   },
 });
