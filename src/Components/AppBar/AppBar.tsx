@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import ProfileButon from '@/Common/Buttons/ProfileButton/ProfileButon';
 import LogoutButton from '@/Common/Buttons/LogoutButton/Logout.button';
-import useSideBar from './Hooks/useSidebar';
 import { Moon, Sun } from '@/Common';
 import { useAuth0 } from '@auth0/auth0-react';
+import useAppBar from './Hooks/useAppBar';
 
 export default function AppBar({
   open,
@@ -27,7 +27,7 @@ export default function AppBar({
     GoProfileRute,
     changeTheme,
     mode,
-  } = useSideBar();
+  } = useAppBar();
   const { user } = useAuth0();
 
   return (

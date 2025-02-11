@@ -21,7 +21,6 @@ export async function createTaskItem({
   const jsonResponse: BaseResponse<TaskItemType> = await response.json();
 
   if (!response.ok) {
-    console.log(response.status);
     throw new Error(` ${jsonResponse.message}`);
   }
 

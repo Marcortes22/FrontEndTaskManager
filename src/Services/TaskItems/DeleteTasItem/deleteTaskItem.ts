@@ -21,7 +21,6 @@ export async function deleteTaskItem({
   const jsonResponse: BaseResponse<IdReponse> = await response.json();
 
   if (!response.ok) {
-    console.log(response.status);
     throw new Error(` ${jsonResponse.message}`);
   }
 

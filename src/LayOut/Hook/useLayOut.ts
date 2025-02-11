@@ -20,7 +20,6 @@ export function useLayOut() {
     backgroundImagesItems.forEach((item) => {
       const img = new Image();
       img.src = item.img;
-      console.log('img', img);
     });
     setBackgroundImages(backgroundImagesItems);
   }, [setBackgroundImages]);

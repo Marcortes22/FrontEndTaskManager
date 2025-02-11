@@ -23,7 +23,11 @@ export default function SideBarItems({ open }: { open: boolean }) {
       <List sx={{ paddingTop: '0px' }}>
         {query.data &&
           query.data.data?.map((item, index) => (
-            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{ display: 'block', paddingY: '5px' }}
+            >
               <Link
                 to={`${item.url}`}
                 viewTransition

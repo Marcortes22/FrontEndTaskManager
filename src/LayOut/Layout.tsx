@@ -2,7 +2,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
-import AppBarStyles from '@/Components/SideBarDrawers/DeskTopDrawer/styles/AppBarStyles';
+import AppBarStyles from '@/Components/AppBar/styles/AppBarStyles';
 import AppBar from '@/Components/AppBar/AppBar';
 import DeskTopDrawer from '@/Components/SideBarDrawers/DeskTopDrawer/DeskTopDrawer';
 import { useLayOut } from './Hook/useLayOut';

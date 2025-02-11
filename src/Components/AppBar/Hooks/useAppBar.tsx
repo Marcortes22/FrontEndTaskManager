@@ -2,7 +2,7 @@ import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useContext, useState } from 'react';
 
-export default function useSideBar() {
+export default function useAppBar() {
   const { mode, setMode } = useContext(ThemeContext);
   const { logout } = useAuth0();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
