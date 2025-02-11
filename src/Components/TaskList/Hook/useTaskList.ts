@@ -1,4 +1,5 @@
 import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
+import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import {
   ICreateTaskItem,
   IUpdateTaskItem,
@@ -6,7 +7,7 @@ import {
 import { TaskItemType } from '@/Types/TaskItem.type';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function useTaskList() {
@@ -17,6 +18,8 @@ export default function useTaskList() {
 
   //Auth0
   const { getAccessTokenSilently } = useAuth0();
+
+  const { setIsLoading } = useContext(ThemeContext);
 
   //States
   const [DrawerState, SetDrawerStateState] = useState(false);
@@ -48,7 +51,7 @@ export default function useTaskList() {
       ...task,
       ...newData,
     };
-
+    setIsLoading(true);
     updateTaskItemMutation.mutate({
       taskItemId: task.id,
       token,

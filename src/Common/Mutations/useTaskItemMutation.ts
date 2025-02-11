@@ -1,3 +1,4 @@
+import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
 import { createTaskItem } from '@/Services/TaskItems/CreateTaskItem/createTaskItem';
 import { deleteTaskItem } from '@/Services/TaskItems/DeleteTasItem/deleteTaskItem';
@@ -6,6 +7,7 @@ import { InvalidateQueries } from '@/Utils/InvalidateQueries';
 import { Theme } from '@mui/material';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useContext } from 'react';
 import toast from 'react-hot-toast';
 
 export function useTaskItemMutation(
@@ -14,14 +16,17 @@ export function useTaskItemMutation(
   queriesToInvalidate?: string[],
 ) {
   const queryClient = useQueryClient();
+  const { setIsLoading } = useContext(ThemeContext);
 
   //Mutation to create taskItem
   const createTaskItemMutation = useMutation({
     mutationFn: (data: { token: string; taskItem: ICreateTaskItem }) => {
       return createTaskItem(data);
     },
+
     onSuccess: () => {
       InvalidateQueries(queryClient, pathName, queriesToInvalidate);
+      setIsLoading(false);
       toast.success('Successfully created!', {
         style: {
           background: theme.palette.background.default,
@@ -30,6 +35,7 @@ export function useTaskItemMutation(
       });
     },
     onError: () => {
+      setIsLoading(false);
       toast.error('Task creation failed');
     },
   });
@@ -44,9 +50,12 @@ export function useTaskItemMutation(
       return updateTaskItem(data);
     },
 
-    onSuccess: () =>
-      InvalidateQueries(queryClient, pathName, queriesToInvalidate),
+    onSuccess: () => {
+      InvalidateQueries(queryClient, pathName, queriesToInvalidate);
+      setIsLoading(false);
+    },
     onError: () => {
+      setIsLoading(false);
       toast.error('Task update failed');
     },
   });
@@ -58,6 +67,7 @@ export function useTaskItemMutation(
     },
     onSuccess: () => {
       InvalidateQueries(queryClient, pathName, queriesToInvalidate);
+      setIsLoading(false);
       toast.success('Successfully deleted!', {
         style: {
           background: theme.palette.background.default,
@@ -66,6 +76,7 @@ export function useTaskItemMutation(
       });
     },
     onError: () => {
+      setIsLoading(false);
       toast.error('Task deletion failed');
     },
   });

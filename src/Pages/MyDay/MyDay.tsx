@@ -21,6 +21,7 @@ export default function MyDay() {
   return (
     <>
       <LinearProgres isLoading={query.isFetching} />
+      <div></div>
       <div className={globalStyles.pageContainer}>
         <Header
           title="My Day"

@@ -10,6 +10,7 @@ export default function ThemeContextProvider({
   const [mode, setMode] = useState('dark');
   const [backgroundImage, setBackgroundImage] = useState(background);
   const [backgroundIsChanging, setBackgroundIsChanging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <ThemeContext.Provider
       value={{
@@ -19,6 +20,8 @@ export default function ThemeContextProvider({
         setBackgroundImage,
         backgroundIsChanging,
         setBackgroundIsChanging,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

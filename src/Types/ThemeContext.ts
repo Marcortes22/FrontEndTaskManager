@@ -5,4 +5,6 @@ export type ThemeContextType = {
   setBackgroundImage: (backgroundImage: string) => void;
   backgroundIsChanging: boolean;
   setBackgroundIsChanging: (backgroundIsChanging: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 };

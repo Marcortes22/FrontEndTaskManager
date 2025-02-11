@@ -1,4 +1,5 @@
 import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
+import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import {
   ICreateTaskItem,
   IUpdateTaskItem,
@@ -9,7 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Dayjs } from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export function useTaskDetail(
@@ -47,6 +48,8 @@ export function useTaskDetail(
   const [titleText, setTitleText] = useState(query.data?.data?.title ?? '');
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const { setIsLoading } = useContext(ThemeContext);
   //State to manage current task
   const [task, setTask] = useState(query.data?.data);
 
@@ -138,7 +141,7 @@ export function useTaskDetail(
       ...task,
       ...newData,
     };
-
+    setIsLoading(true);
     updateTaskItemMutation.mutate({
       taskItemId: task.id,
       token,
@@ -149,6 +152,7 @@ export function useTaskDetail(
   async function handleDeleteTaskItem(task: TaskItemType) {
     if (task && task.id) {
       const token = await getAccessTokenSilently();
+      setIsLoading(true);
       deleteTaskItemMutation.mutate({ taskItemId: task.id, token });
       handleSwipeableDrawerState(false);
     }
