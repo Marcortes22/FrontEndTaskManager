@@ -46,7 +46,7 @@ export function Layout() {
               width: '100%',
               marginTop: '64px',
               opacity: backgroundIsChanging ? 0 : 1,
-              transition: 'opacity 350ms ease-in-out',
+              transition: 'opacity 300ms ease-in-out',
               backgroundImage: `url(${backgroundImage})`,
               backgroundColor: 'black',
               backgroundSize: 'cover',
