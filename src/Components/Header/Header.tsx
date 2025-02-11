@@ -51,22 +51,7 @@ export default function Header({
         }}
       >
         <Box className={styles.MenuContainer}>
-          {/* <Button
-            sx={{
-              color: theme.palette.text.primary,
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '0px',
-            }}
-            variant="text"
-            endIcon={<NavigateNextIcon />}
-          >
-            <Box sx={{ display: 'flex', gap: '10px' }}>
-              <SwapVertIcon />
-              Sord by
-            </Box>
-          </Button> */}
-          <BackGroundImageList />
+          <BackGroundImageList handleClose={handleClose} />
         </Box>
       </Menu>
     </header>

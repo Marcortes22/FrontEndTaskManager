@@ -6,7 +6,11 @@ import { useContext } from 'react';
 import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import { backgroundImagesItems } from '@/Constants/BackGroundImages';
 
-export default function BackGroundImageList() {
+export default function BackGroundImageList({
+  handleClose,
+}: {
+  handleClose: () => void;
+}) {
   const { setBackgroundImage, setBackgroundIsChanging } =
     useContext(ThemeContext);
   const theme = useTheme();
@@ -52,7 +56,10 @@ export default function BackGroundImageList() {
               src={`${item.thumbnail}`}
               alt={item.title}
               // loading="lazy"
-              onClick={() => handleChangesBackgroundImage(item.img)}
+              onClick={() => {
+                handleChangesBackgroundImage(item.img);
+                handleClose();
+              }}
             />
           </ImageListItem>
         ))}

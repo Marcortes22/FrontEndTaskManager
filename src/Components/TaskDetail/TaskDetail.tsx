@@ -46,7 +46,6 @@ export default function TaskDetail({
     handleNoteChange,
     handleTextNoteChange,
     task,
-    query,
     anchorEl,
     open,
     handleCloseDateSelector,
@@ -57,20 +56,6 @@ export default function TaskDetail({
     openDeleteModal,
     setOpenDeleteModal,
   } = useTaskDetail(taskId ?? 0, DrawerState, handleSwipeableDrawerState);
-
-  if (query.isFetching) {
-    return (
-      <Paper
-        elevation={1}
-        className={styles.TaskDetailContainer}
-        sx={{
-          width: { sm: 'auto', md: 250 },
-          height: { xs: '75dvh', md: '100vh' },
-          marginTop: { xs: '0px', md: '64px' },
-        }}
-      />
-    );
-  }
 
   return (
     <>
