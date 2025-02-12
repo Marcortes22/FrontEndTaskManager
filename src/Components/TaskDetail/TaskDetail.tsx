@@ -113,6 +113,10 @@ export default function TaskDetail({
                       onBlur={() => handleTitleChange(false)}
                       onChange={(e) => handleTitleTextChange(e)}
                       autoFocus
+                      onFocus={(e) => {
+                        const length = e.target.value.length;
+                        e.target.setSelectionRange(length, length);
+                      }}
                       value={titleText ?? ''}
                       error={(titleText?.trim()?.length ?? 0) === 0}
                       helperText={
@@ -216,18 +220,17 @@ export default function TaskDetail({
                   fullWidth
                   onBlur={() => handleNoteChange(false)}
                   onChange={(e) => handleTextNoteChange(e)}
-                  autoFocus
                   value={noteText ?? ''}
-                  // error={(noteText?.trim()?.length ?? 0) === 0}
-                  // helperText={
-                  //   (noteText?.trim()?.length ?? 0) === 0
-                  //     ? 'Note must be at least one character'
-                  //     : ''
-                  // }
+                  autoFocus
+                  onFocus={(e) => {
+                    const length = e.target.value.length;
+                    e.target.setSelectionRange(length, length);
+                  }}
                 ></TextField>
               ) : (
                 <Tooltip title="Click to edit" arrow>
                   <Typography
+                    className={styles.TextNoteText}
                     variant="body1"
                     sx={{
                       paddingX: '8px',

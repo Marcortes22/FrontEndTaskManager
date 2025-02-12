@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 
 export default function useAppBar() {
   const { mode, setMode } = useContext(ThemeContext);
-  const { logout } = useAuth0();
+  const { logout, user } = useAuth0();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -30,7 +30,6 @@ export default function useAppBar() {
   function changeTheme() {
     setMode(mode === 'dark' ? 'light' : 'dark');
   }
-  function GoProfileRute() {}
 
   return {
     anchorElNav,
@@ -41,7 +40,7 @@ export default function useAppBar() {
     handleCloseUserMenu,
     changeTheme,
     handleLogOut,
-    GoProfileRute,
     mode,
+    user,
   };
 }

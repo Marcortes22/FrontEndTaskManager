@@ -1,13 +1,15 @@
-import Header from '@/Components/Header/Header';
-import { useAll } from './Hook/useAll';
+import { useAll } from '@/Pages/All/Hook/useAll';
 import { Box } from '@mui/material';
-import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
-import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
-import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import globalStyles from '@/Styles/globals.module.css';
 import allImage from '@/assets/pageImagesInformation/allImage.png';
-import LinearProgres from '@/Components/LinearProgres/LinearProgres';
-import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import {
+  DespegableTaskList,
+  Header,
+  TodoEmptyHelper,
+  TaskInputForm,
+  LinearProgres,
+  MainSkeleton,
+} from '@/Components/index';
 
 export default function All() {
   const { query, allTasksCount } = useAll();

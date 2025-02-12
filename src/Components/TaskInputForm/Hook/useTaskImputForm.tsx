@@ -13,27 +13,24 @@ export function useTaskInputForm(pageQueryKey: string) {
   //Auth0
   const { getAccessTokenSilently } = useAuth0();
   const theme = useTheme();
-  //Location
   const location = useLocation();
 
-  //First Date Value if the location is planned
+  //States
   const firstDateValue: Dayjs | null = location.pathname.includes('planned')
     ? dayjs()
     : null;
-
-  //States
   const [newTitleText, setNewTitleText] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [currentList, setCurrentList] = useState<TaskListType>();
   const [dateValue, setDateValue] = useState<Dayjs | null>(firstDateValue);
   const { setIsLoading } = useContext(ThemeContext);
+
+  //Mutation
   const { createTaskItemMutation } = useTaskItemMutation(
     location.pathname,
     theme,
     [pageQueryKey],
   );
-
-  //Handlers
 
   //Handle Text Title Change
   const handleTextTitleChange = (

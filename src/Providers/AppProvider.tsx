@@ -3,6 +3,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export default function AppProvider({
   children,
@@ -27,7 +28,7 @@ export default function AppProvider({
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             {children}
           </LocalizationProvider>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeContextProvider>
     </Auth0Provider>

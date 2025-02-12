@@ -16,16 +16,13 @@ export default function useTaskList() {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const theme = useTheme();
 
-  //Auth0
-  const { getAccessTokenSilently } = useAuth0();
-
-  const { setIsLoading } = useContext(ThemeContext);
-
   //States
+  const { getAccessTokenSilently } = useAuth0();
+  const { setIsLoading } = useContext(ThemeContext);
   const [DrawerState, SetDrawerStateState] = useState(false);
   const [CurrentTaskId, SetCurrentTaskId] = useState<number>();
 
-  //Mutations to update taskItem
+  //Mutation to update taskItem
   const { updateTaskItemMutation } = useTaskItemMutation(
     location.pathname,
     theme,
@@ -68,5 +65,6 @@ export default function useTaskList() {
     handleTaskClick,
     timeZone,
     handleUpdateTaskItem,
+    theme,
   };
 }

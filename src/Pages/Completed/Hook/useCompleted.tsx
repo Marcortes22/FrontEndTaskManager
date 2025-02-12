@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 
 export function useCompleted() {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+  // Query to get all completed tasks
   const query = useQuery({
     queryKey: ['CompletedTasks'],
     queryFn: async () => {

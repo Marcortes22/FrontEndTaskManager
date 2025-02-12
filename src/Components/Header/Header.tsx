@@ -1,10 +1,10 @@
 import IconButton from '@mui/material/IconButton';
 import BackGroundImageList from '../BackGroundImageList/BackGroundImageList';
-import { useState } from 'react';
 import Menu from '@mui/material/Menu';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import styles from './styles/Header.module.css';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
+import { useHeader } from './Hook/useHeader';
 
 export default function Header({
   title,
@@ -13,16 +13,7 @@ export default function Header({
   title: string;
   children?: React.ReactNode;
 }) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const theme = useTheme();
+  const { anchorEl, open, handleClick, handleClose, theme } = useHeader();
 
   return (
     <header className={styles.HeaderStyles}>

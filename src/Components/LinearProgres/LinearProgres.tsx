@@ -1,21 +1,8 @@
 import { Box, LinearProgress, Fade } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useLinearProgres } from './Hook/useLinearProgres';
 
-interface LinearProgresProps {
-  isLoading: boolean; // Recibe si está cargando o no
-}
-
-export default function LinearProgres({ isLoading }: LinearProgresProps) {
-  const [showLoader, setShowLoader] = useState(isLoading);
-
-  useEffect(() => {
-    if (!isLoading) {
-      const timer = setTimeout(() => setShowLoader(false), 1500);
-      return () => clearTimeout(timer);
-    } else {
-      setShowLoader(true);
-    }
-  }, [isLoading]);
+export default function LinearProgres({ isLoading }: { isLoading: boolean }) {
+  const { showLoader } = useLinearProgres(isLoading);
 
   return (
     <Box

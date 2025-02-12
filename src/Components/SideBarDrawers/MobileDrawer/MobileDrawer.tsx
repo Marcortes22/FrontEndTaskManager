@@ -9,6 +9,7 @@ export default function MobileDrawer({
   handleDrawerClose: () => void;
 }) {
   const theme = useTheme();
+
   return (
     <>
       <Drawer open={open} onClose={handleDrawerClose}>

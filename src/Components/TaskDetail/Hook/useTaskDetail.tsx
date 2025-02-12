@@ -38,33 +38,21 @@ export function useTaskDetail(
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
-  //States to manage if the title or note is being edited
   const [noteIsEditing, setNoteIsEditing] = useState(false);
   const [titleIsEditing, setTitleIsEditing] = useState(true);
-
-  //States to manage the text of the title and note
   const [noteText, setNoteText] = useState(query.data?.data?.note ?? '');
   const [titleText, setTitleText] = useState(query.data?.data?.title ?? '');
-
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
   const { setIsLoading } = useContext(ThemeContext);
-  //State to manage current task
   const [task, setTask] = useState(query.data?.data);
 
-  //Functions
-
-  //Mutations to update taskItem
-  const { updateTaskItemMutation } = useTaskItemMutation(
-    location.pathname,
-    theme,
-    ['taskById'],
-  );
-  const { deleteTaskItemMutation } = useTaskItemMutation(
-    location.pathname,
-    theme,
-  );
+  //Mutations
+  const { updateTaskItemMutation, deleteTaskItemMutation } =
+    useTaskItemMutation(location.pathname, theme, ['taskById']);
+  // const { deleteTaskItemMutation } = useTaskItemMutation(
+  //   location.pathname,
+  //   theme,
+  // );
 
   function handleTitleChange(open: boolean) {
     setTitleIsEditing(open);
@@ -119,18 +107,6 @@ export function useTaskDetail(
     }
   }
 
-  useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ['taskById'] });
-  }, [queryClient, taskId]);
-
-  useEffect(() => {
-    if (query.data?.data && DrawerState) {
-      setTask(query.data.data);
-      setTitleText(query.data.data.title);
-      setNoteText(query.data.data.note ?? '');
-    }
-  }, [DrawerState, query.data?.data]);
-
   async function handleUpdateTaskItemDetail(
     task: TaskItemType,
     newData: IUpdateTaskItem,
@@ -157,6 +133,23 @@ export function useTaskDetail(
       handleSwipeableDrawerState(false);
     }
   }
+
+  useEffect(() => {
+    if (taskId) {
+      queryClient.invalidateQueries({ queryKey: ['taskById'] });
+    }
+  }, [queryClient, taskId]);
+
+  useEffect(() => {
+    if (DrawerState) {
+      setTitleIsEditing(true);
+      if (query.data?.data) {
+        setTask(query.data.data);
+        setTitleText(query.data.data.title);
+        setNoteText(query.data.data.note ?? '');
+      }
+    }
+  }, [DrawerState, query.data?.data]);
 
   return {
     noteIsEditing,

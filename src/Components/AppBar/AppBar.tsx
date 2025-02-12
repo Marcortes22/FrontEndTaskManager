@@ -5,12 +5,9 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
-import { Link } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
-import ProfileButon from '@/Common/Buttons/ProfileButton/ProfileButon';
 import LogoutButton from '@/Common/Buttons/LogoutButton/Logout.button';
-import { Moon, Sun } from '@/Common';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Moon, Sun } from '@/Common/index';
 import useAppBar from './Hooks/useAppBar';
 
 export default function AppBar({
@@ -24,11 +21,10 @@ export default function AppBar({
     anchorElUser,
     handleOpenUserMenu,
     handleCloseUserMenu,
-    GoProfileRute,
     changeTheme,
     mode,
+    user,
   } = useAppBar();
-  const { user } = useAuth0();
 
   return (
     <>
@@ -88,11 +84,11 @@ export default function AppBar({
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <Link className="linkReactRouter" to={`/Profile`}>
+            {/* <Link className="linkReactRouter" to={`/Profile`}>
               <MenuItem onClick={GoProfileRute}>
                 <ProfileButon text="Profile" />
               </MenuItem>
-            </Link>
+            </Link> */}
             <MenuItem>
               <LogoutButton text="LogOut"></LogoutButton>
             </MenuItem>

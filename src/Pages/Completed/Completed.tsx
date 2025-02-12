@@ -1,13 +1,16 @@
-import Header from '@/Components/Header/Header';
-import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
-import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
+import globalStyles from '@/Styles/globals.module.css';
 import completedImage from '@/assets/pageImagesInformation/completedImage.png';
 import { useCompleted } from './Hook/useCompleted';
 import { Box } from '@mui/material';
-import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
-import globalStyles from '@/Styles/globals.module.css';
-import LinearProgres from '@/Components/LinearProgres/LinearProgres';
-import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import {
+  Header,
+  TodoEmptyHelper,
+  TaskInputForm,
+  DespegableTaskList,
+  LinearProgres,
+  MainSkeleton,
+} from '@/Components/index';
+
 export default function Completed() {
   const { query, completedTasksCount } = useCompleted();
 

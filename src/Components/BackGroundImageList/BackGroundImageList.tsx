@@ -1,30 +1,15 @@
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-
-import { useContext } from 'react';
-import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
+import useBackGroundImageList from './Hook/useBackGroundImageList';
 
 export default function BackGroundImageList({
   handleClose,
 }: {
   handleClose: () => void;
 }) {
-  const { setBackgroundImage, setBackgroundIsChanging, backgroundImages } =
-    useContext(ThemeContext);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  function handleChangesBackgroundImage(img: string) {
-    setBackgroundIsChanging(true);
-
-    setTimeout(() => {
-      setBackgroundImage(img);
-    }, 300);
-    setTimeout(() => {
-      setBackgroundIsChanging(false);
-    }, 350);
-  }
+  const { backgroundImages, isMobile, handleChangesBackgroundImage } =
+    useBackGroundImageList();
   return (
     <Box
       sx={{

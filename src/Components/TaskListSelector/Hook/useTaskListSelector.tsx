@@ -12,7 +12,15 @@ export function useTaskListSelector({
   setCurrentList: (list: TaskListType) => void;
   defaultTaskListId?: number;
 }) {
+  //States
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [selectedList, setSelectedList] = useState<TaskListType | null>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  //Constants
+  const open = Boolean(anchorEl);
+
+  //Query
   const query = useQuery({
     queryKey: ['AllTasksLists'],
     queryFn: async () => {
@@ -22,10 +30,7 @@ export function useTaskListSelector({
     enabled: isAuthenticated,
   });
 
-  const [selectedList, setSelectedList] = useState<TaskListType | null>(null);
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  //Functions
   const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
     if (
       query.data?.data &&
@@ -45,6 +50,7 @@ export function useTaskListSelector({
     setAnchorEl(null);
   };
 
+  //Effects
   useEffect(() => {
     if (defaultTaskListId && query.data?.data) {
       const list = query.data.data.find(

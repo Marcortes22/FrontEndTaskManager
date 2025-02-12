@@ -9,13 +9,10 @@ import TaskList from '@/Components/TaskList/TaskList';
 import globalStyles from '@/Styles/globals.module.css';
 import LinearProgres from '@/Components/LinearProgres/LinearProgres';
 import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
-import { useParams } from 'react-router-dom';
 
 export default function TaskLists() {
-  const { query, completedTaskCount, allTaskCount } = useTaskLists();
-
-  const params = useParams();
-  const { id } = params;
+  const { query, completedTaskCount, allTaskCount, taskListId } =
+    useTaskLists();
 
   if (query.isLoading) {
     return <MainSkeleton />;
@@ -56,7 +53,7 @@ export default function TaskLists() {
           )}
         </Box>
         <TaskInputForm
-          defaultTaskListId={Number(id)}
+          defaultTaskListId={Number(taskListId)}
           pageQueryKey="TaskList"
         ></TaskInputForm>
       </div>

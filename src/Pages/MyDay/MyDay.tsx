@@ -1,15 +1,17 @@
-import myDayImage from '@/assets/pageImagesInformation/myDayImage.webp';
-import Header from '@/Components/Header/Header';
-import TaskList from '@/Components/TaskList/TaskList';
-import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
-import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
-import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
-import { Box } from '@mui/material';
-import useMyDay from './Hook/useMyDay';
-import globalStyles from '@/Styles/globals.module.css';
-import LinearProgres from '@/Components/LinearProgres/LinearProgres';
-import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
 import { getDateToLocaleZoneDate } from '@/Utils/TaskItemsDateFunctions';
+import globalStyles from '@/Styles/globals.module.css';
+import useMyDay from './Hook/useMyDay';
+import { Box } from '@mui/material';
+import myDayImage from '@/assets/pageImagesInformation/myDayImage.webp';
+import {
+  Header,
+  TaskList,
+  TodoEmptyHelper,
+  TaskInputForm,
+  DespegableTaskList,
+  LinearProgres,
+  MainSkeleton,
+} from '@/Components/index';
 
 export default function MyDay() {
   const { todayDate, query, tasksCount } = useMyDay();

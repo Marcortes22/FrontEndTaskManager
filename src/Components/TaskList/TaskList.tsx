@@ -8,7 +8,7 @@ import SunIcon from '@mui/icons-material/LightMode';
 import TaskDetailWrapper from '../TaskDetailWrapper/TaskDetailWrapper';
 import useTaskList from './Hook/useTaskList';
 import TaskDetail from '../TaskDetail/TaskDetail';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import {
   getDateToLocaleZoneDate,
@@ -19,13 +19,13 @@ import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
 import { TaskItemType } from '@/Types/TaskItem.type';
 
 export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
-  const theme = useTheme();
   const {
     DrawerState,
     CurrentTaskId,
     handleSwipeableDrawerState,
     handleTaskClick,
     handleUpdateTaskItem,
+    theme,
   } = useTaskList();
 
   return (
