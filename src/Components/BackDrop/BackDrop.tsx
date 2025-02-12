@@ -1,4 +1,4 @@
-import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
+import { ThemeContext } from '@/Contexts/index';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useContext } from 'react';
 

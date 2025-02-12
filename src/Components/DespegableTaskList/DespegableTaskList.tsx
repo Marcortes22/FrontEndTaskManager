@@ -2,8 +2,8 @@ import useDespegableTaskList from './Hook/useDespegableTaskList';
 import { Badge, Box, IconButton } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import styles from './styles/DespegableTaskList.module.css';
-import TaskList from '@/Components/TaskList/TaskList';
-import { TaskItemType } from '@/Types/TaskItem.type';
+import { TaskItemType } from '@Types/index';
+import { TaskList } from '@/Components/index';
 
 export default function DespegableTaskList({
   tasks,

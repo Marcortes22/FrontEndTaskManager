@@ -1,15 +1,17 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
 import { useSideBarItems } from './Hook/useSideBarItems';
-import { IconName } from '@/Constants/IconsDictionary';
+import { IconName } from '@Types/index';
 import styles from './styles/SideBarItems.module.css';
-import { Badge } from '@mui/material';
-import SideBarSkeleton from '@/Components/Skeletons/SideBarSkeleton/SideBarSkeleton';
+import { SideBarSkeleton } from '@/Components/index';
 import { Link } from 'react-router-dom';
+import {
+  Badge,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@mui/material';
 export default function SideBarItems({ open }: { open: boolean }) {
   const { query, iconsDictionary, location } = useSideBarItems();
 

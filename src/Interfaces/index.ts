@@ -1,5 +1,16 @@
-export * as BaseResponse from './BaseResponse';
-export * as ItaskItems from './TaskItems/ItaskItems';
-export * as ITaskLists from './TaskLists/ITaskLists';
-export * as ThemeContextProvider from './ThemeContextProvider';
-export * as IUser from './Users/IUser';
+export type { BaseResponse, IdReponse } from './BaseResponse';
+export type {
+  IGetTodayTaskItems,
+  IGetImportantTaskItems,
+  IGetCompletedTaskItems,
+  ICreateTaskItem,
+  IGetPlannedTaskItems,
+  IUpdateTaskItem,
+} from './TaskItems/ItaskItems';
+export type {
+  ITaskListWithTasks,
+  ITaskListWithCountTasks,
+  ITaskListInformation,
+  ITaskListById,
+} from './TaskLists/ITaskLists';
+export type { ThemeContextProviderProps } from './ThemeContextProvider';

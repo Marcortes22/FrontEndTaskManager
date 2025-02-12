@@ -1,12 +1,8 @@
 import { IconButton, useTheme } from '@mui/material';
-
-import DrawerHeaderStyles from './styles/DrawerHeaderStyles';
-import SideBarItems from '@/Components/SideBarItems/SideBarItems';
-
+import DrawerStyles from './styles/DrawerStyles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-import DrawerStyles from './styles/DrawerStyles';
+import { SideBarItems, DrawerHeaderStyles } from '@/Components/index';
 
 export default function DeskTopDrawer({
   open,

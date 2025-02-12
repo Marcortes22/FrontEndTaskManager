@@ -1,14 +1,11 @@
 import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
-import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
-import {
-  ICreateTaskItem,
-  IUpdateTaskItem,
-} from '@/Interfaces/TaskItems/ItaskItems';
-import { TaskItemType } from '@/Types/TaskItem.type';
+import { ThemeContext } from '@/Contexts/index';
+import { TaskItemType } from '@/Types/index';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ICreateTaskItem, IUpdateTaskItem } from '@/Interfaces/index';
 
 export default function useTaskList() {
   //Constansts

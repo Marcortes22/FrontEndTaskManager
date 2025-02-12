@@ -1,8 +1,5 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import { TaskItemType } from '@/Types/TaskItem.type';
+import { Modal, Typography, Button, Box } from '@mui/material';
 
 const style = {
   position: 'absolute',

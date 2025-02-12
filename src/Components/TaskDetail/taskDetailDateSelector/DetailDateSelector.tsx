@@ -1,9 +1,9 @@
 import { Dayjs } from 'dayjs';
+import { DateCalendar } from '@mui/x-date-pickers';
 import { useDetailDateSelector } from './Hook/useDetailDateSelector';
 import { Button, Menu, Typography } from '@mui/material';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import { CalendarMonthOutlinedIcon } from '@Icons/Icons';
 
-import { DateCalendar } from '@mui/x-date-pickers';
 export default function DetailDateSelector({
   value,
   setValue,

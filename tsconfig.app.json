@@ -32,7 +32,11 @@
       "@Utils/*": ["src/Utils/*"],
       "@Common/*": ["src/Common/*"],
       "@Routes/*": ["src/Router/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@Types/*": ["src/Types/*"],
+      "@Constants/*": ["src/Constants/*"],
+      "@Contexts/*": ["src/Contexts/*"],
+      "@Icons/*": ["src/Icons/*"]
     }
   },
   "include": ["src"]

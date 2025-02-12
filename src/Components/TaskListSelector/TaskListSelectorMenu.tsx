@@ -1,13 +1,18 @@
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { IconName, iconsDictionary } from '@/Constants/IconsDictionary';
+import {
+  List,
+  ListItemButton,
+  MenuItem,
+  Menu,
+  Icon,
+  Skeleton,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import { iconsDictionary } from '@/Constants/index';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DefaultIcon from '@mui/icons-material/Dehaze';
-import { Icon, Skeleton, Tooltip, Typography } from '@mui/material';
 import styles from './styles/TaskListSelector.module.css';
-import { TaskListType } from '@/Types/TaskList.type';
+import { TaskListType, IconName } from '@/Types/index';
 import { useTaskListSelector } from './Hook/useTaskListSelector';
 
 export default function TaskListSelector({

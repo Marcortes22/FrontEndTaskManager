@@ -20,6 +20,10 @@ export default defineConfig({
       '@Common': path.resolve(__dirname, 'src/Common'),
       '@Routes': path.resolve(__dirname, 'src/Routes'),
       '@assets': path.resolve(__dirname, 'src/assets'),
+      '@Types': path.resolve(__dirname, 'src/Types'),
+      '@Constants': path.resolve(__dirname, 'src/Constants'),
+      '@Contexts': path.resolve(__dirname, 'src/Contexts'),
+      '@Icons': path.resolve(__dirname, 'src/Icons'),
     },
   },
 });

@@ -1,7 +1,5 @@
-import { Box } from '@mui/material';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import useBackGroundImageList from './Hook/useBackGroundImageList';
+import { ImageList, ImageListItem, Box } from '@mui/material';
 
 export default function BackGroundImageList({
   handleClose,

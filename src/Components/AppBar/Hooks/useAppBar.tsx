@@ -1,4 +1,4 @@
-import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
+import { ThemeContext } from '@/Contexts/index';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useContext, useState } from 'react';
 

@@ -1,14 +1,17 @@
-import Header from '@/Components/Header/Header';
+import globalStyles from '@/Styles/globals.module.css';
 import { Box } from '@mui/material';
-import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
-import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
-import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import { useTaskLists } from './Hook/useTaskLists';
 import taskListImage from '@/assets/pageImagesInformation/taskListImage.png';
-import TaskList from '@/Components/TaskList/TaskList';
-import globalStyles from '@/Styles/globals.module.css';
-import LinearProgres from '@/Components/LinearProgres/LinearProgres';
-import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+
+import {
+  TaskInputForm,
+  TaskList,
+  LinearProgres,
+  MainSkeleton,
+  Header,
+  DespegableTaskList,
+  TodoEmptyHelper,
+} from '@/Components/index';
 
 export default function TaskLists() {
   const { query, completedTaskCount, allTaskCount, taskListId } =

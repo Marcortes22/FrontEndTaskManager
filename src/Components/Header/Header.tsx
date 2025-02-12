@@ -1,10 +1,8 @@
-import IconButton from '@mui/material/IconButton';
-import BackGroundImageList from '../BackGroundImageList/BackGroundImageList';
-import Menu from '@mui/material/Menu';
-import { Box } from '@mui/material';
+import { Box, Menu, IconButton } from '@mui/material';
 import styles from './styles/Header.module.css';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import { useHeader } from './Hook/useHeader';
+import { BackGroundImageList } from '@Components/index';
 
 export default function Header({
   title,

@@ -1,22 +1,24 @@
-import Checkbox from '@mui/material/Checkbox';
-import StarIcon from '@mui/icons-material/Star';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import styles from './styles/TaskList.module.css';
-import SunIcon from '@mui/icons-material/LightMode';
-import TaskDetailWrapper from '../TaskDetailWrapper/TaskDetailWrapper';
+import { TaskDetailWrapper, TaskDetail } from '@Components/index';
 import useTaskList from './Hook/useTaskList';
-import TaskDetail from '../TaskDetail/TaskDetail';
-import { Box, Typography } from '@mui/material';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import { Box, Checkbox, Typography } from '@mui/material';
+import { TaskItemType } from '@/Types/index';
+
 import {
   getDateToLocaleZoneDate,
   isOlder,
   validateTodayTask,
 } from '@/Utils/TaskItemsDateFunctions';
-import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
-import { TaskItemType } from '@/Types/TaskItem.type';
+
+import {
+  CircleOutlinedIcon,
+  CheckCircleOutlineIcon,
+  StarOutlineOutlinedIcon,
+  CalendarMonthOutlinedIcon,
+  SunIcon,
+  StarIcon,
+  NoteOutlinedIcon,
+} from '@Icons/Icons';
 
 export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
   const {

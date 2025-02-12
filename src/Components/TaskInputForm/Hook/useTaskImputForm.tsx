@@ -1,8 +1,8 @@
 import { useTaskItemMutation } from '@/Common/Mutations/useTaskItemMutation';
-import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
-import { ICreateTaskItem } from '@/Interfaces/TaskItems/ItaskItems';
-import { TaskListType } from '@/Types/TaskList.type';
-import { getTaskItemDefaultData } from '@/Utils/GetTaskItemDefaultData';
+import { ThemeContext } from '@/Contexts/index';
+import { ICreateTaskItem } from '@/Interfaces/index';
+import { TaskListType } from '@/Types/index';
+import { getTaskItemDefaultData } from '@/Utils/index';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';

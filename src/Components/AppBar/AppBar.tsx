@@ -1,14 +1,15 @@
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import { Logout as LogoutButton, Moon, Sun } from '@/Common/index';
 import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
-import Tooltip from '@mui/material/Tooltip';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import LogoutButton from '@/Common/Buttons/LogoutButton/Logout.button';
-import { Moon, Sun } from '@/Common/index';
 import useAppBar from './Hooks/useAppBar';
+import {
+  Toolbar,
+  IconButton,
+  Box,
+  Tooltip,
+  Avatar,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 
 export default function AppBar({
   open,

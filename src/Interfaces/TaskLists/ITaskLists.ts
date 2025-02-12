@@ -18,12 +18,6 @@ export interface ITaskListInformation {
   url: string;
 }
 
-export interface ITaskListInformation {
-  name: string;
-  amoundOfTasks: number;
-  url: string;
-}
-
 export interface ITaskListById {
   id: number;
   name: string;

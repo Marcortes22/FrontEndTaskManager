@@ -1,4 +1,4 @@
-import SideBarItems from '@/Components/SideBarItems/SideBarItems';
+import { SideBarItems } from '@/Components/index';
 import { Box, Drawer, useTheme } from '@mui/material';
 
 export default function MobileDrawer({

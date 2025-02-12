@@ -1,14 +1,16 @@
-import Header from '@/Components/Header/Header';
-
-import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
-import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import plannedImage from '@/assets/pageImagesInformation/plannedImage.png';
 import { usePlanned } from './Hook/usePlanned';
-import DespegableTaskList from '@/Components/DespegableTaskList/DespegableTaskList';
-import { Box } from '@mui/material';
 import globalStyles from '@/Styles/globals.module.css';
-import LinearProgres from '@/Components/LinearProgres/LinearProgres';
-import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+import { Box } from '@mui/material';
+
+import {
+  DespegableTaskList,
+  Header,
+  TaskInputForm,
+  TodoEmptyHelper,
+  LinearProgres,
+  MainSkeleton,
+} from '@/Components/index';
 
 export default function Planned() {
   const {

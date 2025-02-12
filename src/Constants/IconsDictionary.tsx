@@ -15,22 +15,3 @@ export const iconsDictionary = {
   Tasks: <HomeOutlinedIcon />,
   Default: <DefaultIcon />,
 };
-
-export type IconName =
-  | 'My Day'
-  | 'Important'
-  | 'Planned'
-  | 'Completed'
-  | 'All'
-  | 'Tasks'
-  | 'Default';
-
-// export const iconMap = new Map<string, React.ReactNode>([
-//   ['My Day', <MyDayIcon />],
-//   ['Important', <ImportantIcon />],
-//   ['Planned', <PlannedIcon />],
-//   ['Completed', <CompletedIcon />],
-//   ['All', <AllIcon />],
-//   ['Tasks', <HomeOutlinedIcon />],
-//   ['Default', <DefaultIcon />],
-// ]);

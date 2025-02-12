@@ -1,14 +1,16 @@
-import Header from '@/Components/Header/Header';
-
-import TaskList from '@/Components/TaskList/TaskList';
-import TodoEmptyHelper from '@/Components/TodoEmptyHelper/TodoEmptyHelper';
 import importantImage from '@/assets/pageImagesInformation/importantImage.png';
-import TaskInputForm from '@/Components/TaskInputForm/TaskInputForm';
 import { useImportant } from './Hook/useImportant';
 import globalStyles from '@/Styles/globals.module.css';
 import { Box } from '@mui/material';
-import LinearProgres from '@/Components/LinearProgres/LinearProgres';
-import MainSkeleton from '@/Components/Skeletons/MainSkeleton/MainSkeleton';
+
+import {
+  TodoEmptyHelper,
+  TaskInputForm,
+  Header,
+  TaskList,
+  LinearProgres,
+  MainSkeleton,
+} from '@/Components/index';
 
 export default function Important() {
   const { query, tasksCount } = useImportant();

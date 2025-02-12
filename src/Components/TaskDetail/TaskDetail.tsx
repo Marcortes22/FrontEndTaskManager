@@ -1,3 +1,10 @@
+import { format } from '@formkit/tempo';
+import styles from './styles/TaskDetail.module.css';
+import { validateTodayTask } from '@/Utils/index';
+import { useTaskDetail } from './Hook/useTaskDetail';
+import { DateCalendar } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
+import { DeleteTaskItemModal } from '@Components/index';
 import {
   Box,
   Button,
@@ -11,20 +18,15 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { format } from '@formkit/tempo';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
-import StarIcon from '@mui/icons-material/Star';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import styles from './styles/TaskDetail.module.css';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import { validateTodayTask } from '@/Utils/TaskItemsDateFunctions';
-import { useTaskDetail } from './Hook/useTaskDetail';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import { DateCalendar } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
-import DeleteTaskItemModal from '../DeleteTaskItemModal/DeleteTaskItemModal';
+import {
+  CircleOutlinedIcon,
+  CheckCircleOutlineIcon,
+  StarOutlineOutlinedIcon,
+  StarIcon,
+  WbSunnyIcon,
+  DeleteOutlineOutlinedIcon,
+  CalendarMonthOutlinedIcon,
+} from '@Icons/Icons';
 
 export default function TaskDetail({
   taskId,

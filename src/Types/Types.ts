@@ -5,3 +5,12 @@ export type backGroundImages = {
   img: string;
   title: string;
 };
+
+export type IconName =
+  | 'My Day'
+  | 'Important'
+  | 'Planned'
+  | 'Completed'
+  | 'All'
+  | 'Tasks'
+  | 'Default';
