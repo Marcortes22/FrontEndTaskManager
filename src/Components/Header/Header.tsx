@@ -10,6 +10,7 @@ export default function Header({
 }: {
   title: string;
   children?: React.ReactNode;
+  isRemovableList?: boolean;
 }) {
   const { anchorEl, open, handleClick, handleClose } = useHeader();
 
