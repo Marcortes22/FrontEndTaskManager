@@ -26,3 +26,7 @@ export interface ITaskListById {
   completedTaskCount: number;
   totalCount: number;
 }
+
+export interface ICreateTaskList {
+  name: string;
+}

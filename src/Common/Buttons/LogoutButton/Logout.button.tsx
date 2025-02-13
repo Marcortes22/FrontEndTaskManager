@@ -15,7 +15,7 @@ export default function LogoutButton(props: LogoutButtonProps) {
       onClick={() =>
         logout({ logoutParams: { returnTo: window.location.origin } })
       }
-      variant={'outlined'}
+      variant={'contained'}
       color={'error'}
       size={'medium'}
     >

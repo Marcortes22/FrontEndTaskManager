@@ -1,4 +1,4 @@
-import { Box, Menu, IconButton } from '@mui/material';
+import { Box, Menu, IconButton, Typography } from '@mui/material';
 import styles from './styles/Header.module.css';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import { useHeader } from './Hook/useHeader';
@@ -11,12 +11,22 @@ export default function Header({
   title: string;
   children?: React.ReactNode;
 }) {
-  const { anchorEl, open, handleClick, handleClose, theme } = useHeader();
+  const { anchorEl, open, handleClick, handleClose } = useHeader();
 
   return (
     <header className={styles.HeaderStyles}>
       <div>
-        <h1>{title}</h1>
+        <Typography
+          sx={{
+            flexGrow: 1,
+            maxWidth: '75dvw',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+          variant="h4"
+        >
+          {title}
+        </Typography>
         {children}
       </div>
       <IconButton
@@ -27,7 +37,7 @@ export default function Header({
         onClick={handleClick}
         size="large"
       >
-        <WallpaperIcon sx={{ color: theme.palette.primary.main }} />
+        <WallpaperIcon sx={{ color: '#42a5f5' }} />
       </IconButton>
 
       <Menu

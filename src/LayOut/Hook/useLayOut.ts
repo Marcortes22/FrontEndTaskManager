@@ -10,7 +10,15 @@ export function useLayOut() {
   const { backgroundIsChanging, backgroundImage, setBackgroundImages } =
     useContext(ThemeContext);
   const [open, setOpen] = useState(false);
+  const [createTaskListDialogOpen, setCreateTaskListDialogOpen] =
+    useState(false);
 
+  function handleCreateTaskListDialogClose() {
+    setCreateTaskListDialogOpen(false);
+  }
+  function handleCreateTaskListDialogOpen() {
+    setCreateTaskListDialogOpen(true);
+  }
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -38,5 +46,8 @@ export function useLayOut() {
     open,
     theme,
     backgroundIsChanging,
+    createTaskListDialogOpen,
+    handleCreateTaskListDialogClose,
+    handleCreateTaskListDialogOpen,
   };
 }

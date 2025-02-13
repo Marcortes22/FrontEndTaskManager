@@ -1,5 +1,5 @@
 import { Logout as LogoutButton, Moon, Sun } from '@/Common/index';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '@Icons/Icons';
 import useAppBar from './Hooks/useAppBar';
 import {
   Toolbar,
@@ -85,11 +85,6 @@ export default function AppBar({
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {/* <Link className="linkReactRouter" to={`/Profile`}>
-              <MenuItem onClick={GoProfileRute}>
-                <ProfileButon text="Profile" />
-              </MenuItem>
-            </Link> */}
             <MenuItem>
               <LogoutButton text="LogOut"></LogoutButton>
             </MenuItem>

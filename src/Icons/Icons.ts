@@ -7,3 +7,4 @@ export { default as DeleteOutlineOutlinedIcon } from '@mui/icons-material/Delete
 export { default as CalendarMonthOutlinedIcon } from '@mui/icons-material/CalendarMonthOutlined';
 export { default as NoteOutlinedIcon } from '@mui/icons-material/NoteOutlined';
 export { default as SunIcon } from '@mui/icons-material/LightMode';
+export { default as MenuIcon } from '@mui/icons-material/Menu';

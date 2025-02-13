@@ -77,7 +77,15 @@ export default function TaskListSelector({
               <DefaultIcon sx={{ fontSize: '20px' }} />
             )}
 
-            <Typography variant="body2" sx={{ color: 'white' }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'white',
+                maxWidth: '40px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
               {currentList?.name ?? 'Default'}
             </Typography>
           </ListItemButton>
@@ -101,7 +109,16 @@ export default function TaskListSelector({
             sx={{}}
             className={styles.menuListItemContainer}
           >
-            <Typography>{item.name}</Typography>
+            <Typography
+              sx={{
+                color: 'white',
+                maxWidth: '50px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {item.name}
+            </Typography>
             <Icon>
               {iconsDictionary[item.name as IconName] ??
                 iconsDictionary['Default']}

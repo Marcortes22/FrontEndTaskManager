@@ -1,0 +1,17 @@
+.MobileDrawerItemsContainer {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.MobileDrawerItemsContainer::-webkit-scrollbar {
+  width: 5px;
+}
+.MobileDrawerItemsContainer::-webkit-scrollbar-thumb {
+  background: #42a5f5;
+  border-radius: 5px;
+}
+
+.MobileDrawerItemsContainer::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
