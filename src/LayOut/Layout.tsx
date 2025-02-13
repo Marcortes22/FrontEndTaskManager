@@ -10,7 +10,7 @@ import {
   AppBar,
   AppBarStyles,
 } from '@/Components/index';
-import CreateNewTaskListDialog from '@/Components/CreateNewTaskListDialog/CreateNewTaskListDialog';
+import CreateNewTaskListDialog from '@/Components/Dialogs/CreateNewTaskListDialog/CreateNewTaskListDialog';
 
 export function Layout() {
   const {

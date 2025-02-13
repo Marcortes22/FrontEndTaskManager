@@ -6,6 +6,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { IconButton, useTheme } from '@mui/material';
 import { useTaskListMenu } from './Hook/useTaskListMenu';
 import DeleteTaskListModal from '../Modals/DeleteTaskListModal/DeleteTaskListModal';
+import { UpdateTaskListDialog } from '../Dialogs/UpdateTaskListDialog/UpdateTaskListDialog';
 
 export default function TaskListMenu({
   taskListId,
@@ -21,6 +22,10 @@ export default function TaskListMenu({
     anchorEl,
     openDeleteTaskListModal,
     setOpenDeleteTaskListModal,
+    openUpdateTaskListDialog,
+    handleDeleteTaskListModaloOpen,
+    handleUpdateTaskListDialogClose,
+    handleUpdateTaskListDialogOpen,
   } = useTaskListMenu();
   const theme = useTheme();
 
@@ -61,7 +66,7 @@ export default function TaskListMenu({
           onClick={(event) => {
             event.stopPropagation();
             event.preventDefault();
-            setOpenDeleteTaskListModal(true);
+            handleDeleteTaskListModaloOpen();
           }}
           sx={{
             color: theme.palette.primary.main,
@@ -75,7 +80,7 @@ export default function TaskListMenu({
           onClick={(event) => {
             event.stopPropagation();
             event.preventDefault();
-            setOpenDeleteTaskListModal(true);
+            handleUpdateTaskListDialogOpen();
           }}
           sx={{
             color: theme.palette.primary.main,
@@ -92,6 +97,13 @@ export default function TaskListMenu({
         open={openDeleteTaskListModal}
         setOpen={setOpenDeleteTaskListModal}
       ></DeleteTaskListModal>
+
+      <UpdateTaskListDialog
+        taskListId={taskListId}
+        TaskListName={taskListName}
+        openUpdateTaskListDialog={openUpdateTaskListDialog}
+        handleUpdateTaskListDialogClose={handleUpdateTaskListDialogClose}
+      ></UpdateTaskListDialog>
     </>
   );
 }

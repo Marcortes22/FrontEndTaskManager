@@ -2,6 +2,7 @@ import { ThemeContext } from '@/Contexts/index';
 import { ICreateTaskList } from '@/Interfaces/TaskLists/ITaskLists';
 import { createTaskList } from '@/Services/TaskLists/CreateTaskList/createTaskList';
 import { deleteTaskList } from '@/Services/TaskLists/DeleteTaskList/DeleteTaskList';
+import { updateTaskList } from '@/Services/TaskLists/UpdateTaskList/updateTaskList';
 import { Theme } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
@@ -65,8 +66,39 @@ export function useTaskListMutation(theme: Theme) {
     },
   });
 
+  const updateTaskListMutation = useMutation({
+    mutationFn: (data: {
+      token: string;
+      taskListId: number;
+      newName: string;
+    }) => {
+      return updateTaskList(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+      toast.success('Successfully updated!', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onError: () => {
+      toast.error('Task List update failed', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onSettled: () => {
+      setIsLoading(false);
+    },
+  });
+
   return {
     createTaskListMutation,
     deleteTaskListMutation,
+    updateTaskListMutation,
   };
 }

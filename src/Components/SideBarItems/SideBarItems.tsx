@@ -13,6 +13,7 @@ import {
   ListItemText,
   Divider,
   Tooltip,
+  useTheme,
 } from '@mui/material';
 import TaskListMenu from '../TaskListMenu/TaskListMenu';
 
@@ -26,6 +27,7 @@ export default function SideBarItems({
   handleCreateTaskListDialogOpen: () => void;
 }) {
   const { query, iconsDictionary, location } = useSideBarItems();
+  const theme = useTheme();
 
   if (query.isLoading) {
     return <SideBarSkeleton />;
@@ -142,7 +144,9 @@ export default function SideBarItems({
                       },
                 ]}
               >
-                <CreateNewFolderIcon />
+                <CreateNewFolderIcon
+                  sx={{ color: theme.palette.primary.main }}
+                />
               </ListItemIcon>
               <ListItemText
                 primary="New List"
@@ -154,6 +158,8 @@ export default function SideBarItems({
                         alignItems: 'center',
                         textAlign: 'center',
                         justifyContent: 'space-between',
+                        fontWeight: 'bold',
+                        color: theme.palette.primary.main,
                       }
                     : {
                         opacity: 0,

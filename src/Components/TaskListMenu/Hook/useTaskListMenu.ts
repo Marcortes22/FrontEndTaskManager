@@ -11,6 +11,21 @@ export function useTaskListMenu() {
   };
 
   const [openDeleteTaskListModal, setOpenDeleteTaskListModal] = useState(false);
+  const [openUpdateTaskListDialog, setOpenUpdateTaskListDialog] =
+    useState(false);
+
+  const handleUpdateTaskListDialogClose = () => {
+    setOpenUpdateTaskListDialog(false);
+  };
+
+  const handleUpdateTaskListDialogOpen = () => {
+    setOpenUpdateTaskListDialog(true);
+    handleClose();
+  };
+  const handleDeleteTaskListModaloOpen = () => {
+    setOpenDeleteTaskListModal(true);
+    handleClose();
+  };
 
   return {
     open,
@@ -19,5 +34,9 @@ export function useTaskListMenu() {
     anchorEl,
     openDeleteTaskListModal,
     setOpenDeleteTaskListModal,
+    openUpdateTaskListDialog,
+    handleUpdateTaskListDialogClose,
+    handleUpdateTaskListDialogOpen,
+    handleDeleteTaskListModaloOpen,
   };
 }
