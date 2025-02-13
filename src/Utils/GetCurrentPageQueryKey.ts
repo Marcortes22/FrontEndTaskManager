@@ -19,7 +19,7 @@ export function GetCurrentPageQueryKey(pathname: string) {
           queryKey = 'CompletedTasks';
           break;
         case '/all':
-          queryKey = 'AllTasksLists';
+          queryKey = 'allTasks';
           break;
         default:
           break;
