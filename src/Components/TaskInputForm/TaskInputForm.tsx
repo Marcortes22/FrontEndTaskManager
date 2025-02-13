@@ -50,6 +50,7 @@ export default function TaskInputForm({
           // disabled={mutation.isPending}
           onChange={(e) => handleTextTitleChange(e)}
           onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           value={newTitleText}
           className={styles.newTaskInput}
           sx={{
