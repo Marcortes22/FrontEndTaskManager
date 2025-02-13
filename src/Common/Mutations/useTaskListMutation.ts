@@ -1,6 +1,7 @@
 import { ThemeContext } from '@/Contexts/index';
 import { ICreateTaskList } from '@/Interfaces/TaskLists/ITaskLists';
 import { createTaskList } from '@/Services/TaskLists/CreateTaskList/createTaskList';
+import { deleteTaskList } from '@/Services/TaskLists/DeleteTaskList/DeleteTaskList';
 import { Theme } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
@@ -38,7 +39,34 @@ export function useTaskListMutation(theme: Theme) {
     },
   });
 
+  const deleteTaskListMutation = useMutation({
+    mutationFn: (data: { token: string; taskListId: number }) => {
+      return deleteTaskList(data);
+    },
+    onSuccess: () => {
+      toast.success('Successfully deleted!', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onError: () => {
+      toast.error('Task List deletion failed', {
+        style: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+        },
+      });
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+      setIsLoading(false);
+    },
+  });
+
   return {
     createTaskListMutation,
+    deleteTaskListMutation,
   };
 }

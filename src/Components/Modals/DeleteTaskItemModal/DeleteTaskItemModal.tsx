@@ -1,17 +1,6 @@
 import { TaskItemType } from '@/Types/TaskItem.type';
 import { Modal, Typography, Button, Box } from '@mui/material';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { ModalStyle } from '../styles/ModalStyles';
 
 export default function DeleteTaskItemModal({
   task,
@@ -32,7 +21,7 @@ export default function DeleteTaskItemModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={ModalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Delete task
           </Typography>

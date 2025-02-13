@@ -16,6 +16,8 @@ export interface ITaskListInformation {
   name: string;
   amoundOfTasks: number;
   url: string;
+  isDefault?: boolean;
+  id: number;
 }
 
 export interface ITaskListById {

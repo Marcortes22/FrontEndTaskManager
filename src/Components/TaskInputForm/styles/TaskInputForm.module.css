@@ -7,7 +7,7 @@
   background-color: rgba(43, 43, 46, 0.9);
   color: white;
   padding-left: 50px;
-  font-size: medium;
+  font-size: 24px;
 }
 
 .newTaskInput:focus {

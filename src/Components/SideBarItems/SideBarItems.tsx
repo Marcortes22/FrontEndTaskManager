@@ -14,6 +14,7 @@ import {
   Divider,
   Tooltip,
 } from '@mui/material';
+import TaskListMenu from '../TaskListMenu/TaskListMenu';
 
 export default function SideBarItems({
   open,
@@ -34,75 +35,84 @@ export default function SideBarItems({
       <List sx={{ paddingTop: '0px' }}>
         {query.data &&
           query.data.data?.map((item, index) => (
-            <Tooltip key={index} title={item.name} placement="right">
-              <ListItem
-                disablePadding
-                sx={{ display: 'block', paddingY: '5px' }}
-                onClick={handleDrawerClose}
-              >
-                <Link
-                  to={`${item.url}`}
-                  viewTransition
-                  className={styles.linkStyles}
+            <Tooltip key={item.url} title={item.name} placement="right">
+              <>
+                <ListItem
+                  disablePadding
+                  sx={{ display: 'block', paddingY: '5px' }}
+                  onClick={handleDrawerClose}
                 >
-                  <ListItemButton
-                    selected={location.pathname === item.url}
-                    className={styles.listItemButton}
-                    sx={[
-                      open
-                        ? {
-                            justifyContent: 'initial',
-                          }
-                        : {
-                            justifyContent: 'center',
-                          },
-                    ]}
+                  <Link
+                    to={`${item.url}`}
+                    viewTransition
+                    className={styles.linkStyles}
                   >
-                    <ListItemIcon
-                      className={styles.ListItemIconStyles}
+                    <ListItemButton
+                      selected={location.pathname === item.url}
+                      className={styles.listItemButton}
                       sx={[
                         open
                           ? {
-                              mr: 3,
+                              justifyContent: 'initial',
                             }
                           : {
-                              mr: 'auto',
+                              justifyContent: 'center',
                             },
                       ]}
                     >
-                      <Badge
-                        badgeContent={item.amoundOfTasks}
-                        color="primary"
-                        invisible={item.amoundOfTasks > 0 ? false : true}
-                      >
-                        {iconsDictionary[item.name as IconName] ??
-                          iconsDictionary['Default']}
-                      </Badge>
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.name}
-                      sx={[
-                        open
-                          ? {
-                              opacity: 1,
-                              display: 'flex',
-                              alignItems: 'center',
-                              textAlign: 'center',
-                              justifyContent: 'space-between',
-                              '& span': {
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
+                      <ListItemIcon
+                        className={styles.ListItemIconStyles}
+                        sx={[
+                          open
+                            ? {
+                                mr: 3,
+                              }
+                            : {
+                                mr: 'auto',
                               },
-                            }
-                          : {
-                              opacity: 0,
-                            },
-                      ]}
-                    />
-                  </ListItemButton>
-                </Link>
+                        ]}
+                      >
+                        <Badge
+                          badgeContent={item.amoundOfTasks}
+                          color="primary"
+                          invisible={item.amoundOfTasks > 0 ? false : true}
+                        >
+                          {iconsDictionary[item.name as IconName] ??
+                            iconsDictionary['Default']}
+                        </Badge>
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item.name}
+                        sx={[
+                          open
+                            ? {
+                                opacity: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                textAlign: 'center',
+                                justifyContent: 'space-between',
+                                '& span': {
+                                  overflow: 'hidden',
+                                  textOverflow: 'ellipsis',
+                                },
+                              }
+                            : {
+                                opacity: 0,
+                              },
+                        ]}
+                      />
+
+                      {item.isDefault === false && open && item.id && (
+                        <TaskListMenu
+                          taskListId={item.id}
+                          taskListName={item.name}
+                        ></TaskListMenu>
+                      )}
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
                 {index === 4 && <Divider />}
-              </ListItem>
+              </>
             </Tooltip>
           ))}
         <Tooltip title="Create new Task List" placement="right">

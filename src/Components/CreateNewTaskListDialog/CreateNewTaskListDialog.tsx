@@ -38,6 +38,11 @@ export default function CreateNewTaskListDialog({
           </DialogContentText>
           <TextField
             required
+            slotProps={{
+              htmlInput: {
+                maxLength: 20,
+              },
+            }}
             margin="dense"
             id="name"
             name="taskListName"
