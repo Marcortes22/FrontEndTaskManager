@@ -37,7 +37,13 @@ export default function DateSelector({
             onClick={handleClick}
           >
             <CalendarMonthOutlinedIcon sx={{ fontSize: '20px' }} />
-            <Typography variant="body2" sx={{ color: 'white' }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'white',
+                fontSize: { xs: '10px', sm: '12px', md: '14px' },
+              }}
+            >
               {value ? value.format('M/D/YYYY') : null}
             </Typography>
           </IconButton>

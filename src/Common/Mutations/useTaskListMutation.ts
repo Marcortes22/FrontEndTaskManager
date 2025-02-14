@@ -3,12 +3,13 @@ import { ICreateTaskList } from '@/Interfaces/TaskLists/ITaskLists';
 import { createTaskList } from '@/Services/TaskLists/CreateTaskList/createTaskList';
 import { deleteTaskList } from '@/Services/TaskLists/DeleteTaskList/DeleteTaskList';
 import { updateTaskList } from '@/Services/TaskLists/UpdateTaskList/updateTaskList';
+import { InvalidateQueries } from '@/Utils/InvalidateQueries';
 import { Theme } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 
-export function useTaskListMutation(theme: Theme) {
+export function useTaskListMutation(theme: Theme, pathName: string) {
   const queryClient = useQueryClient();
   const { setIsLoading } = useContext(ThemeContext);
 
@@ -19,7 +20,8 @@ export function useTaskListMutation(theme: Theme) {
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+      // queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+      InvalidateQueries(queryClient, pathName, ['AllTasksLists']);
       toast.success('Successfully created!', {
         style: {
           background: theme.palette.background.default,
@@ -45,6 +47,7 @@ export function useTaskListMutation(theme: Theme) {
       return deleteTaskList(data);
     },
     onSuccess: () => {
+      InvalidateQueries(queryClient, pathName, ['AllTasksLists']);
       toast.success('Successfully deleted!', {
         style: {
           background: theme.palette.background.default,
@@ -61,7 +64,7 @@ export function useTaskListMutation(theme: Theme) {
       });
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+      // queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
       setIsLoading(false);
     },
   });
@@ -75,7 +78,8 @@ export function useTaskListMutation(theme: Theme) {
       return updateTaskList(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+      InvalidateQueries(queryClient, pathName, ['AllTasksLists']);
+      // queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
       toast.success('Successfully updated!', {
         style: {
           background: theme.palette.background.default,

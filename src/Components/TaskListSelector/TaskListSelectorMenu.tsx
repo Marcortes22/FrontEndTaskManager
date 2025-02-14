@@ -61,8 +61,6 @@ export default function TaskListSelector({
             aria-label="when device is locked"
             aria-expanded={open ? 'true' : undefined}
             onClick={(event) => {
-              // event.stopPropagation();
-              // event.preventDefault();
               handleClickListItem(event);
             }}
             sx={{
@@ -87,6 +85,8 @@ export default function TaskListSelector({
                 maxWidth: '40px',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
+                fontSize: { xs: '10px', sm: '12px', md: '14px' },
+                whiteSpace: 'nowrap',
               }}
             >
               {currentList?.name ?? 'Default'}

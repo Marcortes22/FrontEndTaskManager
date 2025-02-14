@@ -56,8 +56,8 @@ export default function TaskInputForm({
           className={styles.newTaskInput}
           sx={{
             paddingRight: dateValue
-              ? { xs: '123px', md: '167px' }
-              : { xs: '74px', md: '103px' },
+              ? { xs: '94px', sm: '110dpx', md: '167px' }
+              : { xs: '69px', sm: '74' },
             position: 'absolute',
             paddingLeft: '30px',
             '& .MuiOutlinedInput-root': {
