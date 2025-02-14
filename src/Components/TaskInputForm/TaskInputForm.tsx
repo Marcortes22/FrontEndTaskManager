@@ -39,7 +39,7 @@ export default function TaskInputForm({
         </div>
 
         <IconButton type="submit" className={styles.buttonFormAddNewTask}>
-          {isFocused ? (
+          {newTitleText.trim().length > 0 ? (
             <CircleOutlinedIcon sx={{ color: 'white' }} />
           ) : (
             <AddIcon sx={{ color: 'white' }} />

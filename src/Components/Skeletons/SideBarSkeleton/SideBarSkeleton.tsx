@@ -3,11 +3,21 @@ import { Box, Skeleton } from '@mui/material';
 export default function SideBarSkeleton() {
   return (
     <>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+      <Box
+        sx={{
+          marginTop: '5px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginLeft: '5px',
+        }}
+      >
         {[...Array(7)].map((_, index) => (
           <Skeleton
             variant="rectangular"
-            animation="wave"
+            animation="pulse"
             key={index}
             sx={{
               width: '100%',

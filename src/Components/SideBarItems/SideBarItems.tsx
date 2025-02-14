@@ -29,7 +29,7 @@ export default function SideBarItems({
   const { query, iconsDictionary, location } = useSideBarItems();
   const theme = useTheme();
 
-  if (query.isLoading) {
+  if (query.isFetching) {
     return <SideBarSkeleton />;
   }
   return (

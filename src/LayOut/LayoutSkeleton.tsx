@@ -1,6 +1,8 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 export default function LayoutSkeleton() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <>
       <Box
@@ -42,33 +44,35 @@ export default function LayoutSkeleton() {
           backgroundColor: 'black',
         }}
       >
-        <Box
-          sx={{
-            width: '64px',
-            height: '100vh',
-            paddingX: '3px',
-            backgroundColor: '#121212',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '5px',
-          }}
-        >
-          {[...Array(7)].map((_, index) => (
-            <Skeleton
-              variant="rectangular"
-              animation="wave"
-              key={index}
-              sx={{
-                width: '100%',
-                height: '35px',
-                bgcolor: 'grey.900',
-                display: 'flex',
-                justifyContent: 'end',
-                borderRadius: '5px',
-              }}
-            ></Skeleton>
-          ))}
-        </Box>
+        {isMobile ? null : (
+          <Box
+            sx={{
+              width: '64px',
+              height: '100vh',
+              paddingX: '3px',
+              backgroundColor: '#121212',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+            }}
+          >
+            {[...Array(7)].map((_, index) => (
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                key={index}
+                sx={{
+                  width: '100%',
+                  height: '35px',
+                  bgcolor: 'grey.900',
+                  display: 'flex',
+                  justifyContent: 'end',
+                  borderRadius: '5px',
+                }}
+              ></Skeleton>
+            ))}
+          </Box>
+        )}
 
         <Box
           sx={{
