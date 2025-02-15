@@ -4,7 +4,7 @@ export interface IVerifyAccoundResponse {
 }
 
 export interface ICreateUserDto {
-  id: string;
+  id?: string;
   givenName?: string;
   familyName?: string;
   nickname?: string;
@@ -13,7 +13,7 @@ export interface ICreateUserDto {
   updatedAt?: Date;
   email?: string;
   emailVerified?: boolean;
-  provider: string;
+  provider?: string;
   timeZone: string;
   backGroundImage?: string;
 }

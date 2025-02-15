@@ -11,17 +11,32 @@ export default function ProtectedRoutes({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isLoading, loginWithRedirect, user } = useAuth0();
+  const {
+    isAuthenticated,
+    isLoading,
+    loginWithRedirect,
+    user,
+    error: authError,
+  } = useAuth0();
   const { verifyAccountMutation } = useUserMutation();
-  const { mutate, error } = verifyAccountMutation;
+  const { mutate, error: fetchError } = verifyAccountMutation;
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      return;
+    }
     const userToValidate = GetPropertiesFromUserAuth0(user);
+
+    if (!userToValidate.id || !userToValidate.provider) {
+      setTimeout(() => {
+        toast.error('Something went wrong in your login, please try again');
+      }, 1500);
+      loginWithRedirect();
+    }
     if (isAuthenticated) {
       mutate(userToValidate);
     }
-  }, [isAuthenticated, mutate, user]);
+  }, [isAuthenticated, loginWithRedirect, mutate, user]);
 
   if (isLoading) {
     return (
@@ -31,10 +46,7 @@ export default function ProtectedRoutes({
     );
   }
 
-  if (!isAuthenticated || error || !user?.sub) {
-    setTimeout(() => {
-      toast.error('Something wrong with your login, try again', {});
-    }, 1000);
+  if (!isAuthenticated || fetchError || authError) {
     loginWithRedirect();
     return null;
   }
