@@ -15,7 +15,14 @@ export default function MobileDrawer({
 
   return (
     <>
-      <Drawer open={open} onClose={handleDrawerClose}>
+      <Drawer
+        open={open}
+        onClose={handleDrawerClose}
+        variant="temporary"
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
         <Box
           className={styles.MobileDrawerItemsContainer}
           sx={{

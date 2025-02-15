@@ -10,7 +10,7 @@ export function useUserMutation() {
   const verifyAccountMutation = useMutation({
     mutationFn: async (userData: ICreateUserDto) => {
       const token = await getAccessTokenSilently();
-      console.log(token);
+      // console.log(token);
       return verifyAccound(token, userData);
     },
     onSuccess: (data) => {

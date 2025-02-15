@@ -4,6 +4,7 @@ import { GetPropertiesFromUserAuth0 } from '@/Utils/GetPropertiesFromUserAuth0';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 export default function ProtectedRoutes({
   children,
@@ -12,7 +13,7 @@ export default function ProtectedRoutes({
 }) {
   const { isAuthenticated, isLoading, loginWithRedirect, user } = useAuth0();
   const { verifyAccountMutation } = useUserMutation();
-  const { mutate } = verifyAccountMutation;
+  const { mutate, error } = verifyAccountMutation;
 
   useEffect(() => {
     if (!user) return;
@@ -30,7 +31,10 @@ export default function ProtectedRoutes({
     );
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || error || !user?.sub) {
+    setTimeout(() => {
+      toast.error('Something wrong with your login, try again', {});
+    }, 1000);
     loginWithRedirect();
     return null;
   }
