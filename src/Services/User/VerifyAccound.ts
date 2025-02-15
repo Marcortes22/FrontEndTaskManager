@@ -1,9 +1,12 @@
 import { BaseResponse } from '@/Interfaces/BaseResponse';
-import { IVerifyAccoundResponse } from '@/Interfaces/Users/IUser';
+import {
+  ICreateUserDto,
+  IVerifyAccoundResponse,
+} from '@/Interfaces/Users/IUser';
 
 export async function verifyAccound(
   token: string,
-  timeZone: string,
+  userData: ICreateUserDto,
 ): Promise<BaseResponse<IVerifyAccoundResponse>> {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}User/verifyAccound`,
@@ -13,7 +16,7 @@ export async function verifyAccound(
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ timeZone }),
+      body: JSON.stringify(userData),
     },
   );
 
