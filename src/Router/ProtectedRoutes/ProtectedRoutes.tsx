@@ -22,6 +22,7 @@ export default function ProtectedRoutes({
   const { mutate, error: fetchError } = verifyAccountMutation;
 
   useEffect(() => {
+    console.log('useEffect');
     if (!user) {
       return;
     }
@@ -39,11 +40,7 @@ export default function ProtectedRoutes({
   }, [isAuthenticated, loginWithRedirect, mutate, user]);
 
   if (isLoading) {
-    return (
-      <>
-        <LayoutSkeleton></LayoutSkeleton>
-      </>
-    );
+    return <LayoutSkeleton></LayoutSkeleton>;
   }
 
   if (!isAuthenticated || fetchError || authError) {

@@ -9,6 +9,7 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  Typography,
 } from '@mui/material';
 
 export default function AppBar({
@@ -63,12 +64,24 @@ export default function AppBar({
           <TextField label="Search" variant="standard" />
         </Box> */}
 
-        <Box sx={{ flexGrow: 0 }}>
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: 'flex',
+            alignItems: 'end',
+            gap: '5px',
+            flexDirection: 'column',
+            justifyContent: 'end',
+          }}
+        >
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt={user?.name} src={user?.picture} />
             </IconButton>
           </Tooltip>
+          <Typography variant="caption" sx={{ color: 'white' }}>
+            {user?.email}
+          </Typography>
           <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"
