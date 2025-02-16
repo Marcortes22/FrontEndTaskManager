@@ -79,9 +79,9 @@ export default function AppBar({
               <Avatar alt={user?.name} src={user?.picture} />
             </IconButton>
           </Tooltip>
-          <Typography variant="caption" sx={{ color: 'white' }}>
+          {/* <Typography variant="caption" sx={{ color: 'white' }}>
             {user?.email}
-          </Typography>
+          </Typography> */}
           <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"
