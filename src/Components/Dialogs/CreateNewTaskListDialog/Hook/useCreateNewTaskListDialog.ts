@@ -22,7 +22,6 @@ export function useCreateNewTaskListDialog(
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log(formData);
     const formJson = Object.fromEntries(formData.entries());
     const taskListName = formJson.taskListName;
     if (!taskListName) return;

@@ -27,7 +27,6 @@ export function useUpdateTaskListDialog(taskListId: number) {
         taskListId,
         newName: taskListName,
       });
-      console.log(taskListId);
     }
   }
 

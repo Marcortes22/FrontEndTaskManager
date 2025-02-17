@@ -15,7 +15,7 @@ export function useUserMutation() {
   const verifyAccountMutation = useMutation({
     mutationFn: async (userData: ICreateUserDto) => {
       const token = await getAccessTokenSilently();
-      // console.log(token);
+
       return verifyAccound(token, userData);
     },
     onSuccess: (data) => {
@@ -33,9 +33,6 @@ export function useUserMutation() {
     mutationFn: async (userData: updateUserType) => {
       const token = await getAccessTokenSilently();
       return updateUser({ token, userData });
-    },
-    onSuccess: (data) => {
-      console.log(data);
     },
   });
 

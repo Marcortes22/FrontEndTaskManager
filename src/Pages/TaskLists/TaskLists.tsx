@@ -21,7 +21,6 @@ export default function TaskLists() {
     return <MainSkeleton />;
   }
 
-  console.log(query.data?.data);
   return (
     <>
       <LinearProgres isLoading={query.isFetching} />

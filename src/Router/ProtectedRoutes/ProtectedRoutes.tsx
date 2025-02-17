@@ -22,7 +22,6 @@ export default function ProtectedRoutes({
   const { mutate, error: fetchError } = verifyAccountMutation;
 
   useEffect(() => {
-    console.log('useEffect');
     if (!user) {
       return;
     }
