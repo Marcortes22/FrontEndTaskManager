@@ -1,3 +1,4 @@
+import { useUserMutation } from '@/Common/Mutations/useUserMutation';
 import { ThemeContext } from '@/Contexts/index';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useContext } from 'react';
@@ -7,8 +8,10 @@ export default function useBackGroundImageList() {
     useContext(ThemeContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { updateUserMutation } = useUserMutation();
 
-  function handleChangesBackgroundImage(img: string) {
+  async function handleChangesBackgroundImage(img: string) {
+    if (!img) return;
     setBackgroundIsChanging(true);
 
     setTimeout(() => {
@@ -17,6 +20,10 @@ export default function useBackGroundImageList() {
     setTimeout(() => {
       setBackgroundIsChanging(false);
     }, 350);
+
+    updateUserMutation.mutate({
+      newBackGroundImage: img.split('/').pop() || '',
+    });
   }
 
   return {

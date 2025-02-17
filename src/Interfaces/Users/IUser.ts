@@ -1,6 +1,7 @@
 export interface IVerifyAccoundResponse {
   id: number;
   isNewUser: boolean;
+  backGroundImage: string;
 }
 
 export interface ICreateUserDto {
