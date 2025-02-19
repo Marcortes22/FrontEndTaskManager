@@ -142,7 +142,7 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
                       }}
                       variant="caption"
                     >
-                      {getDateToLocaleZoneDate(task.dueDate, 'short')}
+                      {getDateToLocaleZoneDate(task.dueDate, 'medium')}
                     </Typography>
                   </Box>
                 </>
