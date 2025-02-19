@@ -33,12 +33,20 @@ export function getDateToLocaleZoneDate(
   timeFormat?: FormatStyle,
 ) {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const locale = Intl.DateTimeFormat().resolvedOptions().locale;
 
   const dateFormated = format({
     date: dateToFormat,
     format: { date: dateFormat, time: timeFormat },
     tz: timeZone,
+    locale: locale,
   });
+
+  const dateFormatedTwo = format(dateToFormat, 'DD/MM/YY', 'es');
+
+  if (dateFormat === 'short') {
+    return dateFormatedTwo;
+  }
 
   return dateFormated;
 }
