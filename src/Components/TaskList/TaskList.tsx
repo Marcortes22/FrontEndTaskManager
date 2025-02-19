@@ -85,9 +85,9 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
                       sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}
                     >
                       <SunIcon sx={{ fontSize: '16px' }} />
-                      <Typography sx={{ userSelect: 'none' }} variant="caption">
+                      {/* <Typography sx={{ userSelect: 'none' }} variant="caption">
                         My Day
-                      </Typography>
+                      </Typography> */}
                     </Box>
 
                     <Typography
@@ -101,11 +101,12 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
               <Typography
                 sx={{
                   userSelect: 'none',
-                  maxWidth: {
-                    xs: '40px',
-                    sm: '145px',
-                  },
+                  // maxWidth: {
+                  //   xs: '40px',
+                  //   sm: '145px',
+                  // },
                   overflow: 'hidden',
+                  whiteSpace: 'nowrap',
                 }}
                 variant="caption"
               >
@@ -141,7 +142,7 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
                       }}
                       variant="caption"
                     >
-                      {getDateToLocaleZoneDate(task.dueDate, 'medium')}
+                      {getDateToLocaleZoneDate(task.dueDate, 'short')}
                     </Typography>
                   </Box>
                 </>

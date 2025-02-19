@@ -51,7 +51,7 @@ export function UpdateTaskListDialog({
               required
               slotProps={{
                 htmlInput: {
-                  maxLength: 20,
+                  maxLength: 15,
                 },
               }}
               defaultValue={TaskListName}
