@@ -40,7 +40,7 @@ export default function CreateNewTaskListDialog({
             required
             slotProps={{
               htmlInput: {
-                maxLength: 15,
+                maxLength: 20,
               },
             }}
             margin="dense"
