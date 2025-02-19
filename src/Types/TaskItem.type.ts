@@ -12,4 +12,5 @@ export type TaskItemType = {
   addedToMyDay: Date | null;
   taskListId?: number;
   taskList?: TaskListType;
+  taskListName?: string;
 };

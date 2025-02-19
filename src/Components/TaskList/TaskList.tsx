@@ -99,14 +99,25 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
                 )}
 
               <Typography
-                sx={{ userSelect: 'none' }}
+                sx={{
+                  userSelect: 'none',
+                  maxWidth: {
+                    xs: '40px',
+                    sm: '145px',
+                  },
+                  overflow: 'hidden',
+                }}
                 variant="caption"
-              >{`Tasks`}</Typography>
+              >
+                {task.taskListName}
+              </Typography>
 
               {task.dueDate && (
                 <>
                   <Typography
-                    sx={{ userSelect: 'none' }}
+                    sx={{
+                      userSelect: 'none',
+                    }}
                     fontWeight="bold"
                     variant="caption"
                   >{`·`}</Typography>
