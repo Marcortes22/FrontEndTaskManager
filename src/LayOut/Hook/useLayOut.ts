@@ -1,15 +1,13 @@
 import { darkTheme, lightTheme } from '@/Constants/Themes';
 import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import { useMediaQuery } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
-import { backgroundImagesItems } from '@/Constants/BackGroundImages';
+import { useContext, useState } from 'react';
 export function useLayOut() {
   const { mode } = useContext(ThemeContext);
 
   const theme = mode === 'dark' ? darkTheme : lightTheme;
 
-  const { backgroundIsChanging, backgroundImage, setBackgroundImages } =
-    useContext(ThemeContext);
+  const { backgroundIsChanging, backgroundImage } = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
   const [createTaskListDialogOpen, setCreateTaskListDialogOpen] =
     useState(false);
@@ -24,14 +22,14 @@ export function useLayOut() {
     setOpen(true);
   };
 
-  useEffect(() => {
-    // Precargar todas las imágenes de fondo
-    backgroundImagesItems.forEach((item) => {
-      const img = new Image();
-      img.src = item.img;
-    });
-    setBackgroundImages(backgroundImagesItems);
-  }, [setBackgroundImages]);
+  // useEffect(() => {
+  //   // Precargar todas las imágenes de fondo
+  //   backgroundImagesItems.forEach((item) => {
+  //     const img = new Image();
+  //     img.src = item.img;
+  //   });
+  //   setBackgroundImages(backgroundImagesItems);
+  // }, [setBackgroundImages]);
 
   const handleDrawerClose = () => {
     setOpen(false);
