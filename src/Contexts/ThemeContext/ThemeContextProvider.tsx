@@ -2,14 +2,14 @@ import { ThemeContextProviderProps } from '@/Interfaces/ThemeContextProvider';
 
 import { useState } from 'react';
 import ThemeContext from './ThemeContext';
-//import background from '@/assets/backgroundImages//stars-background.webp';
+import background from '@/assets/backgroundImages/dark-forest-background.webp';
 import { backGroundImages } from '@/Types/Types';
 
 export default function ThemeContextProvider({
   children,
 }: ThemeContextProviderProps) {
   const [mode, setMode] = useState('dark');
-  const [backgroundImage, setBackgroundImage] = useState('');
+  const [backgroundImage, setBackgroundImage] = useState(background);
   const [backgroundIsChanging, setBackgroundIsChanging] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [backgroundImages, setBackgroundImages] = useState<backGroundImages[]>(
