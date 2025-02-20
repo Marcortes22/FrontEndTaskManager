@@ -22,15 +22,6 @@ export function useLayOut() {
     setOpen(true);
   };
 
-  // useEffect(() => {
-  //   // Precargar todas las imágenes de fondo
-  //   backgroundImagesItems.forEach((item) => {
-  //     const img = new Image();
-  //     img.src = item.img;
-  //   });
-  //   setBackgroundImages(backgroundImagesItems);
-  // }, [setBackgroundImages]);
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
