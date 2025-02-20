@@ -43,7 +43,10 @@ export default function SideBarItems({
                 <ListItem
                   disablePadding
                   sx={{ display: 'block', paddingY: '5px' }}
-                  onClick={handleDrawerClose}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleDrawerClose?.();
+                  }}
                 >
                   <Link
                     to={`${item.url}`}

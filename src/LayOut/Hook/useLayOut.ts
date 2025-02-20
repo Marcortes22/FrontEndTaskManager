@@ -7,6 +7,7 @@ export function useLayOut() {
   const { mode } = useContext(ThemeContext);
 
   const theme = mode === 'dark' ? darkTheme : lightTheme;
+
   const { backgroundIsChanging, backgroundImage, setBackgroundImages } =
     useContext(ThemeContext);
   const [open, setOpen] = useState(false);

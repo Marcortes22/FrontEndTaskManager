@@ -47,6 +47,7 @@ export default function DeskTopDrawer({
           <SideBarItems
             handleCreateTaskListDialogOpen={handleCreateTaskListDialogOpen}
             open={open}
+            handleDrawerClose={() => console.log('handleDrawerClose')}
           />
         </Box>
       </DrawerStyles>
