@@ -19,7 +19,7 @@ export function useUserMutation() {
       return verifyAccound(token, userData);
     },
     onSuccess: (data) => {
-      if (data.data?.isNewUser) {
+      if (data.data?.isNewUser === true) {
         queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
       }
       const userBackGround = backgroundImages.find(
