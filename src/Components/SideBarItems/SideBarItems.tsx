@@ -16,6 +16,7 @@ import {
   useTheme,
 } from '@mui/material';
 import TaskListMenu from '../TaskListMenu/TaskListMenu';
+import React from 'react';
 
 export default function SideBarItems({
   open,
@@ -37,8 +38,8 @@ export default function SideBarItems({
       <List sx={{ paddingTop: '0px' }}>
         {query.data &&
           query.data.data?.map((item, index) => (
-            <Tooltip key={item.url} title={item.name} placement="right">
-              <>
+            <React.Fragment key={item.url}>
+              <Tooltip title={item.name} placement="right">
                 <ListItem
                   disablePadding
                   sx={{ display: 'block', paddingY: '5px' }}
@@ -103,19 +104,18 @@ export default function SideBarItems({
                               },
                         ]}
                       />
-
                       {item.isDefault === false && open && item.id && (
                         <TaskListMenu
                           taskListId={item.id}
                           taskListName={item.name}
-                        ></TaskListMenu>
+                        />
                       )}
                     </ListItemButton>
                   </Link>
                 </ListItem>
-                {index === 4 && <Divider />}
-              </>
-            </Tooltip>
+              </Tooltip>
+              {index === 4 && <Divider />}
+            </React.Fragment>
           ))}
         <Tooltip title="Create new Task List" placement="right">
           <ListItem disablePadding sx={{ display: 'block', paddingY: '5px' }}>
