@@ -18,9 +18,11 @@ export function useUserMutation() {
 
       return verifyAccound(token, userData);
     },
+
     onSuccess: (data) => {
-      if (data.data?.isNewUser === true) {
+      if (data?.data?.isNewUser === true) {
         queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
+        queryClient.refetchQueries({ queryKey: ['taskListInformation'] });
       }
       const userBackGround = backgroundImages.find(
         (item) => item.img.split('/').pop() === data.data?.backGroundImage,

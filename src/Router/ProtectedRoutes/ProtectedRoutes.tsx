@@ -2,8 +2,7 @@ import { useUserMutation } from '@/Common/Mutations/useUserMutation';
 import LayoutSkeleton from '@/LayOut/LayoutSkeleton';
 import { GetPropertiesFromUserAuth0 } from '@/Utils/GetPropertiesFromUserAuth0';
 import { useAuth0 } from '@auth0/auth0-react';
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function ProtectedRoutes({
@@ -19,10 +18,12 @@ export default function ProtectedRoutes({
     error: authError,
   } = useAuth0();
   const { verifyAccountMutation } = useUserMutation();
-  const { mutate, error: fetchError } = verifyAccountMutation;
+  const { mutateAsync, error: fetchError, isPending } = verifyAccountMutation;
+  const [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
     if (!user) {
+      setIsVerified(true);
       return;
     }
     const userToValidate = GetPropertiesFromUserAuth0(user);
@@ -34,12 +35,12 @@ export default function ProtectedRoutes({
       loginWithRedirect();
     }
     if (isAuthenticated) {
-      mutate(userToValidate);
+      mutateAsync(userToValidate).then(() => setIsVerified(true));
     }
-  }, [isAuthenticated, loginWithRedirect, mutate, user]);
+  }, [isAuthenticated, loginWithRedirect, mutateAsync, user]);
 
-  if (isLoading) {
-    return <LayoutSkeleton></LayoutSkeleton>;
+  if (isLoading || isPending || !isVerified) {
+    return <LayoutSkeleton />;
   }
 
   if (!isAuthenticated || fetchError || authError) {
