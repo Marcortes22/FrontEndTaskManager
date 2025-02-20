@@ -39,7 +39,7 @@ export default function ProtectedRoutes({
     }
   }, [isAuthenticated, isVerified, loginWithRedirect, mutateAsync, user]);
 
-  if (!isVerified || isLoading) {
+  if (isLoading || !isVerified) {
     return <LayoutSkeleton />;
   }
 

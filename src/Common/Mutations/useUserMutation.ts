@@ -1,5 +1,5 @@
 import { verifyAccound } from '@/Services/User/VerifyAccound';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { ICreateUserDto } from '@/Interfaces/Users/IUser';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useContext } from 'react';
@@ -9,7 +9,7 @@ import { updateUser, updateUserType } from '@/Services/User/UpdateUser';
 
 export function useUserMutation(setIsVerified: (value: boolean) => void) {
   const { setBackgroundImage, backgroundImages } = useContext(ThemeContext);
-  const queryClient = useQueryClient();
+
   const { getAccessTokenSilently } = useAuth0();
 
   const verifyAccountMutation = useMutation({
@@ -18,10 +18,6 @@ export function useUserMutation(setIsVerified: (value: boolean) => void) {
       return verifyAccound(token, userData);
     },
     onSuccess: (data) => {
-      if (data?.data?.isNewUser === true) {
-        queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
-        queryClient.refetchQueries({ queryKey: ['taskListInformation'] });
-      }
       const userBackGround = backgroundImages.find(
         (item) => item.img.split('/').pop() === data.data?.backGroundImage,
       )?.img;
