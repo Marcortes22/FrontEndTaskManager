@@ -1,7 +1,7 @@
 import styles from './styles/TaskList.module.css';
 import { TaskDetailWrapper, TaskDetail } from '@Components/index';
 import useTaskList from './Hook/useTaskList';
-import { Box, Checkbox, Typography } from '@mui/material';
+import { Box, Checkbox, Tooltip, Typography } from '@mui/material';
 import { TaskItemType } from '@/Types/index';
 
 import {
@@ -57,9 +57,11 @@ export default function TaskList({ tasks }: { tasks: TaskItemType[] }) {
                     });
                   }}
                 />
-                <Typography className={styles.titleTask}>
-                  {task.title}
-                </Typography>
+                <Tooltip title="Click to edit" placement="top-start" arrow>
+                  <Typography className={styles.titleTask}>
+                    {task.title}
+                  </Typography>
+                </Tooltip>
               </div>
 
               <Checkbox

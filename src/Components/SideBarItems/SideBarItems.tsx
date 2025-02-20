@@ -39,7 +39,7 @@ export default function SideBarItems({
         {query.data &&
           query.data.data?.map((item, index) => (
             <React.Fragment key={item.url}>
-              <Tooltip title={item.name} placement="right">
+              <Tooltip title={item.name} placement="right" arrow>
                 <ListItem
                   disablePadding
                   sx={{ display: 'block', paddingY: '5px' }}
