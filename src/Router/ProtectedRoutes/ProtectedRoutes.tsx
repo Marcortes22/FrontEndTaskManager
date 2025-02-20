@@ -17,13 +17,13 @@ export default function ProtectedRoutes({
     user,
     error: authError,
   } = useAuth0();
-  const { verifyAccountMutation } = useUserMutation();
-  const { mutateAsync, error: fetchError, isPending } = verifyAccountMutation;
   const [isVerified, setIsVerified] = useState(false);
+  const { verifyAccountMutation } = useUserMutation(setIsVerified);
+  const { mutateAsync, error: fetchError } = verifyAccountMutation;
 
   useEffect(() => {
+    console.log(isVerified);
     if (!user) {
-      setIsVerified(true);
       return;
     }
     const userToValidate = GetPropertiesFromUserAuth0(user);
@@ -35,11 +35,11 @@ export default function ProtectedRoutes({
       loginWithRedirect();
     }
     if (isAuthenticated) {
-      mutateAsync(userToValidate).then(() => setIsVerified(true));
+      mutateAsync(userToValidate);
     }
-  }, [isAuthenticated, loginWithRedirect, mutateAsync, user]);
+  }, [isAuthenticated, isVerified, loginWithRedirect, mutateAsync, user]);
 
-  if (isLoading || isPending || !isVerified) {
+  if (!isVerified || isLoading) {
     return <LayoutSkeleton />;
   }
 

@@ -7,7 +7,7 @@ import ThemeContext from '@/Contexts/ThemeContext/ThemeContext';
 import background from '@/assets/backgroundImages/dark-forest-background.webp';
 import { updateUser, updateUserType } from '@/Services/User/UpdateUser';
 
-export function useUserMutation() {
+export function useUserMutation(setIsVerified: (value: boolean) => void) {
   const { setBackgroundImage, backgroundImages } = useContext(ThemeContext);
   const queryClient = useQueryClient();
   const { getAccessTokenSilently } = useAuth0();
@@ -15,10 +15,8 @@ export function useUserMutation() {
   const verifyAccountMutation = useMutation({
     mutationFn: async (userData: ICreateUserDto) => {
       const token = await getAccessTokenSilently();
-
       return verifyAccound(token, userData);
     },
-
     onSuccess: (data) => {
       if (data?.data?.isNewUser === true) {
         queryClient.invalidateQueries({ queryKey: ['taskListInformation'] });
@@ -28,6 +26,9 @@ export function useUserMutation() {
         (item) => item.img.split('/').pop() === data.data?.backGroundImage,
       )?.img;
       setBackgroundImage(userBackGround ? userBackGround : background);
+    },
+    onSettled: () => {
+      setIsVerified(true);
     },
   });
 
