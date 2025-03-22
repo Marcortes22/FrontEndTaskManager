@@ -23,8 +23,10 @@ export default function ProtectedRoutes({
 
   useEffect(() => {
     if (!user) {
+      setIsVerified(false);
       return;
     }
+
     const userToValidate = GetPropertiesFromUserAuth0(user);
 
     if (!userToValidate.id || !userToValidate.provider) {
@@ -32,18 +34,24 @@ export default function ProtectedRoutes({
         toast.error('Something went wrong in your login, please try again');
       }, 1500);
       loginWithRedirect();
+      return;
     }
+
     if (isAuthenticated) {
       mutateAsync(userToValidate);
     }
-  }, [isAuthenticated, isVerified, loginWithRedirect, mutateAsync, user]);
+  }, [isAuthenticated, loginWithRedirect, mutateAsync, user]);
+
+  if (isLoading) {
+    return <LayoutSkeleton />;
+  }
 
   if (!isAuthenticated) {
     loginWithRedirect();
     return null;
   }
 
-  if (isLoading || !isVerified) {
+  if (!isVerified) {
     return <LayoutSkeleton />;
   }
 
