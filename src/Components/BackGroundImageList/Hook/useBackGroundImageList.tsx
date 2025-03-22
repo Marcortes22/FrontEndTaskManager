@@ -1,14 +1,15 @@
 import { useUserMutation } from '@/Common/Mutations/useUserMutation';
 import { ThemeContext } from '@/Contexts/index';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 export default function useBackGroundImageList() {
   const { setBackgroundImage, setBackgroundIsChanging, backgroundImages } =
     useContext(ThemeContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { updateUserMutation } = useUserMutation();
+  const [isVerified, setIsVerified] = useState(false);
+  const { updateUserMutation } = useUserMutation(setIsVerified);
 
   async function handleChangesBackgroundImage(img: string) {
     if (!img) return;
@@ -30,5 +31,6 @@ export default function useBackGroundImageList() {
     backgroundImages,
     isMobile,
     handleChangesBackgroundImage,
+    isVerified,
   };
 }
